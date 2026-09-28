@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Geo Quiz – start</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&amp;family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4E6C4;font-family:'Pixelify Sans',system-ui,sans-serif;color:#2B1D14}
+a{color:#2A62A6}a:hover{color:#1C4577}
+.gq-f{animation-duration:2.4s;animation-iteration-count:infinite;animation-timing-function:step-end}
+.gq-f1{animation-name:gqf1}
+.gq-f2{opacity:0;animation-name:gqf2}
+.gq-f3{opacity:0;animation-name:gqf3}
+@keyframes gqf1{0%{opacity:1}33.333%{opacity:0}100%{opacity:0}}
+@keyframes gqf2{0%{opacity:0}33.333%{opacity:1}66.666%{opacity:0}100%{opacity:0}}
+@keyframes gqf3{0%{opacity:0}66.666%{opacity:1}100%{opacity:1}}
+.gq-blink{animation:gqb 1.2s step-end infinite}
+@keyframes gqb{0%{opacity:1}50%{opacity:0}100%{opacity:0}}
+@media (prefers-reduced-motion: reduce){.gq-f,.gq-blink{animation:none}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 40px 24px 32px; background: #F4E6C4; display: flex; flex-direction: column; gap: 18px; font-family: 'Pixelify Sans', system-ui, sans-serif; color: #2B1D14">
+  <div style="width: 342px; box-sizing: border-box; border: 3px solid #2B1D14; box-shadow: 5px 5px 0 rgba(43,29,20,0.2)">
+    <svg width="336" height="180" viewBox="0 0 112 60" shape-rendering="crispEdges" role="img" aria-label="Animacja: zawzięty pilot dwupłatowca pędzi nisko nad polami" style="display: block">
+      <defs>
+        <pattern id="gq-d1" width="2" height="2" patternUnits="userSpaceOnUse"><rect width="1" height="1" fill="#5FAEDF"></rect><rect x="1" y="1" width="1" height="1" fill="#5FAEDF"></rect></pattern>
+        <pattern id="gq-d2" width="2" height="2" patternUnits="userSpaceOnUse"><rect width="1" height="1" fill="#74C0EA"></rect><rect x="1" y="1" width="1" height="1" fill="#74C0EA"></rect></pattern>
+        <pattern id="gq-d3" width="2" height="2" patternUnits="userSpaceOnUse"><rect width="1" height="1" fill="#8ED0EE"></rect><rect x="1" y="1" width="1" height="1" fill="#8ED0EE"></rect></pattern>
+
+        <g id="gq-cloud">
+          <path fill="#FFFFFF" d="M5 0h5v1H5z M3 1h9v1H3z M12 2h4v1h-4z M1 2h17v2H1z M0 4h20v1H0z"></path>
+          <path fill="#DCEBF5" d="M0 5h20v1H0z M1 6h17v1H1z"></path>
+          <path fill="#BFD7E8" d="M2 7h14v1H2z"></path>
+        </g>
+        <g id="gq-cloud-s">
+          <path fill="#FFFFFF" d="M2 0h4v1H2z M0 1h9v2H0z"></path>
+          <path fill="#DCEBF5" d="M0 3h9v1H0z"></path>
+        </g>
+
+        <g id="gq-mtn">
+          <path fill="#7C9CC4" d="M4 42V40H6V38H8V36H10V34H12V32H14V30H16V28H18V26H20V24H24V26H26V28H28V30H30V32H32V34H34V36H36V38H38V40H40V42Z M38 42V40H40V38H42V36H44V34H46V32H48V30H50V28H52V26H54V24H56V22H58V20H62V22H64V24H66V26H68V28H70V30H72V32H74V34H76V36H78V38H80V40H82V42Z M84 42V40H86V38H88V36H90V34H92V32H94V30H96V28H98V26H102V28H104V30H106V32H108V34H110V36H112V38H114V40H116V42Z"></path>
+          <path fill="#6283AE" d="M22 24H24V26H26V28H28V30H30V32H32V34H34V36H36V38H38V40H40V42H22Z M60 20H62V22H64V24H66V26H68V28H70V30H72V32H74V34H76V36H78V38H80V40H82V42H60Z M100 26H102V28H104V30H106V32H108V34H110V36H112V38H114V40H116V42H100Z"></path>
+          <path fill="#FFFFFF" d="M20 24H24V26H26V27H24V28H22V27H20V28H18V26H20Z M58 20H62V22H64V24H66V25H63V24H61V26H59V24H57V25H54V24H56V22H58Z M98 26H102V28H104V29H101V28H99V29H96V28H98Z"></path>
+          <path fill="#D6E4F2" d="M22 24H24V26H26V27H24V28H22Z M60 20H62V22H64V24H66V25H63V24H61V26H60Z M100 26H102V28H104V29H101V28H100Z"></path>
+          <path fill="#8FBF8A" d="M0 42H6V41H14V40H24V41H36V40H48V41H60V40H72V39H84V40H96V41H108V40H120V46H0Z"></path>
+        </g>
+
+        <g id="gq-hills">
+          <path fill="#5E9E58" d="M0 44H8V43H14V42H22V41H34V42H42V43H50V44H58V43H64V42H70V40H80V41H88V42H96V43H104V42H112V41H124V42H134V43H140V60H0Z"></path>
+          <path fill="#79B86C" d="M8 43h6v1H8z M22 41h12v1H22z M70 40h10v1H70z M112 41h12v1h-12z"></path>
+          <path fill="#2F6B3A" d="M17 38h2v1h-2z M16 39h4v2h-4z M27 37h2v1h-2z M26 38h4v2h-4z M31 37h2v1h-2z M30 38h4v2h-4z M73 36h2v1h-2z M72 37h4v2h-4z M77 36h2v1h-2z M76 37h4v2h-4z M117 37h2v1h-2z M116 38h4v2h-4z"></path>
+          <path fill="#4E8F4A" d="M17 39h1v1h-1z M27 38h1v1h-1z M31 38h1v1h-1z M73 37h1v1h-1z M77 37h1v1h-1z M117 38h1v1h-1z"></path>
+          <path fill="#5A3A22" d="M17 41h1v1h-1z M27 40h1v1h-1z M31 40h1v1h-1z M73 39h1v1h-1z M77 39h1v1h-1z M117 40h1v1h-1z M90 40h1v2h-1z"></path>
+          <path fill="#F4E6C4" d="M89 39h5v3h-5z M99 40h4v3h-4z"></path>
+          <path fill="#E9D7B0" d="M106 35h3v7h-3z"></path>
+          <path fill="#B8341F" d="M88 38h7v1h-7z M89 37h5v1h-5z M98 39h6v1h-6z M99 38h4v1h-4z"></path>
+          <path fill="#8A5A33" d="M106 34h3v1h-3z M107 33h1v1h-1z"></path>
+          <path fill="#2A62A6" d="M92 40h1v1h-1z M100 41h1v1h-1z"></path>
+          <path fill="#2B1D14" d="M107 37h1v1h-1z"></path>
+        </g>
+
+        <g id="gq-fields">
+          <rect y="46" width="160" height="14" fill="#6DB35F"></rect>
+          <path fill="#8CC56B" d="M0 46h18v3H0z M70 46h24v3H70z M132 46h28v3h-28z M26 49h20v4H26z M106 49h24v4h-24z"></path>
+          <path fill="#D9C46A" d="M18 46h14v3H18z M54 46h16v3H54z M112 46h20v3h-20z M88 49h18v4H88z"></path>
+          <path fill="#5E9E58" d="M32 46h22v3H32z M94 46h18v3H94z M0 49h26v4H0z M60 49h28v4H60z M130 49h30v4h-30z"></path>
+          <path fill="#C9A95A" d="M46 49h14v4H46z"></path>
+          <path fill="#C4AE52" d="M18 47h14v1H18z M54 47h16v1H54z M112 47h20v1h-20z M88 50h18v1H88z M88 52h18v1H88z"></path>
+          <path fill="#B8964A" d="M46 50h14v1H46z M46 52h14v1H46z"></path>
+          <path fill="#3F7F45" d="M18 46h1v3h-1z M32 46h1v3h-1z M54 46h1v3h-1z M70 46h1v3h-1z M94 46h1v3h-1z M112 46h1v3h-1z M132 46h1v3h-1z M0 49h160v1H0z"></path>
+          <path fill="#3F7FC0" d="M0 53h40v2H0z M40 54h30v2H40z M70 53h40v2H70z M110 54h50v2h-50z"></path>
+          <path fill="#8ED0EE" d="M6 53h3v1H6z M50 54h4v1H50z M90 53h3v1H90z M130 54h4v1h-4z"></path>
+          <rect y="56" width="160" height="4" fill="#4E8F4A"></rect>
+          <path fill="#3F7F45" d="M4 58h8v1H4z M22 57h10v1H22z M44 58h8v1H44z M66 57h10v1H66z M88 58h8v1H88z M110 57h10v1h-10z M132 58h8v1h-8z M150 57h8v1h-8z"></path>
+          <path fill="#2F6B3A" d="M14 56h3v2h-3z M58 56h3v2h-3z M100 56h3v2h-3z M140 56h3v2h-3z"></path>
+        </g>
+
+        <g id="gq-plane">
+          <path fill="#D94A2B" d="M-33 -9h5v9h-5z M-31 -10h3v1h-3z M-31 -1h7v3h-7z M-24 -2h44v4h-44z"></path>
+          <path fill="#F07A55" d="M-31 -9h1v8h-1z M-24 -3h44v1h-44z M-31 -1h7v1h-7z"></path>
+          <path fill="#2A62A6" d="M-35 -8h1v8h-1z"></path>
+          <path fill="#FFFFFF" d="M-34 -8h1v8h-1z"></path>
+          <path fill="#B53A22" d="M-24 2h44v2h-44z M-31 2h7v1h-7z"></path>
+          <path fill="#8A2A18" d="M-22 4h40v1h-40z M-6 -2h1v6h-1z M12 -2h1v6h-1z M-30 3h6v1h-6z"></path>
+          <path fill="#D94A2B" d="M-37 1h12v1h-12z"></path>
+          <path fill="#8A2A18" d="M-37 2h12v1h-12z"></path>
+          <path fill="#2A62A6" d="M-21 -2h5v5h-5z"></path>
+          <path fill="#FFFFFF" d="M-20 -1h3v3h-3z"></path>
+          <path fill="#D94A2B" d="M-19 0h1v1h-1z"></path>
+          <path fill="#F4B090" d="M-14 3h1v1h-1z M-10 3h1v1h-1z M2 3h1v1h-1z M6 3h1v1h-1z M16 3h1v1h-1z"></path>
+          <path fill="#2B1D14" d="M-30 4h1v2h-1z"></path>
+
+          <path fill="#F2B632" d="M-10 5h28v2h-28z"></path>
+          <path fill="#FFE08A" d="M-10 5h28v1h-28z"></path>
+          <path fill="#B7791F" d="M-10 7h28v1h-28z M-10 5h1v3h-1z"></path>
+          <path fill="#D99A2B" d="M-6 6h1v1h-1z M-2 6h1v1h-1z M2 6h1v1h-1z M6 6h1v1h-1z M10 6h1v1h-1z M14 6h1v1h-1z"></path>
+
+          <path fill="#2B1D14" d="M4 8h2v1h-2z M5 9h1v1h-1z M9 8h2v1h-2z M9 9h1v1h-1z"></path>
+          <path fill="#2F2A28" d="M6 10h3v1h-3z M5 11h5v1h-5z M4 12h7v3h-7z M5 15h5v1h-5z M6 16h3v1h-3z"></path>
+          <path fill="#5A524E" d="M6 11h2v1h-2z M5 12h1v1h-1z"></path>
+          <path fill="#A8A8A8" d="M6 12h3v3h-3z"></path>
+          <path fill="#707070" d="M8 13h1v2h-1z M6 14h2v1h-2z"></path>
+          <path fill="#E6E6E6" d="M7 13h1v1h-1z"></path>
+
+          <path fill="#6B4226" d="M-9 -5h4v2h-4z M4 -5h3v2h-3z"></path>
+          <path fill="#1A1414" d="M-5 -18h6v1h-6z M-7 -17h10v1h-10z M-8 -16h12v1h-12z M-8 -15h2v2h-2z M0 -15h1v1h-1z M-8 -13h3v8h-3z"></path>
+          <path fill="#4A4058" d="M-4 -17h3v1h-3z M-7 -16h1v1h-1z M-8 -11h1v2h-1z"></path>
+          <path fill="#F2C08A" d="M-5 -13h10v10h-10z M4 -15h1v2h-1z M5 -10h1v3h-1z"></path>
+          <path fill="#D99A62" d="M-5 -12h1v8h-1z M-4 -9h3v1h-3z M2 -9h2v1h-2z M-4 -8h1v3h-1z M4 -9h1v1h-1z M-1 -11h1v1h-1z"></path>
+          <path fill="#E0A872" d="M-6 -10h2v3h-2z"></path>
+          <path fill="#B87A48" d="M-5 -9h1v1h-1z"></path>
+          <path fill="#3A2A20" d="M-6 -15h3v2h-3z M0 -14h1v1h-1z"></path>
+          <path fill="#2B1D14" d="M-3 -15h3v3h-3z M1 -15h3v3h-3z"></path>
+          <path fill="#8ED0EE" d="M-2 -14h1v1h-1z M2 -14h1v1h-1z"></path>
+          <path fill="#FFFFFF" d="M-4 -10h2v1h-2z M2 -10h1v1h-1z M-2 -7h5v1h-5z M-2 -5h5v1h-5z"></path>
+          <path fill="#5A1E1E" d="M-2 -6h5v1h-5z"></path>
+          <path fill="#C0503A" d="M-1 -6h2v1h-2z"></path>
+          <path fill="#2B1D14" d="M-5 -12h3v1h-3z M3 -12h2v1h-2z M-3 -11h2v1h-2z M1 -11h2v1h-2z M-2 -10h1v1h-1z M3 -10h1v1h-1z M4 -8h1v1h-1z M-3 -8h7v1h-7z M-3 -7h1v3h-1z M3 -7h1v3h-1z M0 -7h1v1h-1z M0 -5h1v1h-1z M-2 -4h5v1h-5z"></path>
+          <path fill="#8ED0EE" d="M6 -14h1v1h-1z M6 -13h2v2h-2z M8 -18h1v2h-1z"></path>
+          <path fill="#FFFFFF" d="M6 -13h1v1h-1z"></path>
+          <path fill="#D6452F" d="M-5 -24h2v1h-2z M-2 -24h2v1h-2z M-5 -23h1v1h-1z M-1 -23h1v1h-1z M-5 -21h1v1h-1z M-1 -21h1v1h-1z M-5 -20h2v1h-2z M-2 -20h2v1h-2z"></path>
+
+          <path fill="#3A2A20" d="M-11 -4h1v1h-1z M-11 -3h18v1h-18z"></path>
+          <path fill="#7A4A26" d="M-9 -3h14v1h-14z"></path>
+          <path fill="#CFEFFA" d="M7 -7h2v4h-2z"></path>
+          <path fill="#FFFFFF" d="M8 -7h1v1h-1z"></path>
+          <path fill="#2B1D14" d="M9 -8h1v5h-1z"></path>
+
+
+          <path fill="#6B6B6B" d="M18 -3h6v9h-6z"></path>
+          <path fill="#8C8C8C" d="M20 -2h2v7h-2z"></path>
+          <path fill="#BDBDBD" d="M19 -2h1v7h-1z"></path>
+          <path fill="#4A4A4A" d="M18 5h6v1h-6z"></path>
+          <path fill="#2B1D14" d="M22 -1h1v1h-1z M22 1h1v1h-1z M22 3h1v1h-1z"></path>
+          <path fill="#3A3A3A" d="M17 -4h3v1h-3z"></path>
+          <path fill="#D0D0D0" d="M24 0h2v3h-2z M26 1h1v1h-1z"></path>
+          <path fill="#9A9A9A" d="M24 2h2v1h-2z"></path>
+        </g>
+      </defs>
+
+      <rect width="112" height="60" fill="#B5E2F5"></rect>
+      <rect width="112" height="9" fill="#5FAEDF"></rect>
+      <rect y="9" width="112" height="9" fill="#74C0EA"></rect>
+      <rect y="18" width="112" height="11" fill="#8ED0EE"></rect>
+      <rect y="9" width="112" height="2" fill="url(#gq-d1)"></rect>
+      <rect y="18" width="112" height="2" fill="url(#gq-d2)"></rect>
+      <rect y="29" width="112" height="2" fill="url(#gq-d3)"></rect>
+      <path fill="#FFF3C4" opacity="0.7" d="M10 2h4v1h-4z M8 3h8v1H8z M7 4h10v1H7z M6 5h12v7H6z M7 12h10v1H7z M8 13h8v1H8z M10 14h4v1h-4z"></path>
+      <path fill="#F7C548" d="M10 4h4v1h-4z M9 5h6v1H9z M8 6h8v4H8z M9 10h6v1H9z M10 11h4v1h-4z"></path>
+      <path fill="#FFE58A" d="M10 5h2v1h-2z M9 6h1v1H9z"></path>
+
+      <g class="gq-f gq-f1" style="animation-duration: {{dur}}">
+        <use href="#gq-cloud" x="80" y="6"></use>
+        <use href="#gq-cloud-s" x="40" y="17"></use>
+        <use href="#gq-cloud-s" x="100" y="22"></use>
+        <use href="#gq-mtn"></use>
+        <use href="#gq-hills"></use>
+        <use href="#gq-fields"></use>
+        <path fill="#2B1D14" opacity="0.22" d="M30 57h40v1H30z M34 58h32v1H34z"></path>
+        <path fill="#FFFFFF" opacity="0.75" d="M0 14h14v1H0z M4 22h12v1H4z M0 30h14v1H0z M6 38h10v1H6z"></path>
+        <path fill="#D8D8D8" d="M13 22h3v3h-3z M7 21h4v4H7z M0 22h5v5H0z"></path>
+        <path fill="#EFEFEF" d="M13 22h1v1h-1z M7 21h2v1H7z M0 22h2v1H0z"></path>
+        <g transform="translate(54 27)">
+          <use href="#gq-plane"></use>
+          <path fill="#1A1414" d="M-12 -17h4v2h-4z M-15 -16h3v2h-3z M-18 -17h3v1h-3z M-21 -16h3v1h-3z M-12 -14h4v2h-4z M-16 -13h4v2h-4z M-19 -14h3v1h-3z M-11 -11h3v2h-3z M-14 -10h3v2h-3z M-17 -11h3v1h-3z M-10 -8h2v2h-2z M-13 -7h3v1h-3z"></path>
+          <path fill="#4A4058" d="M-11 -17h2v1h-2z M-15 -13h2v1h-2z M-13 -10h1v1h-1z"></path>
+          <path fill="#FFF6DE" d="M-14 -5h5v2h-5z M-19 -6h5v2h-5z M-24 -5h5v2h-5z M-28 -6h4v1h-4z"></path>
+          <path fill="#D9C8A0" d="M-14 -4h5v1h-5z M-24 -4h5v1h-5z"></path>
+          <path fill="#E8703A" d="M14 -4h3v1h-3z"></path>
+          <path fill="#F7C548" d="M16 -4h1v1h-1z"></path>
+          <path fill="#FFFFFF" opacity="0.35" d="M25 -11h3v25h-3z"></path>
+          <path fill="#5A3A22" d="M26 -10h2v10h-2z M26 3h2v10h-2z"></path>
+          <path fill="#F2B632" d="M26 -10h2v2h-2z M26 11h2v2h-2z"></path>
+        </g>
+      </g>
+
+      <g class="gq-f gq-f2" style="animation-duration: {{dur}}">
+        <use href="#gq-cloud" x="62" y="6"></use>
+        <use href="#gq-cloud-s" x="22" y="17"></use>
+        <use href="#gq-cloud-s" x="82" y="22"></use>
+        <use href="#gq-mtn" x="-2"></use>
+        <use href="#gq-hills" x="-5"></use>
+        <use href="#gq-fields" x="-14"></use>
+        <path fill="#2B1D14" opacity="0.22" d="M36 57h40v1H36z M40 58h32v1H40z"></path>
+        <path fill="#FFFFFF" opacity="0.75" d="M2 12h18v1H2z M8 20h14v1H8z M0 28h20v1H0z M10 36h12v1H10z"></path>
+        <path fill="#D8D8D8" d="M19 23h3v3h-3z M12 21h4v4h-4z M4 20h5v5H4z"></path>
+        <path fill="#EFEFEF" d="M19 23h1v1h-1z M12 21h2v1h-2z M4 20h2v1H4z"></path>
+        <g transform="translate(60 27)">
+          <use href="#gq-plane"></use>
+          <path fill="#1A1414" d="M-12 -16h4v2h-4z M-15 -17h3v2h-3z M-18 -16h3v1h-3z M-22 -17h4v1h-4z M-12 -13h4v2h-4z M-16 -14h4v2h-4z M-20 -13h4v1h-4z M-11 -10h3v2h-3z M-14 -11h3v2h-3z M-18 -10h4v1h-4z M-10 -7h2v2h-2z M-13 -8h3v1h-3z M-15 -7h2v1h-2z"></path>
+          <path fill="#4A4058" d="M-11 -16h2v1h-2z M-15 -14h2v1h-2z M-13 -11h1v1h-1z"></path>
+          <path fill="#FFF6DE" d="M-14 -5h5v2h-5z M-19 -4h5v2h-5z M-24 -5h5v2h-5z M-29 -4h5v1h-5z"></path>
+          <path fill="#D9C8A0" d="M-19 -3h5v1h-5z M-24 -4h5v1h-5z"></path>
+          <path fill="#E8703A" d="M11 -4h5v1h-5z M12 -5h2v1h-2z"></path>
+          <path fill="#F7C548" d="M14 -4h2v1h-2z"></path>
+          <path fill="#FFFFFF" opacity="0.35" d="M25 -11h3v25h-3z"></path>
+          <path fill="#5A3A22" d="M26 -4h2v4h-2z M26 3h2v4h-2z"></path>
+          <path fill="#F2B632" d="M26 -4h2v1h-2z M26 6h2v1h-2z"></path>
+        </g>
+      </g>
+
+      <g class="gq-f gq-f3" style="animation-duration: {{dur}}">
+        <use href="#gq-cloud" x="44" y="6"></use>
+        <use href="#gq-cloud-s" x="4" y="17"></use>
+        <use href="#gq-cloud-s" x="64" y="22"></use>
+        <use href="#gq-mtn" x="-4"></use>
+        <use href="#gq-hills" x="-10"></use>
+        <use href="#gq-fields" x="-28"></use>
+        <path fill="#2B1D14" opacity="0.22" d="M33 57h40v1H33z M37 58h32v1H37z"></path>
+        <path fill="#FFFFFF" opacity="0.75" d="M4 16h14v1H4z M0 24h16v1H0z M6 32h12v1H6z M2 40h14v1H2z"></path>
+        <path fill="#D8D8D8" d="M16 21h3v3h-3z M9 22h4v4H9z M1 21h5v5H1z"></path>
+        <path fill="#EFEFEF" d="M16 21h1v1h-1z M9 22h2v1H9z M1 21h2v1H1z"></path>
+        <g transform="translate(57 27)">
+          <use href="#gq-plane"></use>
+          <path fill="#1A1414" d="M-12 -17h4v2h-4z M-16 -18h4v2h-4z M-19 -19h3v1h-3z M-12 -14h4v2h-4z M-15 -15h3v2h-3z M-19 -14h4v1h-4z M-11 -11h3v2h-3z M-14 -11h3v1h-3z M-17 -12h3v1h-3z M-10 -8h2v2h-2z M-13 -8h3v2h-3z M-15 -9h2v1h-2z"></path>
+          <path fill="#4A4058" d="M-11 -17h2v1h-2z M-14 -15h2v1h-2z M-13 -11h1v1h-1z"></path>
+          <path fill="#FFF6DE" d="M-14 -5h5v2h-5z M-19 -5h5v2h-5z M-24 -7h5v2h-5z M-28 -8h4v1h-4z"></path>
+          <path fill="#D9C8A0" d="M-14 -4h5v1h-5z M-19 -4h5v1h-5z"></path>
+          <path fill="#E8703A" d="M15 -4h2v1h-2z"></path>
+          <path fill="#F7C548" d="M16 -4h1v1h-1z"></path>
+          <path fill="#FFFFFF" opacity="0.35" d="M25 -11h3v25h-3z"></path>
+          <path fill="#5A3A22" d="M26 -10h2v10h-2z M26 3h2v4h-2z"></path>
+          <path fill="#F2B632" d="M26 -10h2v2h-2z M26 6h2v1h-2z"></path>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px">
+    <h1 style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 30px; font-weight: 400; line-height: 1; letter-spacing: 1px; color: #2B1D14; text-shadow: 3px 3px 0 #F2B632">GEO QUIZ</h1>
+    <p style="margin: 0; font-size: 19px; color: #6B5540; text-align: center">Ogarniasz świat? Udowodnij to.</p>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 10px">
+    <div style="font-size: 15px; font-weight: 600; letter-spacing: 2px; color: #6B5540">KATEGORIA</div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+      <button type="button" aria-pressed="true" style="position: relative; height: 104px; padding: 0; border: 3px solid #2B1D14; border-radius: 0; background: #FFF6DE; color: #2B1D14; font: 600 16px 'Pixelify Sans', sans-serif; display: flex; flex-direction: column; box-shadow: 0 0 0 3px #F2B632, 5px 5px 0 3px #2B1D14; cursor: pointer">
+        <span style="height: 60px; box-sizing: border-box; background: #5B8FD1; border-bottom: 3px dashed #2B1D14; box-shadow: inset 0 3px 0 rgba(255,255,255,0.45), inset 0 -3px 0 rgba(0,0,0,0.18); display: flex; align-items: center; justify-content: center">
+          <svg width="40" height="40" viewBox="0 0 10 10" shape-rendering="crispEdges" aria-hidden="true"><path fill="#2B1D14" d="M1 0h1v10H1z"></path><path fill="{{accent2}}" d="M2 1h7v4H2z"></path><path fill="#FFFFFF" d="M2 2h7v1H2z"></path></svg>
+        </span>
+        <span style="flex-grow: 1; background: #2B1D14; color: #FFF6DE; display: flex; align-items: center; justify-content: center">Flagi</span>
+        <span style="position: absolute; top: -12px; right: -12px; width: 26px; height: 26px; box-sizing: border-box; background: #F2B632; border: 3px solid #2B1D14; display: flex; align-items: center; justify-content: center">
+          <svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#2B1D14" d="M6 1h2v1H6z M5 2h2v1H5z M0 3h1v1H0z M4 3h2v1H4z M0 4h2v1H0z M3 4h2v1H3z M1 5h3v1H1z M2 6h1v1H2z"></path></svg>
+        </span>
+      </button>
+      <button type="button" aria-pressed="false" style="position: relative; height: 104px; padding: 0; border: 3px solid #2B1D14; border-radius: 0; background: #FFF6DE; color: #2B1D14; font: 600 16px 'Pixelify Sans', sans-serif; display: flex; flex-direction: column; box-shadow: 4px 4px 0 #2B1D14; cursor: pointer">
+        <span style="height: 60px; box-sizing: border-box; background: #3FA39A; border-bottom: 3px dashed #2B1D14; box-shadow: inset 0 3px 0 rgba(255,255,255,0.45), inset 0 -3px 0 rgba(0,0,0,0.18); display: flex; align-items: center; justify-content: center">
+          <svg width="32" height="36" viewBox="0 0 8 9" shape-rendering="crispEdges" aria-hidden="true"><path fill="#F2B632" d="M2 0h4v1H2z M1 1h6v4H1z M2 5h4v2H2z"></path><path fill="#FFFFFF" d="M2 1h1v2H2z"></path><path fill="#2B1D14" d="M2 7h4v1H2z M3 8h2v1H3z"></path></svg>
+        </span>
+        <span style="flex-grow: 1; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 -3px 0 #E3CFA3">Ciekawostki</span>
+      </button>
+      <button type="button" aria-pressed="false" style="position: relative; height: 104px; padding: 0; border: 3px solid #2B1D14; border-radius: 0; background: #FFF6DE; color: #2B1D14; font: 600 16px 'Pixelify Sans', sans-serif; display: flex; flex-direction: column; box-shadow: 4px 4px 0 #2B1D14; cursor: pointer">
+        <span style="height: 60px; box-sizing: border-box; background: #D9704A; border-bottom: 3px dashed #2B1D14; box-shadow: inset 0 3px 0 rgba(255,255,255,0.45), inset 0 -3px 0 rgba(0,0,0,0.18); display: flex; align-items: center; justify-content: center">
+          <svg width="40" height="36" viewBox="0 0 10 9" shape-rendering="crispEdges" aria-hidden="true"><path fill="#2B1D14" d="M3 0h4v1H3z M3 1h1v1H3z M6 1h1v1H6z"></path><path fill="#7A3E1D" d="M0 2h10v7H0z"></path><path fill="#F2B632" d="M2 2h1v7H2z M7 2h1v7H7z"></path></svg>
+        </span>
+        <span style="flex-grow: 1; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 -3px 0 #E3CFA3">Mix</span>
+      </button>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 10px">
+    <div style="font-size: 15px; font-weight: 600; letter-spacing: 2px; color: #6B5540">POZIOM</div>
+    <div role="group" aria-label="Poziom trudności" style="padding: 8px; border: 3px solid #2B1D14; background: #23408E; box-shadow: inset 0 0 0 2px #FFFFFF, inset 0 0 0 4px #5C77C4, 4px 4px 0 rgba(43,29,20,0.25); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px">
+      <button type="button" aria-pressed="false" style="height: 50px; border: 0; border-radius: 0; background: transparent; color: #DDE5FF; font: 600 18px 'Pixelify Sans', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer">
+        <span>Chill</span>
+        <span style="display: flex; gap: 3px"><span style="width: 6px; height: 6px; background: #F2B632"></span><span style="width: 6px; height: 6px; background: rgba(255,255,255,0.25)"></span><span style="width: 6px; height: 6px; background: rgba(255,255,255,0.25)"></span></span>
+      </button>
+      <button type="button" aria-pressed="true" style="height: 50px; border: 0; border-radius: 0; background: rgba(255,255,255,0.14); color: #F2B632; font: 700 18px 'Pixelify Sans', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; box-shadow: inset 0 -3px 0 #F2B632; cursor: pointer">
+        <span style="display: flex; align-items: center; gap: 6px">
+          <svg class="gq-blink" width="8" height="14" viewBox="0 0 4 7" shape-rendering="crispEdges" aria-hidden="true"><path fill="#F2B632" d="M0 0h1v7H0z M1 1h1v5H1z M2 2h1v3H2z M3 3h1v1H3z"></path></svg>
+          Normal
+        </span>
+        <span style="display: flex; gap: 3px"><span style="width: 6px; height: 6px; background: #F2B632"></span><span style="width: 6px; height: 6px; background: #F2B632"></span><span style="width: 6px; height: 6px; background: rgba(255,255,255,0.25)"></span></span>
+      </button>
+      <button type="button" aria-pressed="false" style="height: 50px; border: 0; border-radius: 0; background: transparent; color: #DDE5FF; font: 600 18px 'Pixelify Sans', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer">
+        <span>Hardkor</span>
+        <span style="display: flex; gap: 3px"><span style="width: 6px; height: 6px; background: #F2B632"></span><span style="width: 6px; height: 6px; background: #F2B632"></span><span style="width: 6px; height: 6px; background: #F2B632"></span></span>
+      </button>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 12px">
+    <div style="flex-grow: 1; flex-basis: 0; padding: 8px 10px 8px 8px; border: 3px solid #2B1D14; background: #FFF6DE; display: flex; align-items: center; gap: 10px; box-shadow: 4px 4px 0 rgba(43,29,20,0.2)">
+      <span style="width: 38px; height: 38px; flex-shrink: 0; background: #2B1D14; box-shadow: inset 0 0 0 2px #6B5540; display: flex; align-items: center; justify-content: center">
+        <svg width="27" height="24" viewBox="0 0 9 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#FFF6DE" d="M1 0h3v1H1z M5 0h3v1H5z M0 1h1v3H0z M4 1h1v1H4z M8 1h1v3H8z M1 4h1v1H1z M7 4h1v1H7z M2 5h1v1H2z M6 5h1v1H6z M3 6h1v1H3z M5 6h1v1H5z M4 7h1v1H4z"></path><path fill="{{accent2}}" d="M1 1h3v1H1z M5 1h3v1H5z M1 2h7v2H1z M2 4h5v1H2z M3 5h3v1H3z M4 6h1v1H4z"></path><path fill="#FFD9CF" d="M2 1h1v1H2z"></path></svg>
+      </span>
+      <div style="font-size: 18px; font-weight: 700; color: #2B1D14">3 życia</div>
+    </div>
+    <div style="flex-grow: 1; flex-basis: 0; padding: 8px 10px 8px 8px; border: 3px solid #2B1D14; background: #FFF6DE; display: flex; align-items: center; gap: 10px; box-shadow: 4px 4px 0 rgba(43,29,20,0.2)">
+      <span style="width: 38px; height: 38px; flex-shrink: 0; background: #2B1D14; box-shadow: inset 0 0 0 2px #6B5540; display: flex; align-items: center; justify-content: center">
+        <svg width="30" height="30" viewBox="0 0 10 10" shape-rendering="crispEdges" aria-hidden="true"><path fill="{{accent2}}" d="M3 0h4v1H3z M1 1h8v2H1z M0 3h10v4H0z M1 7h8v2H1z M3 9h4v1H3z"></path><path fill="#FFFFFF" d="M4 0h2v3H4z M4 7h2v3H4z M0 4h3v2H0z M7 4h3v2H7z"></path><path fill="#2B1D14" d="M4 3h2v4H4z M3 4h4v2H3z"></path></svg>
+      </span>
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font: 400 11px 'Press Start 2P', monospace; color: #2B1D14">50/50</span>
+        <span style="font-size: 15px; color: #6B5540">×1 na grę</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="flex-grow: 1"></div>
+
+  <div style="display: flex; flex-direction: column; gap: 16px; padding: 0 6px">
+    <button type="button" style="height: 66px; border: 3px solid #2B1D14; border-radius: 0; background: {{accent}}; color: #FFFFFF; font: 400 20px 'Press Start 2P', monospace; letter-spacing: 3px; display: flex; align-items: center; justify-content: center; gap: 16px; text-shadow: 3px 3px 0 rgba(0,0,0,0.35); box-shadow: inset 0 4px 0 rgba(255,255,255,0.35), inset 0 -6px 0 rgba(0,0,0,0.3), 0 0 0 3px #F2B632, 0 0 0 6px #2B1D14, 6px 6px 0 6px rgba(43,29,20,0.25); cursor: pointer">
+      <svg class="gq-blink" width="12" height="21" viewBox="0 0 4 7" shape-rendering="crispEdges" aria-hidden="true"><path fill="#F2B632" d="M0 0h1v7H0z M1 1h1v5H1z M2 2h1v3H2z M3 3h1v1H3z"></path></svg>
+      START
+      <svg class="gq-blink" width="12" height="21" viewBox="0 0 4 7" shape-rendering="crispEdges" aria-hidden="true"><path fill="#F2B632" d="M3 0h1v7H3z M2 1h1v5H2z M1 2h1v3H1z M0 3h1v1H0z"></path></svg>
+    </button>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 17px; color: #6B5540">
+      <svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#F2B632" d="M0 0h8v1H0z M1 1h6v3H1z M0 1h1v2H0z M7 1h1v2H7z M2 4h4v1H2z M3 5h2v1H3z M2 6h4v2H2z"></path></svg>
+      <span>Twój rekord: <span style="color: #2B1D14; font-weight: 700">[REKORD]</span> pkt</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2A62A6","options":["#2A62A6","#2E7D5B","#6E4A9E"]},"accent2":{"editor":"color","default":"#B8341F","options":["#B8341F","#A8431A","#9C2F5A"]},"animSpeed":{"editor":"enum","options":["wolno","średnio","szybko"],"default":"średnio"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+const speeds = { 'wolno': '3.6s', 'średnio': '2.4s', 'szybko': '1.5s' };
+return {
+accent: this.props.accent ?? '#2A62A6',
+accent2: this.props.accent2 ?? '#B8341F',
+dur: speeds[this.props.animSpeed ?? 'średnio'] ?? '2.4s'
+};
+}
+}
+</script>
+</body>
+</html>

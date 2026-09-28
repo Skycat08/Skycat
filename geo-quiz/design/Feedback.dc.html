@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Geo Quiz – feedback</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&amp;family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4E6C4;font-family:'Pixelify Sans',system-ui,sans-serif;color:#2B1D14}
+a{color:#2A62A6}a:hover{color:#1C4577}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 44px 20px 28px; background: #F4E6C4; display: flex; flex-direction: column; gap: 16px; font-family: 'Pixelify Sans', system-ui, sans-serif; color: #2B1D14">
+  <div style="display: flex; align-items: center; justify-content: space-between">
+    <div style="display: flex; gap: 6px" aria-label="Życia: 2 z 3">
+      <svg width="27" height="24" viewBox="0 0 9 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#2B1D14" d="M1 0h3v1H1z M5 0h3v1H5z M0 1h1v3H0z M4 1h1v1H4z M8 1h1v3H8z M1 4h1v1H1z M7 4h1v1H7z M2 5h1v1H2z M6 5h1v1H6z M3 6h1v1H3z M5 6h1v1H5z M4 7h1v1H4z"></path><path fill="{{accent2}}" d="M1 1h3v1H1z M5 1h3v1H5z M1 2h7v2H1z M2 4h5v1H2z M3 5h3v1H3z M4 6h1v1H4z"></path><path fill="#FFD9CF" d="M2 1h1v1H2z"></path></svg>
+      <svg width="27" height="24" viewBox="0 0 9 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#2B1D14" d="M1 0h3v1H1z M5 0h3v1H5z M0 1h1v3H0z M4 1h1v1H4z M8 1h1v3H8z M1 4h1v1H1z M7 4h1v1H7z M2 5h1v1H2z M6 5h1v1H6z M3 6h1v1H3z M5 6h1v1H5z M4 7h1v1H4z"></path><path fill="{{accent2}}" d="M1 1h3v1H1z M5 1h3v1H5z M1 2h7v2H1z M2 4h5v1H2z M3 5h3v1H3z M4 6h1v1H4z"></path><path fill="#FFD9CF" d="M2 1h1v1H2z"></path></svg>
+      <svg width="27" height="24" viewBox="0 0 9 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#2B1D14" d="M1 0h3v1H1z M5 0h3v1H5z M0 1h1v3H0z M4 1h1v1H4z M8 1h1v3H8z M1 4h1v1H1z M7 4h1v1H7z M2 5h1v1H2z M6 5h1v1H6z M3 6h1v1H3z M5 6h1v1H5z M4 7h1v1H4z"></path><path fill="#DCC89F" d="M1 1h3v1H1z M5 1h3v1H5z M1 2h7v2H1z M2 4h5v1H2z M3 5h3v1H3z M4 6h1v1H4z"></path></svg>
+    </div>
+    <div aria-label="Punkty: 1250" style="padding: 6px 10px; border: 3px solid #2B1D14; background: #FFF6DE; display: flex; align-items: center; gap: 8px; box-shadow: 3px 3px 0 rgba(43,29,20,0.2)">
+      <svg width="24" height="24" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#F2B632" d="M2 0h4v1H2z M1 1h6v1H1z M0 2h8v4H0z M1 6h6v1H1z M2 7h4v1H2z"></path><path fill="#B7791F" d="M4 2h1v4H4z"></path><path fill="#FFFFFF" d="M2 2h1v1H2z"></path></svg>
+      <span style="font: 400 16px 'Press Start 2P', monospace; color: #2B1D14">1 250</span>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 10px">
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <span style="font-size: 16px; font-weight: 600; letter-spacing: 1px; color: #6B5540">PYTANIE 5/10 · CIEKAWOSTKI</span>
+      <span style="padding: 5px 10px 5px 8px; border: 2px solid #8A7458; background: #E6D3AC; display: flex; align-items: center; gap: 8px; font: 400 11px 'Press Start 2P', monospace; color: #6B5540; text-decoration: line-through"><span style="width: 6px; height: 6px; background: #8A7458"></span>COMBO ×3</span>
+    </div>
+    <div style="display: flex; gap: 5px" aria-label="Trasa: przystanek 5 z 10">
+      <div style="flex-grow: 1; height: 14px; border: 2px solid #2B1D14; background: {{accent}}"></div>
+      <div style="flex-grow: 1; height: 14px; border: 2px solid #2B1D14; background: {{accent}}"></div>
+      <div style="flex-grow: 1; height: 14px; border: 2px solid #2B1D14; background: {{accent}}"></div>
+      <div style="flex-grow: 1; height: 14px; border: 2px solid #2B1D14; background: {{accent}}"></div>
+      <div style="flex-grow: 1; height: 14px; border: 2px solid #2B1D14; background: {{accent2}}"></div>
+      <div style="flex-grow: 1; height: 14px; border: 2px dashed #A58D66; background: transparent"></div>
+      <div style="flex-grow: 1; height: 14px; border: 2px dashed #A58D66; background: transparent"></div>
+      <div style="flex-grow: 1; height: 14px; border: 2px dashed #A58D66; background: transparent"></div>
+      <div style="flex-grow: 1; height: 14px; border: 2px dashed #A58D66; background: transparent"></div>
+      <div style="flex-grow: 1; height: 14px; border: 2px dashed #A58D66; background: transparent"></div>
+    </div>
+  </div>
+
+  <h2 style="margin: 4px 0 0; font-size: 25px; font-weight: 600; line-height: 1.2">Która rzeka jest najdłuższa w Europie?</h2>
+
+  <div style="display: flex; flex-direction: column; gap: 12px">
+    <div style="height: 52px; box-sizing: border-box; padding: 0 14px; border: 3px solid #B8A27A; background: #EFE0BD; color: #75604A; font: 500 19px 'Pixelify Sans', sans-serif; display: flex; align-items: center; gap: 14px">
+      <span style="width: 28px; height: 28px; background: #B8A27A; color: #F4E6C4; font: 400 12px 'Press Start 2P', monospace; display: flex; align-items: center; justify-content: center">A</span>Ren
+    </div>
+    <div style="height: 52px; box-sizing: border-box; padding: 0 14px; border: 3px solid #2B1D14; background: #F6D2C6; color: #2B1D14; font: 600 19px 'Pixelify Sans', sans-serif; display: flex; align-items: center; gap: 14px; box-shadow: 4px 4px 0 #2B1D14">
+      <span style="width: 28px; height: 28px; background: {{accent2}}; color: #FFFFFF; font: 400 12px 'Press Start 2P', monospace; display: flex; align-items: center; justify-content: center">B</span>
+      <span style="flex-grow: 1">Dunaj</span>
+      <svg width="21" height="21" viewBox="0 0 7 7" shape-rendering="crispEdges" role="img" aria-label="Twoja odpowiedź – błędna"><path fill="{{accent2}}" d="M0 0h2v1H0z M5 0h2v1H5z M1 1h2v1H1z M4 1h2v1H4z M2 2h3v1H2z M3 3h1v1H3z M2 4h3v1H2z M1 5h2v1H1z M4 5h2v1H4z M0 6h2v1H0z M5 6h2v1H5z"></path></svg>
+    </div>
+    <div style="height: 52px; box-sizing: border-box; padding: 0 14px; border: 3px solid #2B1D14; background: #D3E3F6; color: #2B1D14; font: 600 19px 'Pixelify Sans', sans-serif; display: flex; align-items: center; gap: 14px; box-shadow: 4px 4px 0 #2B1D14">
+      <span style="width: 28px; height: 28px; background: {{accent}}; color: #FFFFFF; font: 400 12px 'Press Start 2P', monospace; display: flex; align-items: center; justify-content: center">C</span>
+      <span style="flex-grow: 1">Wołga</span>
+      <svg width="24" height="24" viewBox="0 0 8 8" shape-rendering="crispEdges" role="img" aria-label="Poprawna odpowiedź"><path fill="{{accent}}" d="M6 1h2v1H6z M5 2h2v1H5z M0 3h1v1H0z M4 3h2v1H4z M0 4h2v1H0z M3 4h2v1H3z M1 5h3v1H1z M2 6h1v1H2z"></path></svg>
+    </div>
+    <div style="height: 52px; box-sizing: border-box; padding: 0 14px; border: 3px solid #B8A27A; background: #EFE0BD; color: #75604A; font: 500 19px 'Pixelify Sans', sans-serif; display: flex; align-items: center; gap: 14px">
+      <span style="width: 28px; height: 28px; background: #B8A27A; color: #F4E6C4; font: 400 12px 'Press Start 2P', monospace; display: flex; align-items: center; justify-content: center">D</span>Dniepr
+    </div>
+  </div>
+
+  <div style="flex-grow: 1"></div>
+
+  <div style="padding: 18px; border: 3px solid #2B1D14; background: #FFF6DE; box-shadow: 6px 6px 0 rgba(43,29,20,0.2); display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+      <div style="padding: 8px 12px; border: 3px solid {{accent2}}; outline: 2px solid {{accent2}}; outline-offset: 3px; transform: rotate(-5deg); font: 400 18px 'Press Start 2P', monospace; color: {{accent2}}; margin-left: 5px">PUDŁO!</div>
+      <div style="font-size: 17px; font-weight: 600; color: {{accent2}}; text-align: right">−1 życie · combo reset</div>
+    </div>
+    <div style="display: flex; gap: 12px; align-items: flex-start">
+      <svg width="24" height="27" viewBox="0 0 8 9" shape-rendering="crispEdges" style="flex-shrink: 0; margin-top: 2px" aria-hidden="true"><path fill="#F2B632" d="M2 0h4v1H2z M1 1h6v4H1z M2 5h4v2H2z"></path><path fill="#FFFFFF" d="M2 1h1v2H2z"></path><path fill="#2B1D14" d="M2 7h4v1H2z M3 8h2v1H3z"></path></svg>
+      <p style="margin: 0; font-size: 18px; line-height: 1.35; color: #2B1D14">Wołga ma ok. 3 530 km i uchodzi do Morza Kaspijskiego. Dunaj jest drugi – ok. 2 850 km.</p>
+    </div>
+    <button type="button" style="height: 56px; border: 3px solid #2B1D14; border-radius: 0; background: {{accent}}; color: #FFFFFF; font: 400 16px 'Press Start 2P', monospace; letter-spacing: 2px; box-shadow: inset 0 -5px 0 rgba(0,0,0,0.25), inset 0 3px 0 rgba(255,255,255,0.3), 4px 4px 0 #2B1D14; cursor: pointer">DALEJ</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2A62A6","options":["#2A62A6","#2E7D5B","#6E4A9E"]},"accent2":{"editor":"color","default":"#B8341F","options":["#B8341F","#A8431A","#9C2F5A"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#2A62A6', accent2: this.props.accent2 ?? '#B8341F' };
+}
+}
+</script>
+</body>
+</html>

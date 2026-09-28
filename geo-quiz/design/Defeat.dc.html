@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Geo Quiz – porażka</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&amp;family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4E6C4;font-family:'Pixelify Sans',system-ui,sans-serif;color:#2B1D14}
+a{color:#2A62A6}a:hover{color:#1C4577}
+.gqd-f{animation-duration:5s;animation-iteration-count:infinite;animation-timing-function:step-end}
+.gqd-f1{animation-name:gqd1}
+.gqd-f2{opacity:0;animation-name:gqd2}
+.gqd-f3{opacity:0;animation-name:gqd3}
+.gqd-f4{opacity:0;animation-name:gqd4}
+.gqd-f5{opacity:0;animation-name:gqd5}
+@keyframes gqd1{0%{opacity:1}18%{opacity:0}100%{opacity:0}}
+@keyframes gqd2{0%{opacity:0}18%{opacity:1}34%{opacity:0}100%{opacity:0}}
+@keyframes gqd3{0%{opacity:0}34%{opacity:1}52%{opacity:0}100%{opacity:0}}
+@keyframes gqd4{0%{opacity:0}52%{opacity:1}70%{opacity:0}100%{opacity:0}}
+@keyframes gqd5{0%{opacity:0}70%{opacity:1}100%{opacity:1}}
+.gqd-blink{animation:gqdb 1.2s step-end infinite}
+@keyframes gqdb{0%{opacity:1}50%{opacity:0}100%{opacity:0}}
+@media (prefers-reduced-motion: reduce){.gqd-f,.gqd-blink{animation:none}.gqd-f1{opacity:0}.gqd-f5{opacity:1}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 40px 24px 32px; background: #F4E6C4; display: flex; flex-direction: column; gap: 18px; font-family: 'Pixelify Sans', system-ui, sans-serif; color: #2B1D14">
+  <div style="width: 342px; box-sizing: border-box; border: 3px solid #2B1D14; box-shadow: 5px 5px 0 rgba(43,29,20,0.2)">
+    <svg width="336" height="252" viewBox="0 0 112 84" shape-rendering="crispEdges" role="img" aria-label="Animacja: silnik wybucha, a dwupłatowiec z pilotem spada do dżungli" style="display: block">
+      <defs>
+        <pattern id="gqd-p1" width="2" height="2" patternUnits="userSpaceOnUse"><rect width="1" height="1" fill="#3B3F7A"></rect><rect x="1" y="1" width="1" height="1" fill="#3B3F7A"></rect></pattern>
+        <pattern id="gqd-p2" width="2" height="2" patternUnits="userSpaceOnUse"><rect width="1" height="1" fill="#6A4C8C"></rect><rect x="1" y="1" width="1" height="1" fill="#6A4C8C"></rect></pattern>
+        <pattern id="gqd-p3" width="2" height="2" patternUnits="userSpaceOnUse"><rect width="1" height="1" fill="#C2607A"></rect><rect x="1" y="1" width="1" height="1" fill="#C2607A"></rect></pattern>
+        <pattern id="gqd-p4" width="2" height="2" patternUnits="userSpaceOnUse"><rect width="1" height="1" fill="#F29A5A"></rect><rect x="1" y="1" width="1" height="1" fill="#F29A5A"></rect></pattern>
+
+        <g id="gqd-crown">
+          <path fill="#1F4A2A" d="M3 0h6v1H3z M1 1h10v2H1z M0 3h12v6H0z"></path>
+          <path fill="#2F6B3A" d="M3 1h5v1H3z M2 2h7v2H2z M1 4h8v2H1z"></path>
+          <path fill="#4E8F4A" d="M3 1h2v1H3z M2 2h2v1H2z M5 2h1v1H5z"></path>
+        </g>
+        <g id="gqd-palm">
+          <path fill="#8A5A33" d="M6 4h2v4H6z M5 8h2v4H5z M4 12h2v8H4z"></path>
+          <path fill="#6B4226" d="M6 6h2v1H6z M5 10h2v1H5z M4 15h2v1H4z M4 18h2v1H4z"></path>
+          <path fill="#2F6B3A" d="M3 0h8v2H3z M0 1h4v1H0z M-2 2h3v1h-3z M-3 3h2v2h-2z M10 1h4v1h-4z M13 2h3v1h-3z M15 3h2v2h-2z M5 -2h4v2H5z M4 2h2v2H4z M8 2h2v2H8z"></path>
+          <path fill="#4E8F4A" d="M4 0h6v1H4z M6 -2h2v1H6z M1 1h2v1H1z M11 1h2v1h-2z"></path>
+          <path fill="#5A3A22" d="M6 2h1v1H6z M8 2h1v1H8z"></path>
+        </g>
+        <g id="gqd-front">
+          <use href="#gqd-crown" x="-2" y="66"></use><use href="#gqd-crown" x="10" y="66"></use><use href="#gqd-crown" x="22" y="66"></use><use href="#gqd-crown" x="34" y="66"></use><use href="#gqd-crown" x="46" y="66"></use><use href="#gqd-crown" x="58" y="66"></use><use href="#gqd-crown" x="70" y="66"></use><use href="#gqd-crown" x="82" y="66"></use><use href="#gqd-crown" x="94" y="66"></use><use href="#gqd-crown" x="106" y="66"></use>
+          <use href="#gqd-crown" x="-8" y="74"></use><use href="#gqd-crown" x="4" y="74"></use><use href="#gqd-crown" x="16" y="74"></use><use href="#gqd-crown" x="28" y="74"></use><use href="#gqd-crown" x="40" y="74"></use><use href="#gqd-crown" x="52" y="74"></use><use href="#gqd-crown" x="64" y="74"></use><use href="#gqd-crown" x="76" y="74"></use><use href="#gqd-crown" x="88" y="74"></use><use href="#gqd-crown" x="100" y="74"></use><use href="#gqd-crown" x="112" y="74"></use>
+          <path fill="#D6452F" d="M14 70h1v1h-1z M60 77h1v1h-1z M96 71h1v1h-1z M28 78h1v1h-1z"></path>
+          <path fill="#F7C548" d="M40 69h1v1h-1z M84 77h1v1h-1z M8 79h1v1H8z"></path>
+          <path fill="#3F7F45" d="M20 75h1v4h-1z M56 73h1v3h-1z M90 74h1v4h-1z"></path>
+        </g>
+
+        <g id="gqd-body">
+          <path fill="#D94A2B" d="M-33 -9h5v9h-5z M-31 -10h3v1h-3z M-31 -1h7v3h-7z M-24 -2h44v4h-44z"></path>
+          <path fill="#F07A55" d="M-31 -9h1v8h-1z M-24 -3h44v1h-44z M-31 -1h7v1h-7z"></path>
+          <path fill="#2A62A6" d="M-35 -8h1v8h-1z"></path>
+          <path fill="#FFFFFF" d="M-34 -8h1v8h-1z"></path>
+          <path fill="#B53A22" d="M-24 2h44v2h-44z M-31 2h7v1h-7z"></path>
+          <path fill="#8A2A18" d="M-22 4h40v1h-40z M-6 -2h1v6h-1z M12 -2h1v6h-1z M-30 3h6v1h-6z"></path>
+          <path fill="#D94A2B" d="M-37 1h12v1h-12z"></path>
+          <path fill="#8A2A18" d="M-37 2h12v1h-12z"></path>
+          <path fill="#2A62A6" d="M-21 -2h5v5h-5z"></path>
+          <path fill="#FFFFFF" d="M-20 -1h3v3h-3z"></path>
+          <path fill="#D94A2B" d="M-19 0h1v1h-1z"></path>
+          <path fill="#F4B090" d="M-14 3h1v1h-1z M-10 3h1v1h-1z M2 3h1v1h-1z M6 3h1v1h-1z M16 3h1v1h-1z"></path>
+          <path fill="#2B1D14" d="M-30 4h1v2h-1z"></path>
+          <path fill="#F2B632" d="M-10 5h28v2h-28z"></path>
+          <path fill="#FFE08A" d="M-10 5h28v1h-28z"></path>
+          <path fill="#B7791F" d="M-10 7h28v1h-28z M-10 5h1v3h-1z"></path>
+          <path fill="#D99A2B" d="M-6 6h1v1h-1z M-2 6h1v1h-1z M2 6h1v1h-1z M6 6h1v1h-1z M10 6h1v1h-1z M14 6h1v1h-1z"></path>
+          <path fill="#2B1D14" d="M4 8h2v1h-2z M5 9h1v1h-1z M9 8h2v1h-2z M9 9h1v1h-1z"></path>
+          <path fill="#2F2A28" d="M6 10h3v1h-3z M5 11h5v1h-5z M4 12h7v3h-7z M5 15h5v1h-5z M6 16h3v1h-3z"></path>
+          <path fill="#5A524E" d="M6 11h2v1h-2z M5 12h1v1h-1z"></path>
+          <path fill="#A8A8A8" d="M6 12h3v3h-3z"></path>
+          <path fill="#707070" d="M8 13h1v2h-1z M6 14h2v1h-2z"></path>
+          <path fill="#E6E6E6" d="M7 13h1v1h-1z"></path>
+          <path fill="#3A2A20" d="M-11 -4h1v1h-1z M-11 -3h18v1h-18z"></path>
+          <path fill="#7A4A26" d="M-9 -3h14v1h-14z"></path>
+          <path fill="#CFEFFA" d="M7 -7h2v4h-2z"></path>
+          <path fill="#FFFFFF" d="M8 -7h1v1h-1z"></path>
+          <path fill="#2B1D14" d="M9 -8h1v5h-1z"></path>
+          <path fill="#6B6B6B" d="M18 -3h6v9h-6z"></path>
+          <path fill="#8C8C8C" d="M20 -2h2v7h-2z"></path>
+          <path fill="#BDBDBD" d="M19 -2h1v7h-1z"></path>
+          <path fill="#4A4A4A" d="M18 5h6v1h-6z"></path>
+          <path fill="#2B1D14" d="M22 -1h1v1h-1z M22 1h1v1h-1z M22 3h1v1h-1z"></path>
+          <path fill="#3A3A3A" d="M17 -4h3v1h-3z"></path>
+          <path fill="#D0D0D0" d="M24 0h2v3h-2z M26 1h1v1h-1z"></path>
+          <path fill="#9A9A9A" d="M24 2h2v1h-2z"></path>
+        </g>
+        <g id="gqd-head">
+          <path fill="#6B4226" d="M-9 -5h4v2h-4z M4 -5h3v2h-3z"></path>
+          <path fill="#1A1414" d="M-5 -18h6v1h-6z M-7 -17h10v1h-10z M-8 -16h12v1h-12z M-8 -15h2v2h-2z M0 -15h1v1h-1z M-8 -13h3v8h-3z"></path>
+          <path fill="#4A4058" d="M-4 -17h3v1h-3z M-7 -16h1v1h-1z M-8 -11h1v2h-1z"></path>
+          <path fill="#F2C08A" d="M-5 -13h10v10h-10z M4 -15h1v2h-1z M5 -10h1v3h-1z"></path>
+          <path fill="#D99A62" d="M-5 -12h1v8h-1z M4 -9h1v1h-1z"></path>
+          <path fill="#E0A872" d="M-6 -10h2v3h-2z"></path>
+          <path fill="#B87A48" d="M-5 -9h1v1h-1z"></path>
+          <path fill="#3A2A20" d="M-6 -15h3v2h-3z M0 -14h1v1h-1z"></path>
+          <path fill="#2B1D14" d="M-3 -15h3v3h-3z M1 -15h3v3h-3z"></path>
+          <path fill="#8ED0EE" d="M-2 -14h1v1h-1z M2 -14h1v1h-1z"></path>
+        </g>
+        <g id="gqd-face-fierce">
+          <path fill="#D99A62" d="M-4 -9h3v1h-3z M2 -9h2v1h-2z M-4 -8h1v3h-1z M-1 -11h1v1h-1z"></path>
+          <path fill="#FFFFFF" d="M-4 -10h2v1h-2z M2 -10h1v1h-1z M-2 -7h5v1h-5z M-2 -5h5v1h-5z"></path>
+          <path fill="#5A1E1E" d="M-2 -6h5v1h-5z"></path>
+          <path fill="#C0503A" d="M-1 -6h2v1h-2z"></path>
+          <path fill="#2B1D14" d="M-5 -12h3v1h-3z M3 -12h2v1h-2z M-3 -11h2v1h-2z M1 -11h2v1h-2z M-2 -10h1v1h-1z M3 -10h1v1h-1z M4 -8h1v1h-1z M-3 -8h7v1h-7z M-3 -7h1v3h-1z M3 -7h1v3h-1z M0 -7h1v1h-1z M0 -5h1v1h-1z M-2 -4h5v1h-5z"></path>
+          <path fill="#8ED0EE" d="M6 -14h1v1h-1z M6 -13h2v2h-2z M8 -18h1v2h-1z"></path>
+          <path fill="#FFFFFF" d="M6 -13h1v1h-1z"></path>
+          <path fill="#D6452F" d="M-5 -24h2v1h-2z M-2 -24h2v1h-2z M-5 -23h1v1h-1z M-1 -23h1v1h-1z M-5 -21h1v1h-1z M-1 -21h1v1h-1z M-5 -20h2v1h-2z M-2 -20h2v1h-2z"></path>
+        </g>
+        <g id="gqd-face-shock">
+          <path fill="#FFFFFF" d="M-4 -11h2v2h-2z M2 -11h2v2h-2z"></path>
+          <path fill="#5A1E1E" d="M-1 -7h3v2h-3z"></path>
+          <path fill="#2B1D14" d="M-4 -12h2v1h-2z M2 -12h2v1h-2z M-3 -10h1v1h-1z M3 -10h1v1h-1z M-1 -8h3v1h-3z M-2 -7h1v2h-1z M2 -7h1v2h-1z M-1 -5h3v1h-3z"></path>
+          <path fill="#8ED0EE" d="M6 -14h1v1h-1z M6 -13h2v2h-2z M8 -18h1v2h-1z M-9 -16h1v2h-1z"></path>
+          <path fill="#FFFFFF" d="M6 -13h1v1h-1z"></path>
+        </g>
+        <g id="gqd-face-dazed">
+          <path fill="#2B1D14" d="M-4 -11h3v1h-3z M-4 -10h1v1h-1z M-2 -10h1v1h-1z M-4 -9h3v1h-3z M1 -11h3v1h-3z M1 -10h1v1h-1z M3 -10h1v1h-1z M1 -9h3v1h-3z M-2 -6h1v1h-1z M-1 -7h1v1h-1z M0 -6h1v1h-1z M1 -7h1v1h-1z M2 -6h1v1h-1z"></path>
+          <path fill="#C0503A" d="M1 -6h1v2h-1z"></path>
+          <path fill="#6B4226" d="M-3 -12h1v1h-1z M2 -13h1v1h-1z"></path>
+        </g>
+      </defs>
+
+      <rect width="112" height="84" fill="#F7C77A"></rect>
+      <rect width="112" height="12" fill="#3B3F7A"></rect>
+      <rect y="12" width="112" height="12" fill="#6A4C8C"></rect>
+      <rect y="24" width="112" height="12" fill="#C2607A"></rect>
+      <rect y="36" width="112" height="12" fill="#F29A5A"></rect>
+      <rect y="12" width="112" height="2" fill="url(#gqd-p1)"></rect>
+      <rect y="24" width="112" height="2" fill="url(#gqd-p2)"></rect>
+      <rect y="36" width="112" height="2" fill="url(#gqd-p3)"></rect>
+      <rect y="48" width="112" height="2" fill="url(#gqd-p4)"></rect>
+      <path fill="#FFF6DE" d="M8 8h1v1H8z M20 3h1v1h-1z M44 6h1v1h-1z M66 2h1v1h-1z M88 4h1v1h-1z M100 9h1v1h-1z"></path>
+      <path fill="#FFE08A" opacity="0.6" d="M76 40h12v1H76z M73 41h18v1H73z M72 42h20v14H72z"></path>
+      <path fill="#FFD36A" d="M77 43h10v1H77z M75 44h14v1H75z M74 45h16v11H74z"></path>
+      <path fill="#5E4A7A" d="M0 58V54H6V52H10V50H14V48H18V50H22V52H28V50H34V47H38V45H42V47H46V49H52V51H58V49H64V46H68V44H72V46H76V48H82V50H88V48H94V45H98V43H102V45H106V47H112V58Z"></path>
+      <path fill="#7A5E94" d="M14 48h4v1h-4z M38 45h4v1h-4z M68 44h4v1h-4z M98 43h4v1h-4z"></path>
+      <rect y="54" width="112" height="5" fill="#C9B8E0" opacity="0.35"></rect>
+      <path fill="#2F5A3A" d="M0 62V58H10V57H22V56H36V57H48V56H60V57H74V56H86V57H98V56H112V62Z"></path>
+      <rect y="60" width="112" height="24" fill="#1A3A22"></rect>
+      <use href="#gqd-crown" x="-6" y="58"></use><use href="#gqd-crown" x="6" y="58"></use><use href="#gqd-crown" x="18" y="58"></use><use href="#gqd-crown" x="30" y="58"></use><use href="#gqd-crown" x="42" y="58"></use><use href="#gqd-crown" x="54" y="58"></use><use href="#gqd-crown" x="66" y="58"></use><use href="#gqd-crown" x="78" y="58"></use><use href="#gqd-crown" x="90" y="58"></use><use href="#gqd-crown" x="102" y="58"></use>
+      <rect y="58" width="112" height="10" fill="#1A3A22" opacity="0.35"></rect>
+      <use href="#gqd-palm" x="8" y="44"></use>
+      <use href="#gqd-palm" x="92" y="42"></use>
+
+      <g class="gqd-f gqd-f1" style="animation-duration: {{dur}}">
+        <path fill="#FFFFFF" opacity="0.6" d="M0 20h12v1H0z M4 28h10v1H4z M0 36h14v1H0z"></path>
+        <g transform="translate(52 28)">
+          <use href="#gqd-body"></use>
+          <use href="#gqd-head"></use>
+          <use href="#gqd-face-fierce"></use>
+          <path fill="#1A1414" d="M-12 -17h4v2h-4z M-15 -16h3v2h-3z M-18 -17h3v1h-3z M-21 -16h3v1h-3z M-12 -14h4v2h-4z M-16 -13h4v2h-4z M-19 -14h3v1h-3z M-11 -11h3v2h-3z M-14 -10h3v2h-3z M-17 -11h3v1h-3z M-10 -8h2v2h-2z M-13 -7h3v1h-3z"></path>
+          <path fill="#4A4058" d="M-11 -17h2v1h-2z M-15 -13h2v1h-2z M-13 -10h1v1h-1z"></path>
+          <path fill="#FFF6DE" d="M-14 -5h5v2h-5z M-19 -6h5v2h-5z M-24 -5h5v2h-5z M-28 -6h4v1h-4z"></path>
+          <path fill="#D9C8A0" d="M-14 -4h5v1h-5z M-24 -4h5v1h-5z"></path>
+          <path fill="#3A3A3A" d="M19 -8h3v3h-3z M14 -12h4v4h-4z M8 -17h5v5H8z"></path>
+          <path fill="#5A5A5A" d="M19 -8h1v1h-1z M14 -12h2v1h-2z M8 -17h2v1H8z"></path>
+          <path fill="#F7C548" d="M25 -5h1v1h-1z M27 -3h1v1h-1z M24 6h1v1h-1z"></path>
+          <path fill="#E8703A" d="M26 -6h1v1h-1z M25 7h1v1h-1z"></path>
+          <path fill="#FFFFFF" opacity="0.35" d="M25 -11h3v25h-3z"></path>
+          <path fill="#5A3A22" d="M26 -10h2v10h-2z M26 3h2v10h-2z"></path>
+          <path fill="#F2B632" d="M26 -10h2v2h-2z M26 11h2v2h-2z"></path>
+        </g>
+        <use href="#gqd-front"></use>
+      </g>
+
+      <g class="gqd-f gqd-f2" style="animation-duration: {{dur}}">
+        <path fill="#FFFFFF" opacity="0.5" d="M0 24h12v1H0z M2 34h10v1H2z"></path>
+        <g transform="translate(56 32) rotate(10)">
+          <use href="#gqd-body"></use>
+          <use href="#gqd-head"></use>
+          <use href="#gqd-face-shock"></use>
+          <path fill="#1A1414" d="M-12 -16h4v2h-4z M-15 -17h3v2h-3z M-18 -16h3v1h-3z M-22 -17h4v1h-4z M-12 -13h4v2h-4z M-16 -14h4v2h-4z M-20 -13h4v1h-4z M-11 -10h3v2h-3z M-14 -11h3v2h-3z M-18 -10h4v1h-4z M-10 -7h2v2h-2z M-13 -8h3v1h-3z M-15 -7h2v1h-2z"></path>
+          <path fill="#4A4058" d="M-11 -16h2v1h-2z M-15 -14h2v1h-2z M-13 -11h1v1h-1z"></path>
+          <path fill="#FFF6DE" d="M-14 -5h5v2h-5z M-19 -4h5v2h-5z M-24 -5h5v2h-5z M-29 -4h5v1h-5z"></path>
+          <path fill="#D9C8A0" d="M-19 -3h5v1h-5z M-24 -4h5v1h-5z"></path>
+          <path fill="#D6452F" d="M18 -8h10v1H18z M16 -7h14v1H16z M15 -6h16v12H15z M16 6h14v1H16z M18 7h10v1H18z M22 -11h2v3h-2z M22 8h2v3h-2z M11 -1h4v2h-4z M31 -1h4v2h-4z M16 -10h2v2h-2z M29 -10h2v2h-2z M16 8h2v2h-2z M29 8h2v2h-2z"></path>
+          <path fill="#F2A03A" d="M19 -6h8v1h-8z M17 -5h12v10H17z M19 5h8v1h-8z"></path>
+          <path fill="#F7C548" d="M20 -3h6v6h-6z M19 -2h8v4h-8z"></path>
+          <path fill="#FFF6DE" d="M21 -1h4v2h-4z M22 -2h2v4h-2z"></path>
+          <path fill="#2B1D14" d="M8 -14h2v2H8z M34 -9h2v1h-2z M36 4h1v2h-1z M10 11h2v1h-2z M28 -15h1v1h-1z M38 -2h1v1h-1z"></path>
+          <path fill="#6B6B6B" d="M32 -13h2v2h-2z M13 12h2v1h-2z"></path>
+          <path fill="#5A3A22" d="M38 -16h1v4h-1z M39 -17h1v1h-1z"></path>
+          <path fill="#F2B632" d="M39 -18h1v1h-1z"></path>
+        </g>
+        <use href="#gqd-front"></use>
+      </g>
+
+      <g class="gqd-f gqd-f3" style="animation-duration: {{dur}}">
+        <path fill="#7A7A7A" d="M34 8h8v7h-8z"></path>
+        <path fill="#5A5A5A" d="M46 16h7v6h-7z"></path>
+        <path fill="#3A3A3A" d="M58 25h6v5h-6z"></path>
+        <path fill="#2B2B2B" d="M70 34h5v4h-5z"></path>
+        <path fill="#9A9A9A" d="M34 8h3v1h-3z M46 16h3v1h-3z M58 25h2v1h-2z"></path>
+        <g transform="translate(62 44) rotate(32)">
+          <use href="#gqd-body"></use>
+          <use href="#gqd-head"></use>
+          <use href="#gqd-face-shock"></use>
+          <path fill="#1A1414" d="M-12 -17h4v2h-4z M-16 -18h4v2h-4z M-19 -19h3v1h-3z M-12 -14h4v2h-4z M-15 -15h3v2h-3z M-19 -14h4v1h-4z M-11 -11h3v2h-3z M-14 -11h3v1h-3z M-17 -12h3v1h-3z M-10 -8h2v2h-2z M-13 -8h3v2h-3z M-15 -9h2v1h-2z"></path>
+          <path fill="#4A4058" d="M-11 -17h2v1h-2z M-14 -15h2v1h-2z M-13 -11h1v1h-1z"></path>
+          <path fill="#FFF6DE" d="M-14 -5h5v2h-5z M-19 -5h5v2h-5z M-24 -7h5v2h-5z M-28 -8h4v1h-4z"></path>
+          <path fill="#D9C8A0" d="M-14 -4h5v1h-5z M-19 -4h5v1h-5z"></path>
+          <path fill="#D6452F" d="M17 -6h3v3h-3z M21 -9h3v6h-3z M25 -6h2v3h-2z"></path>
+          <path fill="#F2A03A" d="M18 -5h2v2h-2z M21 -7h2v4h-2z M25 -5h1v2h-1z"></path>
+          <path fill="#F7C548" d="M21 -5h1v2h-1z M18 -4h1v1h-1z"></path>
+          <path fill="#5A3A22" d="M26 -2h2v3h-2z"></path>
+          <path fill="#2B1D14" d="M-40 -6h2v1h-2z M-44 2h1v2h-1z M30 -12h1v1h-1z"></path>
+        </g>
+        <use href="#gqd-front"></use>
+      </g>
+
+      <g class="gqd-f gqd-f4" style="animation-duration: {{dur}}">
+        <path fill="#2B1D14" d="M16 22h1v1h-1z M17 23h1v1h-1z M18 22h1v1h-1z M22 30h1v1h-1z M23 31h1v1h-1z M24 30h1v1h-1z M30 24h1v1h-1z M31 25h1v1h-1z M32 24h1v1h-1z M100 26h1v1h-1z M101 27h1v1h-1z M102 26h1v1h-1z"></path>
+        <path fill="#7A7A7A" d="M79 38h6v6h-6z"></path>
+        <path fill="#5A5A5A" d="M74 44h5v5h-5z"></path>
+        <path fill="#3A3A3A" d="M78 50h4v4h-4z"></path>
+        <g transform="translate(60 64) rotate(40)">
+          <use href="#gqd-body"></use>
+          <use href="#gqd-head"></use>
+          <use href="#gqd-face-shock"></use>
+        </g>
+        <use href="#gqd-front"></use>
+        <path fill="#D6452F" d="M76 64h8v5h-8z"></path>
+        <path fill="#F2A03A" d="M77 65h6v3h-6z"></path>
+        <path fill="#F7C548" d="M79 65h2v2h-2z"></path>
+        <path fill="#4E8F4A" d="M70 58h2v1h-2z M72 54h1v1h-1z M76 57h2v1h-2z M80 52h1v1h-1z M84 56h1v2h-1z M88 60h2v1h-2z M92 63h2v1h-2z M66 61h1v1h-1z"></path>
+        <path fill="#2F6B3A" d="M74 60h1v1h-1z M86 53h1v1h-1z M90 58h1v1h-1z M68 56h1v1h-1z"></path>
+      </g>
+
+      <g class="gqd-f gqd-f5" style="animation-duration: {{dur}}">
+        <path fill="#BDBDBD" d="M74 16h8v7h-8z"></path>
+        <path fill="#9A9A9A" d="M79 26h7v7h-7z"></path>
+        <path fill="#7A7A7A" d="M76 36h6v6h-6z"></path>
+        <path fill="#5A5A5A" d="M79 45h5v5h-5z"></path>
+        <path fill="#3A3A3A" d="M77 53h4v4h-4z"></path>
+        <path fill="#D6D6D6" d="M74 16h3v1h-3z M79 26h3v1h-3z M76 36h2v1h-2z"></path>
+        <g transform="translate(60 64) rotate(40)">
+          <use href="#gqd-body"></use>
+          <use href="#gqd-head"></use>
+          <use href="#gqd-face-dazed"></use>
+        </g>
+        <use href="#gqd-front"></use>
+        <path fill="#F7C548" d="M56 46h3v1h-3z M57 45h1v3h-1z M64 42h3v1h-3z M65 41h1v3h-1z M72 46h3v1h-3z M73 45h1v3h-1z"></path>
+        <path fill="#FFF6DE" d="M57 46h1v1h-1z M65 42h1v1h-1z M73 46h1v1h-1z"></path>
+        <path fill="#4E8F4A" d="M44 50h2v1h-2z M45 51h1v1h-1z"></path>
+      </g>
+    </svg>
+  </div>
+
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 12px">
+    <h1 style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 30px; font-weight: 400; line-height: 1; color: {{accent2}}; text-shadow: 3px 3px 0 #2B1D14">GAME OVER</h1>
+    <div style="display: flex; gap: 6px" aria-label="Życia: 0 z 3">
+      <svg width="27" height="24" viewBox="0 0 9 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#2B1D14" d="M1 0h3v1H1z M5 0h3v1H5z M0 1h1v3H0z M4 1h1v1H4z M8 1h1v3H8z M1 4h1v1H1z M7 4h1v1H7z M2 5h1v1H2z M6 5h1v1H6z M3 6h1v1H3z M5 6h1v1H5z M4 7h1v1H4z"></path><path fill="#DCC89F" d="M1 1h3v1H1z M5 1h3v1H5z M1 2h7v2H1z M2 4h5v1H2z M3 5h3v1H3z M4 6h1v1H4z"></path></svg>
+      <svg width="27" height="24" viewBox="0 0 9 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#2B1D14" d="M1 0h3v1H1z M5 0h3v1H5z M0 1h1v3H0z M4 1h1v1H4z M8 1h1v3H8z M1 4h1v1H1z M7 4h1v1H7z M2 5h1v1H2z M6 5h1v1H6z M3 6h1v1H3z M5 6h1v1H5z M4 7h1v1H4z"></path><path fill="#DCC89F" d="M1 1h3v1H1z M5 1h3v1H5z M1 2h7v2H1z M2 4h5v1H2z M3 5h3v1H3z M4 6h1v1H4z"></path></svg>
+      <svg width="27" height="24" viewBox="0 0 9 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#2B1D14" d="M1 0h3v1H1z M5 0h3v1H5z M0 1h1v3H0z M4 1h1v1H4z M8 1h1v3H8z M1 4h1v1H1z M7 4h1v1H7z M2 5h1v1H2z M6 5h1v1H6z M3 6h1v1H3z M5 6h1v1H5z M4 7h1v1H4z"></path><path fill="#DCC89F" d="M1 1h3v1H1z M5 1h3v1H5z M1 2h7v2H1z M2 4h5v1H2z M3 5h3v1H3z M4 6h1v1H4z"></path></svg>
+    </div>
+    <p style="margin: 0; font-size: 18px; line-height: 1.35; color: #2B1D14; text-align: center">Silnik nie wytrzymał, a dżungla nie wybacza. Otrzep się i leć jeszcze raz!</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+    <div style="padding: 12px 14px; border: 3px solid #2B1D14; background: #FFF6DE; box-shadow: 4px 4px 0 rgba(43,29,20,0.2); display: flex; flex-direction: column; gap: 6px">
+      <span style="font: 400 17px 'Press Start 2P', monospace; color: #2B1D14">7/10</span>
+      <span style="font-size: 15px; font-weight: 600; letter-spacing: 1px; color: #6B5540">PRZYSTANEK</span>
+    </div>
+    <div style="padding: 12px 14px; border: 3px solid #2B1D14; background: #FFF6DE; box-shadow: 4px 4px 0 rgba(43,29,20,0.2); display: flex; flex-direction: column; gap: 6px">
+      <span style="display: flex; align-items: center; gap: 8px">
+        <svg width="18" height="18" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#F2B632" d="M2 0h4v1H2z M1 1h6v1H1z M0 2h8v4H0z M1 6h6v1H1z M2 7h4v1H2z"></path><path fill="#B7791F" d="M4 2h1v4H4z"></path><path fill="#FFFFFF" d="M2 2h1v1H2z"></path></svg>
+        <span style="font: 400 17px 'Press Start 2P', monospace; color: #2B1D14">1 250</span>
+      </span>
+      <span style="font-size: 15px; font-weight: 600; letter-spacing: 1px; color: #6B5540">PUNKTY</span>
+    </div>
+  </div>
+
+  <div style="flex-grow: 1"></div>
+
+  <div style="display: flex; flex-direction: column; gap: 14px; padding: 0 6px">
+    <button type="button" style="height: 64px; border: 3px solid #2B1D14; border-radius: 0; background: {{accent}}; color: #FFFFFF; font: 400 15px 'Press Start 2P', monospace; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 12px; text-shadow: 3px 3px 0 rgba(0,0,0,0.35); box-shadow: inset 0 4px 0 rgba(255,255,255,0.35), inset 0 -6px 0 rgba(0,0,0,0.3), 0 0 0 3px #F2B632, 0 0 0 6px #2B1D14, 6px 6px 0 6px rgba(43,29,20,0.25); cursor: pointer">
+      <svg class="gqd-blink" width="10" height="18" viewBox="0 0 4 7" shape-rendering="crispEdges" aria-hidden="true"><path fill="#F2B632" d="M0 0h1v7H0z M1 1h1v5H1z M2 2h1v3H2z M3 3h1v1H3z"></path></svg>
+      SPRÓBUJ PONOWNIE
+    </button>
+    <button type="button" style="height: 52px; border: 3px solid #2B1D14; border-radius: 0; background: #FFF6DE; color: #2B1D14; font: 600 19px 'Pixelify Sans', sans-serif; box-shadow: inset 0 -4px 0 #E3CFA3, 4px 4px 0 #2B1D14; cursor: pointer">Zmień kategorię</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2A62A6","options":["#2A62A6","#2E7D5B","#6E4A9E"]},"accent2":{"editor":"color","default":"#B8341F","options":["#B8341F","#A8431A","#9C2F5A"]},"animSpeed":{"editor":"enum","options":["wolno","średnio","szybko"],"default":"średnio"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+const speeds = { 'wolno': '7s', 'średnio': '5s', 'szybko': '3.5s' };
+return {
+accent: this.props.accent ?? '#2A62A6',
+accent2: this.props.accent2 ?? '#B8341F',
+dur: speeds[this.props.animSpeed ?? 'średnio'] ?? '5s'
+};
+}
+}
+</script>
+</body>
+</html>

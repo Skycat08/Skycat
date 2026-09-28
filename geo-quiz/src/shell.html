@@ -1,0 +1,753 @@
+<title>Geo Quiz Pixel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+/* Layout: one phone-width column centred on a paper-map ground; each game screen is a section toggled with [hidden]. */
+:root {
+  --paper: #F4E6C4; --card: #FFF6DE; --card-dim: #EFE0BD; --ink: #2B1D14; --muted: #6B5540;
+  --blue: #2A62A6; --red: #B8341F; --gold: #F2B632; --gold-dk: #B7791F; --navy: #23408E;
+  --ok-bg: #D3E3F6; --bad-bg: #F6D2C6; --night: #0A0A0A; --night-card: #17140F; --night-muted: #CFC6B0;
+  --display: 'Press Start 2P', 'Courier New', monospace;
+  --body: 'Pixelify Sans', 'Trebuchet MS', system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { min-height: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; -webkit-tap-highlight-color: transparent; }
+body[data-screen="victory"] { background: var(--night); color: var(--card); }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+button:focus-visible, input:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.app { max-width: 430px; margin: 0 auto; padding-inline: 20px; padding-block: 16px 28px; min-height: 100vh; display: flex; flex-direction: column; }
+.screen { display: flex; flex-direction: column; gap: 18px; flex-grow: 1; }
+.grow { flex-grow: 1; min-height: 8px; }
+.pix { shape-rendering: crispEdges; }
+
+/* toolbar */
+.toolbar { display: flex; justify-content: flex-end; gap: 10px; }
+.icon-btn { width: 44px; height: 44px; border: 3px solid var(--ink); background: var(--card); display: grid; place-items: center; box-shadow: 3px 3px 0 var(--ink); padding: 0; }
+.icon-btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
+body[data-screen="victory"] .icon-btn { border-color: var(--gold); background: var(--night-card); box-shadow: 3px 3px 0 rgba(242,182,50,.3); }
+
+/* scene frames */
+.scene { border: 3px solid var(--ink); box-shadow: 5px 5px 0 rgba(43,29,20,.2); background: var(--ink); }
+.scene svg { display: block; width: 100%; height: auto; }
+.scene.gold { border-color: var(--gold); box-shadow: 5px 5px 0 rgba(242,182,50,.25); }
+
+/* start */
+.logo { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.logo h1 { margin: 0; font: 400 clamp(24px, 8vw, 30px)/1 var(--display); letter-spacing: 1px; text-shadow: 3px 3px 0 var(--gold); }
+.logo p { margin: 0; font-size: 19px; color: var(--muted); }
+.label { font-size: 15px; font-weight: 600; letter-spacing: 2px; color: var(--muted); margin-bottom: 10px; }
+.cats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.cat { position: relative; height: 104px; padding: 0; border: 3px solid var(--ink); background: var(--card); color: var(--ink); font-weight: 600; font-size: 16px; display: flex; flex-direction: column; box-shadow: 4px 4px 0 var(--ink); }
+.cat .top { height: 60px; flex-shrink: 0; border-bottom: 3px dashed var(--ink); box-shadow: inset 0 3px 0 rgba(255,255,255,.45), inset 0 -3px 0 rgba(0,0,0,.18); display: grid; place-items: center; }
+.cat .name { flex-grow: 1; display: grid; place-items: center; box-shadow: inset 0 -3px 0 #E3CFA3; }
+.cat .badge { display: none; position: absolute; top: -12px; right: -12px; width: 26px; height: 26px; background: var(--gold); border: 3px solid var(--ink); place-items: center; }
+.cat[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--gold), 5px 5px 0 3px var(--ink); }
+.cat[aria-pressed="true"] .name { background: var(--ink); color: var(--card); box-shadow: none; }
+.cat[aria-pressed="true"] .badge { display: grid; }
+.levels { padding: 8px; border: 3px solid var(--ink); background: var(--navy); box-shadow: inset 0 0 0 2px #FFFFFF, inset 0 0 0 4px #5C77C4, 4px 4px 0 rgba(43,29,20,.25); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
+.lvl { height: 50px; border: 0; background: transparent; color: #DDE5FF; font-weight: 600; font-size: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+.lvl .cur { visibility: hidden; margin-right: 6px; }
+.lvl .row { display: flex; align-items: center; }
+.lvl .pips { display: flex; gap: 3px; }
+.lvl .pips i { width: 6px; height: 6px; background: rgba(255,255,255,.25); }
+.lvl .pips i.on { background: var(--gold); }
+.lvl[aria-pressed="true"] { background: rgba(255,255,255,.14); color: var(--gold); font-weight: 700; box-shadow: inset 0 -3px 0 var(--gold); }
+.lvl[aria-pressed="true"] .cur { visibility: visible; }
+.infos { display: flex; gap: 12px; }
+.info { flex: 1 1 0; min-width: 0; padding: 8px 10px 8px 8px; border: 3px solid var(--ink); background: var(--card); display: flex; align-items: center; gap: 10px; box-shadow: 4px 4px 0 rgba(43,29,20,.2); }
+.slot { width: 38px; height: 38px; flex-shrink: 0; background: var(--ink); box-shadow: inset 0 0 0 2px var(--muted); display: grid; place-items: center; }
+.info b { font-size: 18px; }
+.info small { display: block; font-size: 15px; color: var(--muted); }
+.info .tag { font: 400 11px var(--display); }
+.btn-big { height: 66px; margin: 6px; border: 3px solid var(--ink); background: var(--blue); color: #FFFFFF; font: 400 20px var(--display); letter-spacing: 3px; display: flex; align-items: center; justify-content: center; gap: 16px; text-shadow: 3px 3px 0 rgba(0,0,0,.35); box-shadow: inset 0 4px 0 rgba(255,255,255,.35), inset 0 -6px 0 rgba(0,0,0,.3), 0 0 0 3px var(--gold), 0 0 0 6px var(--ink), 6px 6px 0 6px rgba(43,29,20,.25); }
+.btn-big.small-txt { font-size: 15px; letter-spacing: 1px; gap: 12px; }
+.btn-big:active { transform: translate(2px,2px); }
+.btn-sec { height: 52px; margin-inline: 6px; border: 3px solid var(--ink); background: var(--card); color: var(--ink); font-weight: 600; font-size: 19px; box-shadow: inset 0 -4px 0 #E3CFA3, 4px 4px 0 var(--ink); }
+.record { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 17px; color: var(--muted); margin-top: 10px; }
+.record b { color: var(--ink); }
+.blink { animation: blink 1.2s step-end infinite; }
+@keyframes blink { 0% { opacity: 1 } 50% { opacity: 0 } 100% { opacity: 0 } }
+
+/* quiz */
+.hud { display: flex; align-items: center; justify-content: space-between; }
+.hearts { display: flex; gap: 6px; }
+.pts { padding: 6px 10px; border: 3px solid var(--ink); background: var(--card); display: flex; align-items: center; gap: 8px; box-shadow: 3px 3px 0 rgba(43,29,20,.2); font: 400 16px var(--display); font-variant-numeric: tabular-nums; }
+.prog { display: flex; flex-direction: column; gap: 10px; }
+.prog-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.prog-top .qn { font-size: 16px; font-weight: 600; letter-spacing: 1px; color: var(--muted); }
+.combo { padding: 5px 10px 5px 8px; border: 2px solid var(--ink); background: var(--gold); display: flex; align-items: center; gap: 8px; font: 400 11px var(--display); transform: rotate(-2deg); white-space: nowrap; }
+.combo::before { content: ""; width: 6px; height: 6px; background: var(--ink); }
+.combo.off { background: #E6D3AC; border-color: #8A7458; color: var(--muted); transform: none; }
+.combo.off::before { background: #8A7458; }
+.route { display: flex; gap: 5px; }
+.route i { flex-grow: 1; height: 14px; border: 2px dashed #A58D66; }
+.route i.ok { border: 2px solid var(--ink); background: var(--blue); }
+.route i.bad { border: 2px solid var(--ink); background: var(--red); }
+.route i.now { border: 2px solid var(--ink); background: var(--gold); }
+.qcard { padding: 18px; border: 3px solid var(--ink); background: var(--card); box-shadow: 6px 6px 0 rgba(43,29,20,.2); display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.qcard .visual svg { display: block; width: 210px; max-width: 100%; height: auto; }
+.qcard .visual.bulb svg { width: 48px; }
+.qcard h2 { margin: 0; font-size: 23px; font-weight: 600; line-height: 1.2; text-align: center; text-wrap: balance; }
+.answers { display: flex; flex-direction: column; gap: 12px; }
+.ans { min-height: 54px; padding: 8px 14px; border: 3px solid var(--ink); background: var(--card); color: var(--ink); font-size: 19px; font-weight: 500; display: flex; align-items: center; gap: 14px; text-align: left; box-shadow: inset 0 -4px 0 #E3CFA3, 4px 4px 0 var(--ink); }
+.ans .l { width: 28px; height: 28px; flex-shrink: 0; background: var(--ink); color: var(--card); font: 400 12px var(--display); display: grid; place-items: center; }
+.ans .t { flex-grow: 1; min-width: 0; }
+.ans .mark { display: none; }
+.ans.sel { background: var(--blue); color: #FFFFFF; font-weight: 600; transform: translate(2px,2px); box-shadow: inset 0 -4px 0 rgba(0,0,0,.25), 2px 2px 0 var(--ink); }
+.ans.sel .l { background: #FFFFFF; color: var(--blue); }
+.ans.gone { visibility: hidden; }
+.ans:disabled { cursor: default; }
+.ans.ok { background: var(--ok-bg); color: var(--ink); font-weight: 600; transform: none; box-shadow: 4px 4px 0 var(--ink); }
+.ans.ok .l { background: var(--blue); color: #FFFFFF; }
+.ans.bad { background: var(--bad-bg); color: var(--ink); font-weight: 600; transform: none; box-shadow: 4px 4px 0 var(--ink); }
+.ans.bad .l { background: var(--red); color: #FFFFFF; }
+.ans.ok .mark.m-ok, .ans.bad .mark.m-bad { display: block; }
+.ans.dim { border-color: #B8A27A; background: var(--card-dim); color: #75604A; box-shadow: none; }
+.ans.dim .l { background: #B8A27A; color: var(--paper); }
+.qbar { display: flex; gap: 12px; }
+.btn-5050 { width: 112px; height: 58px; flex-shrink: 0; border: 3px solid var(--ink); background: var(--gold); color: var(--ink); font: 400 14px var(--display); box-shadow: inset 0 -4px 0 rgba(0,0,0,.15), inset 0 3px 0 rgba(255,255,255,.4), 4px 4px 0 var(--ink); }
+.btn-5050:disabled { background: #E6D3AC; color: #8A7458; border-color: #8A7458; box-shadow: none; text-decoration: line-through; cursor: default; }
+.btn-check { flex-grow: 1; height: 58px; border: 3px solid var(--ink); background: var(--blue); color: #FFFFFF; font: 400 16px var(--display); letter-spacing: 2px; box-shadow: inset 0 -5px 0 rgba(0,0,0,.25), inset 0 3px 0 rgba(255,255,255,.3), 4px 4px 0 var(--ink); }
+.btn-check:disabled { opacity: .5; cursor: default; }
+.verdict { padding: 18px; border: 3px solid var(--ink); background: var(--card); box-shadow: 6px 6px 0 rgba(43,29,20,.2); display: flex; flex-direction: column; gap: 16px; }
+.verdict .head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.stamp { margin-left: 5px; padding: 8px 12px; border: 3px solid currentColor; outline: 2px solid currentColor; outline-offset: 3px; transform: rotate(-5deg); font: 400 18px var(--display); white-space: nowrap; }
+.verdict.good .stamp, .verdict.good .gain { color: var(--blue); }
+.verdict.bad .stamp, .verdict.bad .gain { color: var(--red); }
+.gain { font-size: 17px; font-weight: 600; text-align: right; }
+.fact { display: flex; gap: 12px; align-items: flex-start; }
+.fact p { margin: 0; font-size: 18px; line-height: 1.35; }
+.fact svg { flex-shrink: 0; margin-top: 2px; }
+
+/* end screens */
+.end-title { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.end-title h1 { margin: 0; font: 400 30px/1 var(--display); color: var(--red); text-shadow: 3px 3px 0 var(--ink); }
+.end-title p { margin: 0; font-size: 18px; line-height: 1.35; }
+.tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.tile { padding: 12px 14px; border: 3px solid var(--ink); background: var(--card); box-shadow: 4px 4px 0 rgba(43,29,20,.2); display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.tile .v { font: 400 17px var(--display); display: flex; align-items: center; gap: 8px; font-variant-numeric: tabular-nums; }
+.tile .k { font-size: 15px; font-weight: 600; letter-spacing: 1px; color: var(--muted); }
+.newrec { align-self: center; padding: 4px 10px; border: 2px solid var(--ink); background: var(--gold); color: var(--ink); font: 400 11px var(--display); transform: rotate(-2deg); }
+#s-victory .end-title h1 { font-size: 64px; color: var(--gold); text-shadow: 5px 5px 0 var(--red); }
+#s-victory .end-title .sub { font-size: 22px; font-weight: 700; letter-spacing: 2px; }
+#s-victory .end-title p { color: var(--night-muted); }
+#s-victory .tile { border-color: var(--gold); background: var(--night-card); box-shadow: none; }
+#s-victory .tile .v { color: var(--gold); }
+#s-victory .tile .k { color: var(--night-muted); }
+#s-victory .btn-sec { border-color: var(--card); background: transparent; color: var(--card); box-shadow: none; }
+.save { display: flex; gap: 10px; margin-inline: 6px; }
+.save input { flex-grow: 1; min-width: 0; height: 48px; padding: 0 12px; border: 3px solid var(--ink); background: var(--card); font-size: 18px; }
+.save button { height: 48px; padding: 0 12px; border: 3px solid var(--ink); background: var(--gold); color: var(--ink); font: 400 11px var(--display); box-shadow: 3px 3px 0 var(--ink); }
+.save button:disabled { opacity: .6; cursor: default; }
+.save-msg { margin: -6px 6px 0; font-size: 16px; min-height: 1em; }
+#s-victory .save input { border-color: var(--gold); background: var(--night-card); color: var(--card); }
+#s-victory .save button { border-color: var(--gold); box-shadow: none; }
+
+/* confetti */
+.confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 5; }
+.confetti i { position: absolute; top: -12px; display: block; animation: fall linear infinite; animation-timing-function: steps(24); }
+@keyframes fall { from { transform: translateY(0) } to { transform: translateY(calc(100vh + 24px)) } }
+
+/* ranking panel */
+.modal { position: fixed; inset: 0; z-index: 10; background: rgba(10,10,10,.6); display: grid; place-items: center; padding: 16px; }
+.panel { width: min(100%, 390px); max-height: 90vh; overflow: auto; padding: 18px; border: 3px solid var(--ink); background: var(--navy); color: #FFFFFF; box-shadow: inset 0 0 0 2px #FFFFFF, inset 0 0 0 4px #5C77C4, 6px 6px 0 rgba(0,0,0,.4); display: flex; flex-direction: column; gap: 14px; }
+.panel h2 { margin: 0; font: 400 18px var(--display); color: var(--gold); display: flex; justify-content: space-between; align-items: center; }
+.panel .x { width: 44px; height: 44px; border: 2px solid #FFFFFF; background: transparent; color: #FFFFFF; font: 400 14px var(--display); }
+.panel ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.panel li { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 6px 8px; font-size: 18px; }
+.panel li.me { background: rgba(242,182,50,.2); box-shadow: inset 0 -3px 0 var(--gold); }
+.panel li .n { font: 400 12px var(--display); color: var(--gold); }
+.panel li .who { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.panel li .who small { color: #BFCBF0; font-size: 14px; margin-left: 6px; }
+.panel li .s { font: 400 13px var(--display); font-variant-numeric: tabular-nums; }
+.panel .empty { margin: 0; color: #DDE5FF; font-size: 17px; }
+
+/* scene frame animations (from the design canvas) */
+.gq-f{animation-duration:2.4s;animation-iteration-count:infinite;animation-timing-function:step-end}
+.gq-f1{animation-name:gqf1}.gq-f2{opacity:0;animation-name:gqf2}.gq-f3{opacity:0;animation-name:gqf3}
+@keyframes gqf1{0%{opacity:1}33.333%{opacity:0}100%{opacity:0}}
+@keyframes gqf2{0%{opacity:0}33.333%{opacity:1}66.666%{opacity:0}100%{opacity:0}}
+@keyframes gqf3{0%{opacity:0}66.666%{opacity:1}100%{opacity:1}}
+.gqd-f{animation-duration:5s;animation-iteration-count:infinite;animation-timing-function:step-end}
+.gqd-f1{animation-name:gqd1}.gqd-f2{opacity:0;animation-name:gqd2}.gqd-f3{opacity:0;animation-name:gqd3}.gqd-f4{opacity:0;animation-name:gqd4}.gqd-f5{opacity:0;animation-name:gqd5}
+@keyframes gqd1{0%{opacity:1}18%{opacity:0}100%{opacity:0}}
+@keyframes gqd2{0%{opacity:0}18%{opacity:1}34%{opacity:0}100%{opacity:0}}
+@keyframes gqd3{0%{opacity:0}34%{opacity:1}52%{opacity:0}100%{opacity:0}}
+@keyframes gqd4{0%{opacity:0}52%{opacity:1}70%{opacity:0}100%{opacity:0}}
+@keyframes gqd5{0%{opacity:0}70%{opacity:1}100%{opacity:1}}
+.gqv-f{animation-duration:4s;animation-iteration-count:infinite;animation-timing-function:step-end}
+.gqv-f1{animation-name:gqv1}.gqv-f2{opacity:0;animation-name:gqv2}.gqv-f3{opacity:0;animation-name:gqv3}.gqv-f4{opacity:0;animation-name:gqv4}
+@keyframes gqv1{0%{opacity:1}20%{opacity:0}100%{opacity:0}}
+@keyframes gqv2{0%{opacity:0}20%{opacity:1}40%{opacity:0}100%{opacity:0}}
+@keyframes gqv3{0%{opacity:0}40%{opacity:1}60%{opacity:0}100%{opacity:0}}
+@keyframes gqv4{0%{opacity:0}60%{opacity:1}100%{opacity:1}}
+@media (prefers-reduced-motion: reduce) {
+  .gq-f, .gqd-f, .gqv-f, .blink, .confetti i { animation: none; }
+  .gqd-f1, .gqv-f1 { opacity: 0; } .gqd-f5, .gqv-f4 { opacity: 1; }
+  .confetti { display: none; }
+}
+</style>
+
+<div class="app">
+
+  <!-- START -->
+  <section id="s-start" class="screen" aria-label="Start">
+    <div class="toolbar">
+      <button type="button" class="icon-btn rank-btn" hidden aria-label="Pokaż ranking"><svg class="pix" width="22" height="22" viewBox="0 0 8 8" aria-hidden="true"><path fill="#F2B632" d="M0 0h8v1H0z M1 1h6v3H1z M0 1h1v2H0z M7 1h1v2H7z M2 4h4v1H2z M3 5h2v1H3z M2 6h4v2H2z"></path></svg></button>
+      <button type="button" class="icon-btn mute-btn" aria-label="Wycisz dźwięk"></button>
+    </div>
+    <div class="scene"><!--MAIN_SVG--></div>
+    <div class="logo">
+      <h1>GEO QUIZ</h1>
+      <p>Ogarniasz świat? Udowodnij to.</p>
+    </div>
+    <div>
+      <div class="label" id="lbl-cat">KATEGORIA</div>
+      <div class="cats" role="group" aria-labelledby="lbl-cat">
+        <button type="button" class="cat" data-cat="flags" aria-pressed="true">
+          <span class="top" style="background:#5B8FD1"><svg class="pix" width="40" height="40" viewBox="0 0 10 10" aria-hidden="true"><path fill="#2B1D14" d="M1 0h1v10H1z"></path><path fill="#B8341F" d="M2 1h7v4H2z"></path><path fill="#FFFFFF" d="M2 2h7v1H2z"></path></svg></span>
+          <span class="name">Flagi</span>
+          <span class="badge"><svg class="pix" width="16" height="16" viewBox="0 0 8 8" aria-hidden="true"><path fill="#2B1D14" d="M6 1h2v1H6z M5 2h2v1H5z M0 3h1v1H0z M4 3h2v1H4z M0 4h2v1H0z M3 4h2v1H3z M1 5h3v1H1z M2 6h1v1H2z"></path></svg></span>
+        </button>
+        <button type="button" class="cat" data-cat="facts" aria-pressed="false">
+          <span class="top" style="background:#3FA39A"><svg class="pix" width="32" height="36" viewBox="0 0 8 9" aria-hidden="true"><path fill="#F2B632" d="M2 0h4v1H2z M1 1h6v4H1z M2 5h4v2H2z"></path><path fill="#FFFFFF" d="M2 1h1v2H2z"></path><path fill="#2B1D14" d="M2 7h4v1H2z M3 8h2v1H3z"></path></svg></span>
+          <span class="name">Ciekawostki</span>
+          <span class="badge"><svg class="pix" width="16" height="16" viewBox="0 0 8 8" aria-hidden="true"><path fill="#2B1D14" d="M6 1h2v1H6z M5 2h2v1H5z M0 3h1v1H0z M4 3h2v1H4z M0 4h2v1H0z M3 4h2v1H3z M1 5h3v1H1z M2 6h1v1H2z"></path></svg></span>
+        </button>
+        <button type="button" class="cat" data-cat="mix" aria-pressed="false">
+          <span class="top" style="background:#D9704A"><svg class="pix" width="40" height="36" viewBox="0 0 10 9" aria-hidden="true"><path fill="#2B1D14" d="M3 0h4v1H3z M3 1h1v1H3z M6 1h1v1H6z"></path><path fill="#7A3E1D" d="M0 2h10v7H0z"></path><path fill="#F2B632" d="M2 2h1v7H2z M7 2h1v7H7z"></path></svg></span>
+          <span class="name">Mix</span>
+          <span class="badge"><svg class="pix" width="16" height="16" viewBox="0 0 8 8" aria-hidden="true"><path fill="#2B1D14" d="M6 1h2v1H6z M5 2h2v1H5z M0 3h1v1H0z M4 3h2v1H4z M0 4h2v1H0z M3 4h2v1H3z M1 5h3v1H1z M2 6h1v1H2z"></path></svg></span>
+        </button>
+      </div>
+    </div>
+    <div>
+      <div class="label" id="lbl-lvl">POZIOM</div>
+      <div class="levels" role="group" aria-labelledby="lbl-lvl">
+        <button type="button" class="lvl" data-level="chill" aria-pressed="false"><span class="row"><svg class="pix cur blink" width="8" height="14" viewBox="0 0 4 7" aria-hidden="true"><path fill="#F2B632" d="M0 0h1v7H0z M1 1h1v5H1z M2 2h1v3H2z M3 3h1v1H3z"></path></svg>Chill</span><span class="pips"><i class="on"></i><i></i><i></i></span></button>
+        <button type="button" class="lvl" data-level="normal" aria-pressed="true"><span class="row"><svg class="pix cur blink" width="8" height="14" viewBox="0 0 4 7" aria-hidden="true"><path fill="#F2B632" d="M0 0h1v7H0z M1 1h1v5H1z M2 2h1v3H2z M3 3h1v1H3z"></path></svg>Normal</span><span class="pips"><i class="on"></i><i class="on"></i><i></i></span></button>
+        <button type="button" class="lvl" data-level="hard" aria-pressed="false"><span class="row"><svg class="pix cur blink" width="8" height="14" viewBox="0 0 4 7" aria-hidden="true"><path fill="#F2B632" d="M0 0h1v7H0z M1 1h1v5H1z M2 2h1v3H2z M3 3h1v1H3z"></path></svg>Hardkor</span><span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i></span></button>
+      </div>
+    </div>
+    <div class="infos">
+      <div class="info"><span class="slot"><!--HEART_LIGHT--></span><b>3 życia</b></div>
+      <div class="info"><span class="slot"><svg class="pix" width="30" height="30" viewBox="0 0 10 10" aria-hidden="true"><path fill="#B8341F" d="M3 0h4v1H3z M1 1h8v2H1z M0 3h10v4H0z M1 7h8v2H1z M3 9h4v1H3z"></path><path fill="#FFFFFF" d="M4 0h2v3H4z M4 7h2v3H4z M0 4h3v2H0z M7 4h3v2H7z"></path><path fill="#2B1D14" d="M4 3h2v4H4z M3 4h4v2H3z"></path></svg></span><span><span class="tag">50/50</span><small>×1 na grę</small></span></div>
+    </div>
+    <div class="grow"></div>
+    <div>
+      <button type="button" class="btn-big" id="btn-start" style="width:calc(100% - 12px)">
+        <svg class="pix blink" width="12" height="21" viewBox="0 0 4 7" aria-hidden="true"><path fill="#F2B632" d="M0 0h1v7H0z M1 1h1v5H1z M2 2h1v3H2z M3 3h1v1H3z"></path></svg>
+        START
+        <svg class="pix blink" width="12" height="21" viewBox="0 0 4 7" aria-hidden="true"><path fill="#F2B632" d="M3 0h1v7H3z M2 1h1v5H2z M1 2h1v3H1z M0 3h1v1H0z"></path></svg>
+      </button>
+      <div class="record"><svg class="pix" width="16" height="16" viewBox="0 0 8 8" aria-hidden="true"><path fill="#F2B632" d="M0 0h8v1H0z M1 1h6v3H1z M0 1h1v2H0z M7 1h1v2H7z M2 4h4v1H2z M3 5h2v1H3z M2 6h4v2H2z"></path></svg><span>Twój rekord: <b id="best">0</b> pkt</span></div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="s-quiz" class="screen" aria-label="Pytanie" hidden>
+    <div class="hud">
+      <div class="hearts" id="hearts"></div>
+      <div class="pts" id="pts-wrap"><!--COIN24--><span id="pts">0</span></div>
+    </div>
+    <div class="prog">
+      <div class="prog-top"><span class="qn" id="qn">PYTANIE 1/10</span><span class="combo off" id="combo">COMBO ×0</span></div>
+      <div class="route" id="route"></div>
+    </div>
+    <div class="qcard">
+      <div class="visual" id="qvisual"></div>
+      <h2 id="qtext"></h2>
+    </div>
+    <div class="answers" id="answers"></div>
+    <div class="grow"></div>
+    <div class="qbar" id="qbar">
+      <button type="button" class="btn-5050" id="btn-5050" aria-label="Koło ratunkowe 50/50">50/50</button>
+      <button type="button" class="btn-check" id="btn-check" disabled>SPRAWDŹ</button>
+    </div>
+    <div class="verdict" id="verdict" hidden>
+      <div class="head"><div class="stamp" id="v-stamp"></div><div class="gain" id="v-gain"></div></div>
+      <div class="fact"><svg class="pix" width="24" height="27" viewBox="0 0 8 9" aria-hidden="true"><path fill="#F2B632" d="M2 0h4v1H2z M1 1h6v4H1z M2 5h4v2H2z"></path><path fill="#FFFFFF" d="M2 1h1v2H2z"></path><path fill="#2B1D14" d="M2 7h4v1H2z M3 8h2v1H3z"></path></svg><p id="v-fact"></p></div>
+      <button type="button" class="btn-check" id="btn-next">DALEJ</button>
+    </div>
+  </section>
+
+  <!-- DEFEAT -->
+  <section id="s-defeat" class="screen" aria-label="Porażka" hidden>
+    <div class="toolbar">
+      <button type="button" class="icon-btn rank-btn" hidden aria-label="Pokaż ranking"><svg class="pix" width="22" height="22" viewBox="0 0 8 8" aria-hidden="true"><path fill="#F2B632" d="M0 0h8v1H0z M1 1h6v3H1z M0 1h1v2H0z M7 1h1v2H7z M2 4h4v1H2z M3 5h2v1H3z M2 6h4v2H2z"></path></svg></button>
+      <button type="button" class="icon-btn mute-btn" aria-label="Wycisz dźwięk"></button>
+    </div>
+    <div class="scene"><!--DEFEAT_SVG--></div>
+    <div class="end-title">
+      <h1>GAME OVER</h1>
+      <div class="hearts" aria-label="Życia: 0 z 3"><!--HEART_EMPTY--><!--HEART_EMPTY--><!--HEART_EMPTY--></div>
+      <p>Silnik nie wytrzymał, a dżungla nie wybacza. Otrzep się i leć jeszcze raz!</p>
+      <span class="newrec" id="d-rec" hidden>NOWY REKORD!</span>
+    </div>
+    <div class="tiles">
+      <div class="tile"><span class="v" id="d-stop">1/10</span><span class="k">PRZYSTANEK</span></div>
+      <div class="tile"><span class="v"><!--COIN18--><span id="d-score">0</span></span><span class="k">PUNKTY</span></div>
+    </div>
+    <form class="save" id="d-save" hidden><label for="d-name" class="sr" style="position:absolute;left:-9999px">Pseudonim</label><input id="d-name" maxlength="16" placeholder="Twój pseudonim" autocomplete="nickname" required><button type="submit">ZAPISZ</button></form>
+    <p class="save-msg" id="d-msg" aria-live="polite"></p>
+    <div class="grow"></div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <button type="button" class="btn-big small-txt again" style="width:calc(100% - 12px)"><svg class="pix blink" width="10" height="18" viewBox="0 0 4 7" aria-hidden="true"><path fill="#F2B632" d="M0 0h1v7H0z M1 1h1v5H1z M2 2h1v3H2z M3 3h1v1H3z"></path></svg>SPRÓBUJ PONOWNIE</button>
+      <button type="button" class="btn-sec menu">Zmień kategorię</button>
+    </div>
+  </section>
+
+  <!-- VICTORY -->
+  <section id="s-victory" class="screen" aria-label="Zwycięstwo" hidden>
+    <div class="toolbar">
+      <button type="button" class="icon-btn rank-btn" hidden aria-label="Pokaż ranking"><svg class="pix" width="22" height="22" viewBox="0 0 8 8" aria-hidden="true"><path fill="#F2B632" d="M0 0h8v1H0z M1 1h6v3H1z M0 1h1v2H0z M7 1h1v2H7z M2 4h4v1H2z M3 5h2v1H3z M2 6h4v2H2z"></path></svg></button>
+      <button type="button" class="icon-btn mute-btn" aria-label="Wycisz dźwięk"></button>
+    </div>
+    <div class="scene gold"><!--VICTORY_SVG--></div>
+    <div class="end-title">
+      <h1>GG</h1>
+      <div class="sub">ARTEFAKT ZDOBYTY!</div>
+      <p>Złoty kostur jest twój. Świat stoi przed tobą otworem.</p>
+      <span class="newrec" id="v-rec" hidden>NOWY REKORD!</span>
+    </div>
+    <div class="tiles">
+      <div class="tile"><span class="v" id="v-correct">0/10</span><span class="k">POPRAWNYCH</span></div>
+      <div class="tile"><span class="v"><!--COIN18--><span id="v-score">0</span></span><span class="k">PUNKTY</span></div>
+    </div>
+    <form class="save" id="v-save" hidden><label for="v-name" style="position:absolute;left:-9999px">Pseudonim</label><input id="v-name" maxlength="16" placeholder="Twój pseudonim" autocomplete="nickname" required><button type="submit">ZAPISZ</button></form>
+    <p class="save-msg" id="v-msg" aria-live="polite"></p>
+    <div class="grow"></div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <button type="button" class="btn-big small-txt again" style="width:calc(100% - 12px)"><svg class="pix blink" width="10" height="18" viewBox="0 0 4 7" aria-hidden="true"><path fill="#F2B632" d="M0 0h1v7H0z M1 1h1v5H1z M2 2h1v3H2z M3 3h1v1H3z"></path></svg>ZAGRAJ PONOWNIE</button>
+      <button type="button" class="btn-sec menu">Zmień kategorię</button>
+    </div>
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+  </section>
+</div>
+
+<div class="modal" id="rank" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="rank-title">
+    <h2 id="rank-title">RANKING <button type="button" class="x" id="rank-close" aria-label="Zamknij ranking">X</button></h2>
+    <ol id="rank-list"></ol>
+    <p class="empty" id="rank-empty" hidden></p>
+  </div>
+</div>
+
+<script>
+(() => {
+'use strict';
+const $ = (id) => document.getElementById(id);
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+};
+
+/* ---------- pixel art helpers ---------- */
+const HEART_PATH_O = 'M1 0h3v1H1z M5 0h3v1H5z M0 1h1v3H0z M4 1h1v1H4z M8 1h1v3H8z M1 4h1v1H1z M7 4h1v1H7z M2 5h1v1H2z M6 5h1v1H6z M3 6h1v1H3z M5 6h1v1H5z M4 7h1v1H4z';
+const HEART_PATH_F = 'M1 1h3v1H1z M5 1h3v1H5z M1 2h7v2H1z M2 4h5v1H2z M3 5h3v1H3z M4 6h1v1H4z';
+const heart = (full) => `<svg class="pix" width="27" height="24" viewBox="0 0 9 8" aria-hidden="true"><path fill="#2B1D14" d="${HEART_PATH_O}"></path><path fill="${full ? '#B8341F' : '#DCC89F'}" d="${HEART_PATH_F}"></path>${full ? '<path fill="#FFD9CF" d="M2 1h1v1H2z"></path>' : ''}</svg>`;
+const MARK_OK = '<svg class="pix mark m-ok" width="24" height="24" viewBox="0 0 8 8" role="img" aria-label="Poprawna odpowiedź"><path fill="#2A62A6" d="M6 1h2v1H6z M5 2h2v1H5z M0 3h1v1H0z M4 3h2v1H4z M0 4h2v1H0z M3 4h2v1H3z M1 5h3v1H1z M2 6h1v1H2z"></path></svg>';
+const MARK_BAD = '<svg class="pix mark m-bad" width="21" height="21" viewBox="0 0 7 7" role="img" aria-label="Błędna odpowiedź"><path fill="#B8341F" d="M0 0h2v1H0z M5 0h2v1H5z M1 1h2v1H1z M4 1h2v1H4z M2 2h3v1H2z M3 3h1v1H3z M2 4h3v1H2z M1 5h2v1H1z M4 5h2v1H4z M0 6h2v1H0z M5 6h2v1H5z"></path></svg>';
+const BULB_BIG = '<svg class="pix" viewBox="0 0 8 9" aria-hidden="true"><path fill="#F2B632" d="M2 0h4v1H2z M1 1h6v4H1z M2 5h4v2H2z"></path><path fill="#FFFFFF" d="M2 1h1v2H2z"></path><path fill="#2B1D14" d="M2 7h4v1H2z M3 8h2v1H3z"></path></svg>';
+const SPK_ON = '<svg class="pix" width="22" height="22" viewBox="0 0 8 8" aria-hidden="true"><path fill="#2B1D14" d="M0 3h2v2H0z M2 2h1v4H2z M3 1h1v6H3z"></path><path fill="#2A62A6" d="M5 2h1v1H5z M6 3h1v2H6z M5 5h1v1H5z"></path></svg>';
+const SPK_OFF = '<svg class="pix" width="22" height="22" viewBox="0 0 8 8" aria-hidden="true"><path fill="#2B1D14" d="M0 3h2v2H0z M2 2h1v4H2z M3 1h1v6H3z"></path><path fill="#B8341F" d="M5 2h1v1H5z M7 2h1v1H7z M6 3h1v2H6z M5 5h1v1H5z M7 5h1v1H7z"></path></svg>';
+
+/* flags: 60x40 cloth drawn at x6 y4 inside a 70x48 box with a pole */
+const eq = (...c) => c.map((x) => [x, 1]);
+function flagSVG(spec) {
+  const X = 6, Y = 4, W = 60, H = 40;
+  let out = '';
+  const bands = (arr, vert) => {
+    const tot = arr.reduce((a, b) => a + b[1], 0); const len = vert ? W : H; let p = 0;
+    arr.forEach(([c, w], i) => {
+      const size = i === arr.length - 1 ? len - p : Math.round(len * w / tot);
+      out += vert ? `<rect x="${X + p}" y="${Y}" width="${size}" height="${H}" fill="${c}"></rect>`
+                  : `<rect x="${X}" y="${Y + p}" width="${W}" height="${size}" fill="${c}"></rect>`;
+      p += size;
+    });
+  };
+  if (spec.bg) out += `<rect x="${X}" y="${Y}" width="${W}" height="${H}" fill="${spec.bg}"></rect>`;
+  if (spec.h) bands(spec.h, false);
+  if (spec.v) bands(spec.v, true);
+  if (spec.cross) spec.cross.forEach(([c, w]) => {
+    out += `<rect x="${X + 20 - w / 2}" y="${Y}" width="${w}" height="${H}" fill="${c}"></rect><rect x="${X}" y="${Y + 20 - w / 2}" width="${W}" height="${w}" fill="${c}"></rect>`;
+  });
+  if (spec.circle) {
+    const [c, cx, cy, r] = spec.circle;
+    for (let y = cy - r; y < cy + r; y++) {
+      const dy = y + 0.5 - cy; const hw = Math.round(Math.sqrt(r * r - dy * dy));
+      if (hw > 0) out += `<rect x="${X + cx - hw}" y="${Y + y}" width="${hw * 2}" height="1" fill="${c}"></rect>`;
+    }
+  }
+  return `<svg class="pix" viewBox="0 0 70 48" role="img" aria-label="Flaga do rozpoznania"><path fill="#F2B632" d="M2 0h2v1H2z M1 1h4v1H1z M2 2h2v1H2z"></path><path fill="#8A5A33" d="M2 3h2v45H2z"></path><path fill="#2B1D14" d="M5 3h62v42H5z"></path>${out}</svg>`;
+}
+
+/* ---------- question bank ---------- */
+const FLAGS = [
+  ['Polska', 'easy', { h: eq('#FFFFFF', '#DC143C') }, ['Monako', 'Indonezja', 'Austria'], 'Warszawa', 'Biel i czerwień to barwy z herbu: biały orzeł na czerwonym polu.'],
+  ['Niemcy', 'easy', { h: eq('#000000', '#DD0000', '#FFCE00') }, ['Belgia', 'Austria', 'Litwa'], 'Berlin', ''],
+  ['Francja', 'easy', { v: eq('#0055A4', '#FFFFFF', '#EF4135') }, ['Holandia', 'Włochy', 'Rosja'], 'Paryż', 'Trikolor pochodzi z czasów rewolucji francuskiej.'],
+  ['Włochy', 'easy', { v: eq('#009246', '#FFFFFF', '#CE2B37') }, ['Irlandia', 'Meksyk', 'Węgry'], 'Rzym', ''],
+  ['Japonia', 'easy', { bg: '#FFFFFF', circle: ['#BC002D', 30, 20, 12] }, ['Bangladesz', 'Korea Południowa', 'Chiny'], 'Tokio', 'Flaga nazywa się Hinomaru, czyli „krąg słońca”.'],
+  ['Ukraina', 'easy', { h: eq('#0057B7', '#FFD700') }, ['Szwecja', 'Kazachstan', 'Rumunia'], 'Kijów', 'Niebo nad łanami zboża.'],
+  ['Szwecja', 'easy', { bg: '#006AA7', cross: [['#FECC00', 6]] }, ['Finlandia', 'Norwegia', 'Dania'], 'Sztokholm', ''],
+  ['Hiszpania', 'easy', { h: [['#AA151B', 1], ['#F1BF00', 2], ['#AA151B', 1]] }, ['Portugalia', 'Kolumbia', 'Andora'], 'Madryt', 'Flaga państwowa ma jeszcze herb, tu pokazana jest wersja bez niego.'],
+  ['Irlandia', 'normal', { v: eq('#169B62', '#FFFFFF', '#FF883E') }, ['Włochy', 'Wybrzeże Kości Słoniowej', 'Indie'], 'Dublin', 'Wybrzeże Kości Słoniowej ma te same kolory w odwrotnej kolejności.'],
+  ['Belgia', 'normal', { v: eq('#000000', '#FDDA24', '#EF3340') }, ['Niemcy', 'Rumunia', 'Czad'], 'Bruksela', 'Te same kolory co u Niemiec, tylko w pionie.'],
+  ['Holandia', 'normal', { h: eq('#AE1C28', '#FFFFFF', '#21468B') }, ['Francja', 'Rosja', 'Luksemburg'], 'Amsterdam', 'Luksemburg ma prawie taką samą flagę, z jaśniejszym błękitem.'],
+  ['Austria', 'normal', { h: eq('#C8102E', '#FFFFFF', '#C8102E') }, ['Łotwa', 'Polska', 'Peru'], 'Wiedeń', ''],
+  ['Rosja', 'normal', { h: eq('#FFFFFF', '#0039A6', '#D52B1E') }, ['Słowenia', 'Serbia', 'Holandia'], 'Moskwa', ''],
+  ['Finlandia', 'normal', { bg: '#FFFFFF', cross: [['#003580', 8]] }, ['Szwecja', 'Islandia', 'Grecja'], 'Helsinki', 'Śnieg i jeziora, stąd biel i błękit.'],
+  ['Norwegia', 'normal', { bg: '#BA0C2F', cross: [['#FFFFFF', 8], ['#00205B', 4]] }, ['Islandia', 'Dania', 'Wielka Brytania'], 'Oslo', ''],
+  ['Dania', 'normal', { bg: '#C8102E', cross: [['#FFFFFF', 6]] }, ['Szwajcaria', 'Norwegia', 'Anglia'], 'Kopenhaga', 'Dannebrog to jedna z najstarszych wciąż używanych flag państwowych.'],
+  ['Litwa', 'normal', { h: eq('#FDB913', '#006A44', '#C1272D') }, ['Boliwia', 'Ghana', 'Etiopia'], 'Wilno', ''],
+  ['Węgry', 'normal', { h: eq('#CE2939', '#FFFFFF', '#477050') }, ['Bułgaria', 'Włochy', 'Iran'], 'Budapeszt', ''],
+  ['Bangladesz', 'normal', { bg: '#006A4E', circle: ['#F42A41', 27, 20, 10] }, ['Japonia', 'Palau', 'Pakistan'], 'Dhaka', 'Czerwone koło jest lekko przesunięte w stronę masztu.'],
+  ['Estonia', 'normal', { h: eq('#0072CE', '#000000', '#FFFFFF') }, ['Łotwa', 'Finlandia', 'Botswana'], 'Tallinn', ''],
+  ['Mauritius', 'hard', { h: eq('#EA2839', '#1A206D', '#FFD500', '#00A551') }, ['Gabon', 'Madagaskar', 'Seszele'], 'Port Louis', 'Jedna z niewielu flag z czterema poziomymi pasami.'],
+  ['Gabon', 'hard', { h: eq('#009E60', '#FCD116', '#3A75C4') }, ['Sierra Leone', 'Rwanda', 'Mauritius'], 'Libreville', 'Zieleń lasu, żółć równika i błękit oceanu.'],
+  ['Sierra Leone', 'hard', { h: eq('#1EB53A', '#FFFFFF', '#0072C6') }, ['Gabon', 'Nigeria', 'Sudan'], 'Freetown', ''],
+  ['Kolumbia', 'hard', { h: [['#FCD116', 2], ['#003893', 1], ['#CE1126', 1]] }, ['Ekwador', 'Wenezuela', 'Hiszpania'], 'Bogota', 'Ekwador ma podobną flagę, ale z herbem pośrodku.'],
+  ['Łotwa', 'hard', { h: [['#9E3039', 2], ['#FFFFFF', 1], ['#9E3039', 2]] }, ['Austria', 'Polska', 'Liban'], 'Ryga', 'Ten ciemny karmin to tak zwana łotewska czerwień.'],
+  ['Nigeria', 'hard', { v: eq('#008751', '#FFFFFF', '#008751') }, ['Irlandia', 'Pakistan', 'Sierra Leone'], 'Abudża', ''],
+  ['Czad', 'hard', { v: eq('#002664', '#FECB00', '#C60C30') }, ['Rumunia', 'Andora', 'Mołdawia'], 'Ndżamena', 'Prawie identyczna z flagą Rumunii, różni się odcieniem niebieskiego.'],
+  ['Rumunia', 'hard', { v: eq('#002B7F', '#FCD116', '#CE1126') }, ['Czad', 'Belgia', 'Mołdawia'], 'Bukareszt', 'Prawie identyczna z flagą Czadu.'],
+  ['Bułgaria', 'hard', { h: eq('#FFFFFF', '#00966E', '#D62612') }, ['Węgry', 'Litwa', 'Tadżykistan'], 'Sofia', ''],
+  ['Armenia', 'hard', { h: eq('#D90012', '#0033A0', '#F2A800') }, ['Kolumbia', 'Litwa', 'Gruzja'], 'Erywań', ''],
+  ['Jemen', 'hard', { h: eq('#CE1126', '#FFFFFF', '#000000') }, ['Egipt', 'Syria', 'Irak'], 'Sana', 'Egipt, Syria i Irak mają te same pasy, ale z godłem lub gwiazdami.'],
+  ['Laos', 'hard', { h: [['#CE1126', 1], ['#002868', 2], ['#CE1126', 1]], circle: ['#FFFFFF', 30, 20, 8] }, ['Kambodża', 'Tajlandia', 'Kostaryka'], 'Wientian', 'Białe koło to księżyc nad Mekongiem.'],
+  ['Palau', 'hard', { bg: '#4AADD6', circle: ['#FFDE00', 26, 20, 10] }, ['Bangladesz', 'Japonia', 'Mikronezja'], 'Ngerulmud', 'Żółte koło to księżyc w pełni nad Pacyfikiem.'],
+  ['Gwinea', 'hard', { v: eq('#CE1126', '#FCD116', '#009460') }, ['Mali', 'Senegal', 'Kamerun'], 'Konakry', 'Flaga Mali ma te same kolory w odwrotnej kolejności.'],
+  ['Mali', 'hard', { v: eq('#14B53A', '#FCD116', '#CE1126') }, ['Gwinea', 'Senegal', 'Etiopia'], 'Bamako', ''],
+  ['Boliwia', 'hard', { h: eq('#D52B1E', '#F9E300', '#007934') }, ['Litwa', 'Ghana', 'Gwinea'], 'Sucre (siedziba rządu: La Paz)', '']
+].map(([name, level, spec, wrong, capital, note]) => ({
+  kind: 'flag', level, spec, text: 'Do jakiego kraju należy ta flaga?', a: name, wrong,
+  fact: `To flaga: ${name}. Stolica: ${capital}.${note ? ' ' + note : ''}`
+}));
+
+const FACTS = [
+  ['easy', 'Która rzeka jest najdłuższa w Europie?', 'Wołga', ['Dunaj', 'Ren', 'Dniepr'], 'Wołga ma ok. 3 530 km i uchodzi do Morza Kaspijskiego. Dunaj jest drugi, ok. 2 850 km.'],
+  ['easy', 'Który ocean jest największy?', 'Spokojny', ['Atlantycki', 'Indyjski', 'Arktyczny'], 'Ocean Spokojny zajmuje mniej więcej jedną trzecią powierzchni Ziemi.'],
+  ['easy', 'Który szczyt jest najwyższy na świecie?', 'Mount Everest', ['K2', 'Kangczendzonga', 'Mont Blanc'], 'Everest ma 8 849 m n.p.m. K2 jest drugi, ma 8 611 m.'],
+  ['easy', 'Jak nazywa się stolica Australii?', 'Canberra', ['Sydney', 'Melbourne', 'Perth'], 'Canberrę zbudowano od zera jako kompromis między rywalizującymi Sydney i Melbourne.'],
+  ['easy', 'Na którym kontynencie leży większość Egiptu?', 'Afryka', ['Azja', 'Europa', 'Australia'], 'Tylko Półwysep Synaj leży w Azji, reszta kraju jest w Afryce.'],
+  ['easy', 'Która pustynia jest największą gorącą pustynią świata?', 'Sahara', ['Gobi', 'Kalahari', 'Atakama'], 'Sahara ma ok. 9 mln km². Największą pustynią w ogóle jest lodowa Antarktyda.'],
+  ['easy', 'Jaki jest najwyższy szczyt Polski?', 'Rysy', ['Śnieżka', 'Babia Góra', 'Giewont'], 'Polski wierzchołek Rysów ma 2 499 m n.p.m. Najwyższy wierzchołek, 2 503 m, leży po stronie słowackiej.'],
+  ['normal', 'Które państwo jest najmniejsze na świecie?', 'Watykan', ['Monako', 'San Marino', 'Liechtenstein'], 'Watykan ma ok. 0,44 km², mniej niż wiele parków miejskich.'],
+  ['normal', 'Ile państw ma dostęp do Morza Kaspijskiego?', '5', ['3', '4', '6'], 'Rosja, Kazachstan, Turkmenistan, Iran i Azerbejdżan.'],
+  ['normal', 'Które jezioro jest najgłębsze na świecie?', 'Bajkał', ['Tanganika', 'Titicaca', 'Wiktorii'], 'Bajkał ma ok. 1 640 m głębokości i mieści ok. 20% niezamarzniętej słodkiej wody na Ziemi.'],
+  ['normal', 'Który kraj ma najwięcej mieszkańców?', 'Indie', ['Chiny', 'USA', 'Indonezja'], 'Według szacunków ONZ Indie wyprzedziły Chiny w 2023 roku.'],
+  ['normal', 'Przez które miasto przepływa Tamiza?', 'Londyn', ['Dublin', 'Edynburg', 'Manchester'], 'Tamiza ma ok. 346 km i uchodzi do Morza Północnego.'],
+  ['normal', 'W jakim kraju leży Machu Picchu?', 'Peru', ['Boliwia', 'Chile', 'Ekwador'], 'Miasto Inków leży w Andach na wysokości ok. 2 430 m.'],
+  ['normal', 'Który kraj ma najdłuższą linię brzegową?', 'Kanada', ['Rosja', 'Australia', 'Norwegia'], 'Wybrzeże Kanady ma ponad 200 tys. km, głównie dzięki tysiącom wysp.'],
+  ['normal', 'Jaka rzeka jest najdłuższa w Afryce?', 'Nil', ['Kongo', 'Niger', 'Zambezi'], 'Nil ma ok. 6 650 km i płynie przez 11 krajów.'],
+  ['normal', 'Która cieśnina oddziela Europę od Afryki?', 'Gibraltarska', ['Bosfor', 'Kaletańska', 'Mesyńska'], 'W najwęższym miejscu ma tylko ok. 14 km.'],
+  ['normal', 'W jakim kraju jest najwyższy wodospad świata, Salto Angel?', 'Wenezuela', ['Brazylia', 'Kanada', 'Zambia'], 'Salto Angel spada z wysokości 979 m.'],
+  ['hard', 'Jak nazywa się stolica Kazachstanu?', 'Astana', ['Ałmaty', 'Biszkek', 'Taszkent'], 'Stolicę przeniesiono z Ałmaty w 1997 roku. W latach 2019–2022 miasto nazywało się Nur-Sułtan.'],
+  ['hard', 'Która pustynia jest najsuchszą niepolarną pustynią świata?', 'Atakama', ['Sahara', 'Namib', 'Gobi'], 'W niektórych miejscach Atakamy nigdy nie zanotowano deszczu.'],
+  ['hard', 'Który kraj ma najwięcej stref czasowych, licząc terytoria zamorskie?', 'Francja', ['Rosja', 'USA', 'Wielka Brytania'], 'Francja ma 12 stref czasowych dzięki terytoriom rozsianym po całym świecie.'],
+  ['hard', 'Która stolica (siedziba rządu) leży najwyżej na świecie?', 'La Paz', ['Quito', 'Bogota', 'Katmandu'], 'La Paz leży na ok. 3 600 m n.p.m. Konstytucyjną stolicą Boliwii jest Sucre.'],
+  ['hard', 'Który z tych krajów nie ma dostępu do morza?', 'Paragwaj', ['Urugwaj', 'Ekwador', 'Gujana'], 'Mimo to Paragwaj ma marynarkę wojenną, która pływa po rzekach.'],
+  ['hard', 'Na granicy jakich krajów leży jezioro Titicaca?', 'Peru i Boliwia', ['Chile i Argentyna', 'Peru i Ekwador', 'Boliwia i Chile'], 'To najwyżej położone żeglowne jezioro świata, ok. 3 810 m n.p.m.'],
+  ['hard', 'Ile państw leży w Afryce (członków ONZ)?', '54', ['48', '50', '58'], 'Najmłodszy z nich to Sudan Południowy, niepodległy od 2011 roku.']
+].map(([level, text, a, wrong, fact]) => ({ kind: 'fact', level, text, a, wrong, fact }));
+
+const shuffle = (arr) => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const PREF = { chill: ['easy', 'normal'], normal: null, hard: ['hard', 'normal'] };
+function pick(pool, level, n) {
+  const order = PREF[level];
+  if (!order) return shuffle(pool).slice(0, n);
+  let out = [];
+  order.forEach((lv) => { if (out.length < n) out = out.concat(shuffle(pool.filter((q) => q.level === lv)).slice(0, n - out.length)); });
+  return out;
+}
+function buildRound(cat, level) {
+  let qs;
+  if (cat === 'flags') qs = pick(FLAGS, level, 10);
+  else if (cat === 'facts') qs = pick(FACTS, level, 10);
+  else qs = pick(FLAGS, level, 5).concat(pick(FACTS, level, 5));
+  return shuffle(qs).map((q) => {
+    const answers = shuffle([q.a].concat(q.wrong));
+    return Object.assign({}, q, { answers, correct: answers.indexOf(q.a) });
+  });
+}
+
+/* ---------- sound (8-bit, generated) ---------- */
+let muted = store.get('gq-mute', '0') === '1';
+let ac = null;
+function audio() {
+  if (!ac) { try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
+  if (ac.state === 'suspended') ac.resume();
+  return ac;
+}
+function tone(f, t0, d, type, v, f2) {
+  if (muted) return; const a = audio(); if (!a) return;
+  const o = a.createOscillator(), g = a.createGain(), t = a.currentTime + t0;
+  o.type = type || 'square'; o.frequency.setValueAtTime(f, t);
+  if (f2) o.frequency.exponentialRampToValueAtTime(f2, t + d);
+  g.gain.setValueAtTime(v || 0.06, t); g.gain.exponentialRampToValueAtTime(0.0008, t + d);
+  o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + d + 0.03);
+}
+function noise(t0, d, v) {
+  if (muted) return; const a = audio(); if (!a) return;
+  const buf = a.createBuffer(1, Math.floor(a.sampleRate * d), a.sampleRate); const ch = buf.getChannelData(0);
+  for (let i = 0; i < ch.length; i++) ch[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / ch.length, 2);
+  const s = a.createBufferSource(), g = a.createGain(); s.buffer = buf; g.gain.value = v || 0.2;
+  s.connect(g); g.connect(a.destination); s.start(a.currentTime + t0);
+}
+const sfx = {
+  click: () => tone(660, 0, 0.05, 'square', 0.04),
+  pick: () => tone(880, 0, 0.05, 'square', 0.04),
+  good: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, i * 0.07, 0.12, 'square', 0.05)),
+  bad: () => { tone(247, 0, 0.14, 'sawtooth', 0.06); tone(175, 0.14, 0.3, 'sawtooth', 0.06, 90); },
+  fifty: () => { tone(500, 0, 0.08, 'triangle', 0.08); tone(350, 0.09, 0.1, 'triangle', 0.08); },
+  boom: () => { noise(0, 0.9, 0.3); tone(140, 0, 0.7, 'square', 0.08, 35); },
+  crash: () => { noise(0, 0.5, 0.25); tone(90, 0, 0.4, 'square', 0.06, 30); },
+  win: () => [[523, 0], [523, 0.12], [523, 0.24], [659, 0.36], [784, 0.6], [659, 0.78], [784, 0.9], [1047, 1.05]].forEach(([f, t]) => tone(f, t, 0.2, 'square', 0.05))
+};
+function renderMute() {
+  document.querySelectorAll('.mute-btn').forEach((b) => { b.innerHTML = muted ? SPK_OFF : SPK_ON; b.setAttribute('aria-label', muted ? 'Włącz dźwięk' : 'Wycisz dźwięk'); b.setAttribute('aria-pressed', String(muted)); });
+}
+
+/* ---------- state ---------- */
+const S = { cat: 'flags', level: 'normal', qs: [], i: 0, lives: 3, score: 0, combo: 0, maxCombo: 0, correct: 0, fifty: false, sel: null, answered: false, results: [], savedId: null };
+const LVL_NAME = { chill: 'Chill', normal: 'Normal', hard: 'Hardkor' };
+const BASE = { chill: 100, normal: 150, hard: 200 };
+const fmt = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+const timers = [];
+
+function show(id) {
+  ['s-start', 's-quiz', 's-defeat', 's-victory'].forEach((s) => { $(s).hidden = s !== id; });
+  document.body.dataset.screen = id.slice(2);
+  timers.splice(0).forEach(clearTimeout);
+  window.scrollTo(0, 0);
+}
+
+/* start screen */
+document.querySelectorAll('.cat').forEach((b) => b.addEventListener('click', () => {
+  S.cat = b.dataset.cat; sfx.pick();
+  document.querySelectorAll('.cat').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  store.set('gq-cat', S.cat);
+}));
+document.querySelectorAll('.lvl').forEach((b) => b.addEventListener('click', () => {
+  S.level = b.dataset.level; sfx.pick();
+  document.querySelectorAll('.lvl').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  store.set('gq-level', S.level);
+}));
+function restorePrefs() {
+  const c = store.get('gq-cat', 'flags'), l = store.get('gq-level', 'normal');
+  const cb = document.querySelector(`.cat[data-cat="${c}"]`), lb = document.querySelector(`.lvl[data-level="${l}"]`);
+  if (cb) { S.cat = c; document.querySelectorAll('.cat').forEach((x) => x.setAttribute('aria-pressed', String(x === cb))); }
+  if (lb) { S.level = l; document.querySelectorAll('.lvl').forEach((x) => x.setAttribute('aria-pressed', String(x === lb))); }
+}
+const best = () => Number(store.get('gq-best', '0')) || 0;
+const renderBest = () => { $('best').textContent = fmt(best()); };
+
+function startGame() {
+  audio();
+  Object.assign(S, { qs: buildRound(S.cat, S.level), i: 0, lives: 3, score: 0, combo: 0, maxCombo: 0, correct: 0, fifty: false, results: [], savedId: null });
+  sfx.click(); show('s-quiz'); renderQ();
+}
+$('btn-start').addEventListener('click', startGame);
+document.querySelectorAll('.again').forEach((b) => b.addEventListener('click', startGame));
+document.querySelectorAll('.menu').forEach((b) => b.addEventListener('click', () => { sfx.click(); renderBest(); show('s-start'); }));
+document.querySelectorAll('.mute-btn').forEach((b) => b.addEventListener('click', () => { muted = !muted; store.set('gq-mute', muted ? '1' : '0'); renderMute(); if (!muted) sfx.click(); }));
+
+/* quiz */
+function renderHud() {
+  $('hearts').innerHTML = [0, 1, 2].map((k) => heart(k < S.lives)).join('');
+  $('hearts').setAttribute('aria-label', `Życia: ${S.lives} z 3`);
+  $('pts').textContent = fmt(S.score);
+  $('pts-wrap').setAttribute('aria-label', `Punkty: ${S.score}`);
+  const cb = $('combo');
+  cb.textContent = `COMBO ×${S.combo}`;
+  cb.classList.toggle('off', S.combo < 2);
+  $('route').innerHTML = Array.from({ length: 10 }, (_, k) => `<i class="${S.results[k] || (k === S.i ? 'now' : '')}"></i>`).join('');
+  $('route').setAttribute('aria-label', `Trasa: przystanek ${S.i + 1} z 10`);
+}
+function renderQ() {
+  const q = S.qs[S.i];
+  S.sel = null; S.answered = false;
+  $('qn').textContent = `PYTANIE ${S.i + 1}/10 · ${q.kind === 'flag' ? 'FLAGI' : 'CIEKAWOSTKI'}`;
+  $('qvisual').className = 'visual' + (q.kind === 'fact' ? ' bulb' : '');
+  $('qvisual').innerHTML = q.kind === 'flag' ? flagSVG(q.spec) : BULB_BIG;
+  $('qtext').textContent = q.text;
+  const wrap = $('answers'); wrap.innerHTML = '';
+  q.answers.forEach((txt, k) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'ans'; b.dataset.k = k;
+    b.innerHTML = `<span class="l">${'ABCD'[k]}</span><span class="t"></span>${MARK_OK}${MARK_BAD}`;
+    b.querySelector('.t').textContent = txt;
+    b.addEventListener('click', () => select(k));
+    wrap.appendChild(b);
+  });
+  $('btn-check').disabled = true;
+  $('btn-5050').disabled = S.fifty;
+  $('qbar').hidden = false; $('verdict').hidden = true;
+  renderHud();
+}
+function select(k) {
+  if (S.answered) return;
+  const b = $('answers').children[k]; if (!b || b.classList.contains('gone')) return;
+  S.sel = k; sfx.pick();
+  [...$('answers').children].forEach((x, j) => { x.classList.toggle('sel', j === k); x.setAttribute('aria-pressed', String(j === k)); });
+  $('btn-check').disabled = false;
+}
+$('btn-5050').addEventListener('click', () => {
+  if (S.fifty || S.answered) return;
+  const q = S.qs[S.i]; S.fifty = true; sfx.fifty();
+  const wrong = shuffle([0, 1, 2, 3].filter((k) => k !== q.correct)).slice(0, 2);
+  wrong.forEach((k) => { const b = $('answers').children[k]; b.classList.add('gone'); b.disabled = true; });
+  if (wrong.includes(S.sel)) { S.sel = null; $('btn-check').disabled = true; [...$('answers').children].forEach((x) => x.classList.remove('sel')); }
+  $('btn-5050').disabled = true;
+});
+function check() {
+  if (S.sel === null || S.answered) return;
+  S.answered = true;
+  const q = S.qs[S.i], ok = S.sel === q.correct;
+  [...$('answers').children].forEach((b, k) => {
+    b.disabled = true; b.classList.remove('sel');
+    if (k === q.correct) b.classList.add('ok');
+    else if (k === S.sel) b.classList.add('bad');
+    else b.classList.add('dim');
+  });
+  const v = $('verdict');
+  if (ok) {
+    S.combo++; S.maxCombo = Math.max(S.maxCombo, S.combo); S.correct++;
+    const gain = BASE[S.level] + 50 * Math.min(S.combo - 1, 4);
+    S.score += gain; S.results[S.i] = 'ok';
+    v.className = 'verdict good'; $('v-stamp').textContent = 'BRAWO!';
+    $('v-gain').textContent = `+${gain} pkt${S.combo > 1 ? ` · combo ×${S.combo}` : ''}`;
+    sfx.good();
+  } else {
+    S.lives--; S.combo = 0; S.results[S.i] = 'bad';
+    v.className = 'verdict bad'; $('v-stamp').textContent = 'PUDŁO!';
+    $('v-gain').textContent = S.lives > 0 ? '−1 życie · combo reset' : 'Koniec żyć!';
+    sfx.bad();
+  }
+  $('v-fact').textContent = q.fact;
+  $('btn-next').textContent = S.lives === 0 ? 'KONIEC' : (S.i === 9 ? 'WYNIK' : 'DALEJ');
+  $('qbar').hidden = true; v.hidden = false;
+  renderHud();
+  $('btn-next').focus({ preventScroll: true });
+  v.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+$('btn-check').addEventListener('click', check);
+$('btn-next').addEventListener('click', () => {
+  sfx.click();
+  if (S.lives === 0) return endGame(false);
+  if (S.i === 9) return endGame(true);
+  S.i++; renderQ(); window.scrollTo(0, 0);
+});
+document.addEventListener('keydown', (e) => {
+  if ($('s-quiz').hidden || !$('rank').hidden || e.target.tagName === 'INPUT') return;
+  if (!S.answered && ['1', '2', '3', '4'].includes(e.key)) select(Number(e.key) - 1);
+  else if (e.key === 'Enter' && !S.answered && S.sel !== null) { e.preventDefault(); check(); }
+});
+
+/* end screens */
+function makeConfetti() {
+  const box = $('confetti'); box.innerHTML = '';
+  const colors = ['#F2B632', '#D6452F', '#5B8FD1', '#3FA39A', '#FFF6DE', '#E88AB0'];
+  for (let k = 0; k < 46; k++) {
+    const i = document.createElement('i'); const wide = Math.random() < 0.4;
+    i.style.left = (Math.random() * 100).toFixed(1) + '%';
+    i.style.width = (wide ? 9 : 6) + 'px'; i.style.height = (wide ? 3 : 6) + 'px';
+    i.style.background = colors[k % colors.length];
+    i.style.animationDuration = (4 + Math.random() * 4).toFixed(2) + 's';
+    i.style.animationDelay = (-Math.random() * 8).toFixed(2) + 's';
+    box.appendChild(i);
+  }
+}
+function endGame(won) {
+  const isBest = S.score > best();
+  if (isBest) store.set('gq-best', String(S.score));
+  const p = won ? 'v' : 'd';
+  if (won) {
+    show('s-victory'); makeConfetti(); sfx.win();
+    $('v-correct').textContent = `${S.correct}/10`; $('v-score').textContent = fmt(S.score);
+  } else {
+    show('s-defeat');
+    $('d-stop').textContent = `${S.i + 1}/10`; $('d-score').textContent = fmt(S.score);
+    timers.push(setTimeout(sfx.boom, 900), setTimeout(sfx.crash, 2600));
+  }
+  $(p + '-rec').hidden = !(isBest && S.score > 0);
+  const form = $(p + '-save');
+  form.hidden = !DB || S.score <= 0;
+  form.querySelector('input').value = store.get('gq-name', '');
+  form.querySelector('button').disabled = false;
+  $(p + '-msg').textContent = '';
+}
+
+/* ---------- shared ranking (claude.ai artifact db; absent elsewhere) ---------- */
+let DB = null;
+const cleanName = (s) => String(s || '').replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 16);
+async function connectDb(tries) {
+  try {
+    if (!window.claude || typeof window.claude.use !== 'function') {
+      if ((tries || 0) < 6) setTimeout(() => connectDb((tries || 0) + 1), 500);
+      return;
+    }
+    const db = await window.claude.use('db');
+    if (!db) return;
+    DB = db;
+    document.querySelectorAll('.rank-btn').forEach((b) => { b.hidden = false; });
+  } catch (e) { DB = null; }
+}
+async function openRanking() {
+  const m = $('rank'), list = $('rank-list'), empty = $('rank-empty');
+  m.hidden = false; list.innerHTML = ''; empty.hidden = false; empty.textContent = 'Wczytywanie…';
+  $('rank-close').focus();
+  if (!DB) { empty.textContent = 'Ranking jest dostępny tylko w wersji gry na claude.ai.'; return; }
+  try {
+    const snap = await DB.collection('scores').orderBy('score', 'desc').limit(25).get();
+    const rows = snap.docs.map((d) => ({ id: d.id, ...d.data() }))
+      .filter((r) => typeof r.score === 'number' && isFinite(r.score) && r.score >= 0 && r.score <= 100000)
+      .slice(0, 10);
+    if (!rows.length) { empty.textContent = 'Jeszcze pusto. Zagraj i zapisz pierwszy wynik!'; return; }
+    empty.hidden = true;
+    rows.forEach((r, k) => {
+      const li = document.createElement('li'); if (r.id === S.savedId) li.className = 'me';
+      const n = document.createElement('span'); n.className = 'n'; n.textContent = `${k + 1}.`;
+      const who = document.createElement('span'); who.className = 'who'; who.textContent = cleanName(r.name) || 'Pilot';
+      const sm = document.createElement('small'); sm.textContent = LVL_NAME[r.level] || ''; who.appendChild(sm);
+      const s = document.createElement('span'); s.className = 's'; s.textContent = fmt(Math.round(r.score));
+      li.append(n, who, s); list.appendChild(li);
+    });
+  } catch (e) {
+    empty.textContent = e && e.code === 'resource_exhausted' ? 'Za dużo zapytań naraz, spróbuj za chwilę.' : 'Ranking jest chwilowo niedostępny.';
+  }
+}
+function closeRanking() { $('rank').hidden = true; }
+document.querySelectorAll('.rank-btn').forEach((b) => b.addEventListener('click', () => { sfx.click(); openRanking(); }));
+$('rank-close').addEventListener('click', closeRanking);
+$('rank').addEventListener('click', (e) => { if (e.target === $('rank')) closeRanking(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('rank').hidden) closeRanking(); });
+['d', 'v'].forEach((p) => $(p + '-save').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const name = cleanName($(p + '-name').value);
+  const msg = $(p + '-msg'), btn = e.target.querySelector('button');
+  if (!name) { msg.textContent = 'Wpisz pseudonim, żeby zapisać wynik.'; return; }
+  if (!DB) return;
+  btn.disabled = true; msg.textContent = 'Zapisywanie…';
+  try {
+    const ref = await DB.collection('scores').add({ name, score: S.score, correct: S.correct, level: S.level, cat: S.cat, at: Date.now() });
+    S.savedId = ref.id; store.set('gq-name', name);
+    msg.textContent = 'Zapisano w rankingu!'; e.target.hidden = true;
+    openRanking();
+  } catch (err) {
+    btn.disabled = false;
+    msg.textContent = err && err.code === 'quota_exceeded' ? 'Ranking jest pełny, nie da się dodać wyniku.' : 'Nie udało się zapisać. Spróbuj jeszcze raz.';
+  }
+}));
+
+/* boot */
+renderMute(); restorePrefs(); renderBest(); show('s-start');
+connectDb();
+})();
+</script>

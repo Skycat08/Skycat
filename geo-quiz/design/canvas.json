@@ -1,0 +1,20 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-09-28T12:00:00Z"},
+  "title": "Geo Quiz Pixel",
+  "launch": {"view": "canvas"},
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 390, "h": 844, "title": "1 · Start"},
+    "Question.dc.html": {"x": 470, "y": 0, "w": 390, "h": 844, "title": "2 · Pytanie (flaga)"},
+    "Feedback.dc.html": {"x": 940, "y": 0, "w": 390, "h": 844, "title": "3 · Feedback (ciekawostka)"},
+    "Result.dc.html": {"x": 1410, "y": 0, "w": 390, "h": 844, "title": "4 · Wynik"},
+    "Defeat.dc.html": {"x": 1880, "y": 0, "w": 390, "h": 844, "title": "5 · Porażka"},
+    "Victory.dc.html": {"x": 2350, "y": 0, "w": 390, "h": 844, "title": "6 · Zwycięstwo"}
+  },
+  "order": ["Main.dc.html", "Question.dc.html", "Feedback.dc.html", "Result.dc.html", "Defeat.dc.html", "Victory.dc.html"],
+  "notes": {
+    "flowTitle": {"x": 0, "y": -300, "text": "Geo Quiz — pikselowa wyprawa", "kind": "title1", "maxW": 2740}
+  },
+  "designSystems": []
+}

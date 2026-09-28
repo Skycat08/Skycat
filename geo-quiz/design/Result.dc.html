@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Geo Quiz – wynik</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&amp;family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4E6C4;font-family:'Pixelify Sans',system-ui,sans-serif;color:#2B1D14}
+a{color:#2A62A6}a:hover{color:#1C4577}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 52px 24px 32px; background: #F4E6C4; display: flex; flex-direction: column; gap: 22px; font-family: 'Pixelify Sans', system-ui, sans-serif; color: #2B1D14">
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 14px">
+    <div style="font-size: 17px; font-weight: 600; letter-spacing: 4px; color: #6B5540">KONIEC GRY</div>
+    <h1 style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 48px; font-weight: 400; line-height: 1; color: #2B1D14; text-shadow: 4px 4px 0 #F2B632">GG!</h1>
+  </div>
+
+  <div style="align-self: center; margin-top: 8px; padding: 18px 26px; border: 4px solid {{accent}}; outline: 3px solid {{accent}}; outline-offset: 5px; transform: rotate(-4deg); display: flex; flex-direction: column; align-items: center; gap: 10px">
+    <svg width="48" height="24" viewBox="0 0 16 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="{{accent}}" d="M0 3h2v1H0z M3 3h2v1H3z M6 2h8v2H6z M14 3h1v1h-1z M6 0h2v2H6z M10 4h3v2h-3z M6 4h1v1H6z"></path></svg>
+    <div style="font: 400 50px 'Press Start 2P', monospace; line-height: 1; color: {{accent}}">8<span style="font-size: 24px">/10</span></div>
+    <div style="font-size: 18px; font-weight: 700; letter-spacing: 3px; color: {{accent}}">POPRAWNYCH</div>
+  </div>
+
+  <p style="margin: 6px 0 0; text-align: center; font-size: 19px; line-height: 1.35; color: #2B1D14">Mapa cię szanuje. Jeszcze trochę i będziesz znać wszystkie wyspy Oceanii.</p>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+    <div style="padding: 14px; border: 3px solid #2B1D14; background: #FFF6DE; box-shadow: 4px 4px 0 rgba(43,29,20,0.2); display: flex; flex-direction: column; gap: 8px">
+      <div style="display: flex; align-items: center; gap: 8px">
+        <svg width="20" height="20" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#F2B632" d="M2 0h4v1H2z M1 1h6v1H1z M0 2h8v4H0z M1 6h6v1H1z M2 7h4v1H2z"></path><path fill="#B7791F" d="M4 2h1v4H4z"></path><path fill="#FFFFFF" d="M2 2h1v1H2z"></path></svg>
+        <span style="font: 400 17px 'Press Start 2P', monospace; color: #2B1D14">2 450</span>
+      </div>
+      <div style="font-size: 15px; font-weight: 600; letter-spacing: 1px; color: #6B5540">PUNKTY</div>
+    </div>
+    <div style="padding: 14px; border: 3px solid #2B1D14; background: #FFF6DE; box-shadow: 4px 4px 0 rgba(43,29,20,0.2); display: flex; flex-direction: column; gap: 8px">
+      <span style="align-self: flex-start; padding: 3px 8px; border: 2px solid #2B1D14; background: #F2B632; font: 400 17px 'Press Start 2P', monospace; color: #2B1D14; transform: rotate(-2deg)">×5</span>
+      <div style="font-size: 15px; font-weight: 600; letter-spacing: 1px; color: #6B5540">NAJDŁUŻSZE COMBO</div>
+    </div>
+    <div style="padding: 14px; border: 3px solid #2B1D14; background: #FFF6DE; box-shadow: 4px 4px 0 rgba(43,29,20,0.2); display: flex; flex-direction: column; gap: 8px">
+      <div style="display: flex; gap: 4px" aria-label="Pozostało 1 z 3 żyć">
+        <svg width="27" height="24" viewBox="0 0 9 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#2B1D14" d="M1 0h3v1H1z M5 0h3v1H5z M0 1h1v3H0z M4 1h1v1H4z M8 1h1v3H8z M1 4h1v1H1z M7 4h1v1H7z M2 5h1v1H2z M6 5h1v1H6z M3 6h1v1H3z M5 6h1v1H5z M4 7h1v1H4z"></path><path fill="{{accent2}}" d="M1 1h3v1H1z M5 1h3v1H5z M1 2h7v2H1z M2 4h5v1H2z M3 5h3v1H3z M4 6h1v1H4z"></path><path fill="#FFD9CF" d="M2 1h1v1H2z"></path></svg>
+        <svg width="27" height="24" viewBox="0 0 9 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#2B1D14" d="M1 0h3v1H1z M5 0h3v1H5z M0 1h1v3H0z M4 1h1v1H4z M8 1h1v3H8z M1 4h1v1H1z M7 4h1v1H7z M2 5h1v1H2z M6 5h1v1H6z M3 6h1v1H3z M5 6h1v1H5z M4 7h1v1H4z"></path><path fill="#DCC89F" d="M1 1h3v1H1z M5 1h3v1H5z M1 2h7v2H1z M2 4h5v1H2z M3 5h3v1H3z M4 6h1v1H4z"></path></svg>
+        <svg width="27" height="24" viewBox="0 0 9 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#2B1D14" d="M1 0h3v1H1z M5 0h3v1H5z M0 1h1v3H0z M4 1h1v1H4z M8 1h1v3H8z M1 4h1v1H1z M7 4h1v1H7z M2 5h1v1H2z M6 5h1v1H6z M3 6h1v1H3z M5 6h1v1H5z M4 7h1v1H4z"></path><path fill="#DCC89F" d="M1 1h3v1H1z M5 1h3v1H5z M1 2h7v2H1z M2 4h5v1H2z M3 5h3v1H3z M4 6h1v1H4z"></path></svg>
+      </div>
+      <div style="font-size: 15px; font-weight: 600; letter-spacing: 1px; color: #6B5540">ŻYCIA</div>
+    </div>
+    <div style="padding: 14px; border: 3px solid #2B1D14; background: #FFF6DE; box-shadow: 4px 4px 0 rgba(43,29,20,0.2); display: flex; flex-direction: column; gap: 8px">
+      <span style="font: 400 17px 'Press Start 2P', monospace; line-height: 24px; color: #2B1D14">1/1</span>
+      <div style="font-size: 15px; font-weight: 600; letter-spacing: 1px; color: #6B5540">UŻYTE 50/50</div>
+    </div>
+  </div>
+
+  <div style="flex-grow: 1"></div>
+
+  <div style="display: flex; flex-direction: column; gap: 14px">
+    <button type="button" style="height: 60px; border: 3px solid #2B1D14; border-radius: 0; background: {{accent}}; color: #FFFFFF; font: 400 15px 'Press Start 2P', monospace; letter-spacing: 1px; box-shadow: inset 0 -5px 0 rgba(0,0,0,0.25), inset 0 3px 0 rgba(255,255,255,0.3), 5px 5px 0 #2B1D14; cursor: pointer">ZAGRAJ PONOWNIE</button>
+    <button type="button" style="height: 52px; border: 3px solid #2B1D14; border-radius: 0; background: #FFF6DE; color: #2B1D14; font: 600 19px 'Pixelify Sans', sans-serif; box-shadow: inset 0 -4px 0 #E3CFA3, 4px 4px 0 #2B1D14; cursor: pointer">Zmień kategorię</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2A62A6","options":["#2A62A6","#2E7D5B","#6E4A9E"]},"accent2":{"editor":"color","default":"#B8341F","options":["#B8341F","#A8431A","#9C2F5A"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#2A62A6', accent2: this.props.accent2 ?? '#B8341F' };
+}
+}
+</script>
+</body>
+</html>

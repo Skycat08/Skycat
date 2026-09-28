@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Geo Quiz – zwycięstwo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&amp;family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0A0A0A;font-family:'Pixelify Sans',system-ui,sans-serif;color:#FFF6DE}
+a{color:#F2B632}a:hover{color:#FFE08A}
+.gqv-f{animation-duration:4s;animation-iteration-count:infinite;animation-timing-function:step-end}
+.gqv-f1{animation-name:gqv1}
+.gqv-f2{opacity:0;animation-name:gqv2}
+.gqv-f3{opacity:0;animation-name:gqv3}
+.gqv-f4{opacity:0;animation-name:gqv4}
+@keyframes gqv1{0%{opacity:1}20%{opacity:0}100%{opacity:0}}
+@keyframes gqv2{0%{opacity:0}20%{opacity:1}40%{opacity:0}100%{opacity:0}}
+@keyframes gqv3{0%{opacity:0}40%{opacity:1}60%{opacity:0}100%{opacity:0}}
+@keyframes gqv4{0%{opacity:0}60%{opacity:1}100%{opacity:1}}
+.gqv-conf{animation:gqvc 7s steps(28) infinite}
+@keyframes gqvc{from{transform:translateY(-844px)}to{transform:translateY(0)}}
+.gqv-blink{animation:gqvb 1.2s step-end infinite}
+@keyframes gqvb{0%{opacity:1}50%{opacity:0}100%{opacity:0}}
+@media (prefers-reduced-motion: reduce){.gqv-f,.gqv-conf,.gqv-blink{animation:none}.gqv-f1{opacity:0}.gqv-f4{opacity:1}}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; box-sizing: border-box; padding: 40px 24px 32px; background: #0A0A0A; display: flex; flex-direction: column; gap: 18px; font-family: 'Pixelify Sans', system-ui, sans-serif; color: #FFF6DE; overflow: hidden">
+  <div style="width: 342px; box-sizing: border-box; border: 3px solid #F2B632; box-shadow: 5px 5px 0 rgba(242,182,50,0.25)">
+    <svg width="336" height="252" viewBox="0 0 112 84" shape-rendering="crispEdges" role="img" aria-label="Animacja: dwupłatowiec ląduje przy świątyni, a pilot unosi nad głową złoty kostur" style="display: block">
+      <defs>
+        <pattern id="gqv-p1" width="2" height="2" patternUnits="userSpaceOnUse"><rect width="1" height="1" fill="#5FAEDF"></rect><rect x="1" y="1" width="1" height="1" fill="#5FAEDF"></rect></pattern>
+        <pattern id="gqv-p2" width="2" height="2" patternUnits="userSpaceOnUse"><rect width="1" height="1" fill="#8ED0EE"></rect><rect x="1" y="1" width="1" height="1" fill="#8ED0EE"></rect></pattern>
+        <pattern id="gqv-p3" width="2" height="2" patternUnits="userSpaceOnUse"><rect width="1" height="1" fill="#B5E2F5"></rect><rect x="1" y="1" width="1" height="1" fill="#B5E2F5"></rect></pattern>
+
+        <g id="gqv-crown">
+          <path fill="#1F4A2A" d="M3 0h6v1H3z M1 1h10v2H1z M0 3h12v6H0z"></path>
+          <path fill="#2F6B3A" d="M3 1h5v1H3z M2 2h7v2H2z M1 4h8v2H1z"></path>
+          <path fill="#4E8F4A" d="M3 1h2v1H3z M2 2h2v1H2z M5 2h1v1H5z"></path>
+        </g>
+        <g id="gqv-palm">
+          <path fill="#8A5A33" d="M6 4h2v4H6z M5 8h2v4H5z M4 12h2v8H4z"></path>
+          <path fill="#6B4226" d="M6 6h2v1H6z M5 10h2v1H5z M4 15h2v1H4z M4 18h2v1H4z"></path>
+          <path fill="#2F6B3A" d="M3 0h8v2H3z M0 1h4v1H0z M-2 2h3v1h-3z M-3 3h2v2h-2z M10 1h4v1h-4z M13 2h3v1h-3z M15 3h2v2h-2z M5 -2h4v2H5z M4 2h2v2H4z M8 2h2v2H8z"></path>
+          <path fill="#4E8F4A" d="M4 0h6v1H4z M6 -2h2v1H6z M1 1h2v1H1z M11 1h2v1h-2z"></path>
+          <path fill="#5A3A22" d="M6 2h1v1H6z M8 2h1v1H8z"></path>
+        </g>
+        <g id="gqv-cloud">
+          <path fill="#FFFFFF" d="M5 0h5v1H5z M3 1h9v1H3z M12 2h4v1h-4z M1 2h17v2H1z M0 4h20v1H0z"></path>
+          <path fill="#DCEBF5" d="M0 5h20v1H0z M1 6h17v1H1z"></path>
+          <path fill="#BFD7E8" d="M2 7h14v1H2z"></path>
+        </g>
+
+        <g id="gqv-body">
+          <path fill="#D94A2B" d="M-33 -9h5v9h-5z M-31 -10h3v1h-3z M-31 -1h7v3h-7z M-24 -2h44v4h-44z"></path>
+          <path fill="#F07A55" d="M-31 -9h1v8h-1z M-24 -3h44v1h-44z M-31 -1h7v1h-7z"></path>
+          <path fill="#2A62A6" d="M-35 -8h1v8h-1z"></path>
+          <path fill="#FFFFFF" d="M-34 -8h1v8h-1z"></path>
+          <path fill="#B53A22" d="M-24 2h44v2h-44z M-31 2h7v1h-7z"></path>
+          <path fill="#8A2A18" d="M-22 4h40v1h-40z M-6 -2h1v6h-1z M12 -2h1v6h-1z M-30 3h6v1h-6z"></path>
+          <path fill="#D94A2B" d="M-37 1h12v1h-12z"></path>
+          <path fill="#8A2A18" d="M-37 2h12v1h-12z"></path>
+          <path fill="#2A62A6" d="M-21 -2h5v5h-5z"></path>
+          <path fill="#FFFFFF" d="M-20 -1h3v3h-3z"></path>
+          <path fill="#D94A2B" d="M-19 0h1v1h-1z"></path>
+          <path fill="#F4B090" d="M-14 3h1v1h-1z M-10 3h1v1h-1z M2 3h1v1h-1z M6 3h1v1h-1z M16 3h1v1h-1z"></path>
+          <path fill="#2B1D14" d="M-30 4h1v2h-1z"></path>
+          <path fill="#F2B632" d="M-10 5h28v2h-28z"></path>
+          <path fill="#FFE08A" d="M-10 5h28v1h-28z"></path>
+          <path fill="#B7791F" d="M-10 7h28v1h-28z M-10 5h1v3h-1z"></path>
+          <path fill="#D99A2B" d="M-6 6h1v1h-1z M-2 6h1v1h-1z M2 6h1v1h-1z M6 6h1v1h-1z M10 6h1v1h-1z M14 6h1v1h-1z"></path>
+          <path fill="#2B1D14" d="M4 8h2v1h-2z M5 9h1v1h-1z M9 8h2v1h-2z M9 9h1v1h-1z"></path>
+          <path fill="#2F2A28" d="M6 10h3v1h-3z M5 11h5v1h-5z M4 12h7v3h-7z M5 15h5v1h-5z M6 16h3v1h-3z"></path>
+          <path fill="#5A524E" d="M6 11h2v1h-2z M5 12h1v1h-1z"></path>
+          <path fill="#A8A8A8" d="M6 12h3v3h-3z"></path>
+          <path fill="#707070" d="M8 13h1v2h-1z M6 14h2v1h-2z"></path>
+          <path fill="#E6E6E6" d="M7 13h1v1h-1z"></path>
+          <path fill="#3A2A20" d="M-11 -4h1v1h-1z M-11 -3h18v1h-18z"></path>
+          <path fill="#7A4A26" d="M-9 -3h14v1h-14z"></path>
+          <path fill="#CFEFFA" d="M7 -7h2v4h-2z"></path>
+          <path fill="#FFFFFF" d="M8 -7h1v1h-1z"></path>
+          <path fill="#2B1D14" d="M9 -8h1v5h-1z"></path>
+          <path fill="#6B6B6B" d="M18 -3h6v9h-6z"></path>
+          <path fill="#8C8C8C" d="M20 -2h2v7h-2z"></path>
+          <path fill="#BDBDBD" d="M19 -2h1v7h-1z"></path>
+          <path fill="#4A4A4A" d="M18 5h6v1h-6z"></path>
+          <path fill="#2B1D14" d="M22 -1h1v1h-1z M22 1h1v1h-1z M22 3h1v1h-1z"></path>
+          <path fill="#3A3A3A" d="M17 -4h3v1h-3z"></path>
+          <path fill="#D0D0D0" d="M24 0h2v3h-2z M26 1h1v1h-1z"></path>
+          <path fill="#9A9A9A" d="M24 2h2v1h-2z"></path>
+        </g>
+        <g id="gqv-head">
+          <path fill="#6B4226" d="M-9 -5h4v2h-4z M4 -5h3v2h-3z"></path>
+          <path fill="#1A1414" d="M-5 -18h6v1h-6z M-7 -17h10v1h-10z M-8 -16h12v1h-12z M-8 -15h2v2h-2z M0 -15h1v1h-1z M-8 -13h3v8h-3z"></path>
+          <path fill="#4A4058" d="M-4 -17h3v1h-3z M-7 -16h1v1h-1z M-8 -11h1v2h-1z"></path>
+          <path fill="#F2C08A" d="M-5 -13h10v10h-10z M4 -15h1v2h-1z M5 -10h1v3h-1z"></path>
+          <path fill="#D99A62" d="M-5 -12h1v8h-1z M4 -9h1v1h-1z"></path>
+          <path fill="#E0A872" d="M-6 -10h2v3h-2z"></path>
+          <path fill="#B87A48" d="M-5 -9h1v1h-1z"></path>
+          <path fill="#3A2A20" d="M-6 -15h3v2h-3z M0 -14h1v1h-1z"></path>
+          <path fill="#2B1D14" d="M-3 -15h3v3h-3z M1 -15h3v3h-3z"></path>
+          <path fill="#8ED0EE" d="M-2 -14h1v1h-1z M2 -14h1v1h-1z"></path>
+        </g>
+        <g id="gqv-face-fierce">
+          <path fill="#D99A62" d="M-4 -9h3v1h-3z M2 -9h2v1h-2z M-4 -8h1v3h-1z M-1 -11h1v1h-1z"></path>
+          <path fill="#FFFFFF" d="M-4 -10h2v1h-2z M2 -10h1v1h-1z M-2 -7h5v1h-5z M-2 -5h5v1h-5z"></path>
+          <path fill="#5A1E1E" d="M-2 -6h5v1h-5z"></path>
+          <path fill="#C0503A" d="M-1 -6h2v1h-2z"></path>
+          <path fill="#2B1D14" d="M-5 -12h3v1h-3z M3 -12h2v1h-2z M-3 -11h2v1h-2z M1 -11h2v1h-2z M-2 -10h1v1h-1z M3 -10h1v1h-1z M4 -8h1v1h-1z M-3 -8h7v1h-7z M-3 -7h1v3h-1z M3 -7h1v3h-1z M0 -7h1v1h-1z M0 -5h1v1h-1z M-2 -4h5v1h-5z"></path>
+          <path fill="#8ED0EE" d="M6 -14h1v1h-1z M6 -13h2v2h-2z"></path>
+          <path fill="#FFFFFF" d="M6 -13h1v1h-1z"></path>
+        </g>
+        <g id="gqv-face-happy">
+          <path fill="#E88A6A" d="M-4 -8h1v1h-1z M4 -8h1v1h-1z"></path>
+          <path fill="#FFFFFF" d="M-2 -7h5v1h-5z"></path>
+          <path fill="#5A1E1E" d="M-2 -6h5v1h-5z"></path>
+          <path fill="#C0503A" d="M-1 -6h2v1h-2z"></path>
+          <path fill="#2B1D14" d="M-5 -12h2v1h-2z M2 -12h2v1h-2z M-4 -10h1v1h-1z M-3 -11h1v1h-1z M-2 -10h1v1h-1z M2 -10h1v1h-1z M3 -11h1v1h-1z M4 -10h1v1h-1z M-3 -8h7v1h-7z M-3 -7h1v2h-1z M3 -7h1v2h-1z M-2 -5h5v1h-5z"></path>
+        </g>
+        <g id="gqv-standing">
+          <path fill="#6B4226" d="M-8 -9h13v6h-13z M-11 -26h2v18h-2z M6 -26h2v18h-2z"></path>
+          <path fill="#4E2F1A" d="M-8 -9h2v6h-2z M-11 -26h1v18h-1z M7 -26h1v18h-1z"></path>
+          <path fill="#3A2A20" d="M2 -8h1v5h-1z"></path>
+          <path fill="#E8D8B0" d="M-7 -10h9v1h-9z M-11 -24h2v1h-2z M6 -24h2v1h-2z"></path>
+          <path fill="#B7791F" d="M-19 -29h1v4h-1z"></path>
+          <path fill="#F2B632" d="M-18 -28h32v2h-32z"></path>
+          <path fill="#FFE08A" d="M-18 -28h32v1h-32z"></path>
+          <path fill="#B7791F" d="M-18 -27h32v1h-32z M-10 -28h1v2h-1z M-3 -28h1v2h-1z M4 -28h1v2h-1z"></path>
+          <path fill="#F2B632" d="M15 -32h4v1h-4z M14 -31h6v6h-6z M15 -25h4v1h-4z"></path>
+          <path fill="#B7791F" d="M19 -31h1v6h-1z M15 -25h4v1h-4z"></path>
+          <path fill="#FFE08A" d="M16 -34h2v2h-2z M15 -32h2v1h-2z"></path>
+          <path fill="#D6452F" d="M16 -30h2v4h-2z"></path>
+          <path fill="#FFB0A0" d="M16 -30h1v1h-1z"></path>
+          <path fill="#F2C08A" d="M-12 -29h3v3h-3z M5 -29h3v3h-3z"></path>
+          <path fill="#D99A62" d="M-12 -27h3v1h-3z M5 -27h3v1h-3z"></path>
+        </g>
+      </defs>
+
+      <rect width="112" height="84" fill="#FFF3C4"></rect>
+      <rect width="112" height="14" fill="#5FAEDF"></rect>
+      <rect y="14" width="112" height="14" fill="#8ED0EE"></rect>
+      <rect y="28" width="112" height="14" fill="#B5E2F5"></rect>
+      <rect y="42" width="112" height="10" fill="#DDF0F5"></rect>
+      <rect y="14" width="112" height="2" fill="url(#gqv-p1)"></rect>
+      <rect y="28" width="112" height="2" fill="url(#gqv-p2)"></rect>
+      <rect y="42" width="112" height="2" fill="url(#gqv-p3)"></rect>
+      <path fill="#FFF3C4" opacity="0.7" d="M16 18h4v1h-4z M14 19h8v1h-8z M13 20h10v1H13z M12 21h12v7H12z M13 28h10v1H13z M14 29h8v1h-8z M16 30h4v1h-4z"></path>
+      <path fill="#F7C548" d="M16 20h4v1h-4z M15 21h6v1h-6z M14 22h8v4h-8z M15 26h6v1h-6z M16 27h4v1h-4z"></path>
+      <path fill="#FFE58A" d="M16 21h2v1h-2z M15 22h1v1h-1z"></path>
+      <use href="#gqv-cloud" x="38" y="6"></use>
+      <path fill="#7C9CC4" d="M20 52V50H22V48H24V46H26V44H28V42H30V40H34V42H36V44H38V46H40V48H42V50H44V52Z M44 52V50H46V48H48V46H50V44H52V42H54V40H56V38H60V40H62V42H64V44H66V46H68V48H70V50H72V52Z"></path>
+      <path fill="#6283AE" d="M32 40H34V42H36V44H38V46H40V48H42V50H44V52H32Z M58 38H60V40H62V42H64V44H66V46H68V48H70V50H72V52H58Z"></path>
+      <path fill="#FFFFFF" d="M30 40H34V42H32V43H30Z M56 38H60V40H62V41H58V40H56Z"></path>
+      <path fill="#8FBF8A" d="M0 54H8V53H20V52H40V53H56V52H112V58H0Z"></path>
+      <use href="#gqv-crown" x="-4" y="48"></use><use href="#gqv-crown" x="8" y="48"></use><use href="#gqv-crown" x="20" y="49"></use><use href="#gqv-crown" x="32" y="48"></use><use href="#gqv-crown" x="44" y="49"></use><use href="#gqv-crown" x="56" y="48"></use><use href="#gqv-crown" x="102" y="48"></use>
+      <use href="#gqv-palm" x="2" y="34"></use>
+      <use href="#gqv-palm" x="100" y="32"></use>
+      <path fill="#9A9483" d="M66 54h40v6H66z M70 48h32v6H70z M74 42h24v6H74z M78 36h16v6H78z M81 30h10v6H81z"></path>
+      <path fill="#6E6A5C" d="M100 54h6v6h-6z M97 48h5v6h-5z M94 42h4v6h-4z M91 36h3v6h-3z M89 30h2v6h-2z"></path>
+      <path fill="#BDB6A0" d="M66 54h40v1H66z M70 48h32v1H70z M74 42h24v1H74z M78 36h16v1H78z M81 30h10v1H81z"></path>
+      <path fill="#7A7566" d="M84 36h4v24h-4z"></path>
+      <path fill="#BDB6A0" d="M84 38h4v1h-4z M84 41h4v1h-4z M84 44h4v1h-4z M84 47h4v1h-4z M84 50h4v1h-4z M84 53h4v1h-4z M84 56h4v1h-4z M84 59h4v1h-4z"></path>
+      <path fill="#6E6A5C" d="M80 29h12v1H80z M82 28h8v1h-8z"></path>
+      <path fill="#2B1D14" d="M85 32h2v4h-2z"></path>
+      <path fill="#F7C548" d="M85 33h2v1h-2z"></path>
+      <path fill="#5E9E58" d="M66 58h3v2h-3z M72 52h2v2h-2z M98 46h2v2h-2z M76 40h2v2h-2z M104 56h2v2h-2z M92 34h1v2h-1z"></path>
+      <path fill="#3F7F45" d="M68 55h1v3h-1z M101 49h1v3h-1z M79 37h1v3h-1z"></path>
+      <path fill="#5A3A22" d="M63 53h2v7h-2z M108 53h2v7h-2z"></path>
+      <path fill="#3A3A3A" d="M62 52h4v1h-4z M107 52h4v1h-4z"></path>
+      <rect y="58" width="112" height="26" fill="#6DB35F"></rect>
+      <rect y="58" width="112" height="2" fill="#5E9E58"></rect>
+      <rect y="64" width="112" height="8" fill="#C9A95A"></rect>
+      <path fill="#A8894A" d="M0 64h112v1H0z M0 71h112v1H0z"></path>
+      <path fill="#B8964A" d="M0 67h112v1H0z M6 69h10v1H6z M40 69h14v1H40z M80 69h12v1H80z"></path>
+      <path fill="#FFF6DE" d="M4 62h2v1H4z M24 62h2v1h-2z M44 62h2v1h-2z M64 62h2v1h-2z M84 62h2v1h-2z M104 62h2v1h-2z M14 73h2v1h-2z M34 73h2v1h-2z M54 73h2v1h-2z M74 73h2v1h-2z M94 73h2v1h-2z"></path>
+      <path fill="#4E8F4A" d="M10 61h1v2h-1z M30 60h1v2h-1z M50 61h1v2h-1z M92 60h1v2h-1z M20 75h1v2h-1z M60 76h1v2h-1z M98 75h1v2h-1z"></path>
+
+      <g class="gqv-f gqv-f1" style="animation-duration: {{dur}}">
+        <path fill="#F2A03A" d="M62 49h4v3h-4z M63 48h2v1h-2z M107 49h4v3h-4z M108 48h2v1h-2z"></path>
+        <path fill="#F7C548" d="M63 50h2v2h-2z M108 50h2v2h-2z"></path>
+        <path fill="#FFFFFF" opacity="0.7" d="M0 30h10v1H0z M0 38h14v1H0z M2 46h8v1H2z"></path>
+        <g transform="translate(30 44)">
+          <use href="#gqv-body"></use>
+          <use href="#gqv-head"></use>
+          <use href="#gqv-face-fierce"></use>
+          <path fill="#1A1414" d="M-12 -17h4v2h-4z M-15 -16h3v2h-3z M-18 -17h3v1h-3z M-21 -16h3v1h-3z M-12 -14h4v2h-4z M-16 -13h4v2h-4z M-19 -14h3v1h-3z M-11 -11h3v2h-3z M-14 -10h3v2h-3z M-17 -11h3v1h-3z M-10 -8h2v2h-2z M-13 -7h3v1h-3z"></path>
+          <path fill="#4A4058" d="M-11 -17h2v1h-2z M-15 -13h2v1h-2z M-13 -10h1v1h-1z"></path>
+          <path fill="#FFF6DE" d="M-14 -5h5v2h-5z M-19 -6h5v2h-5z M-24 -5h5v2h-5z M-28 -6h4v1h-4z"></path>
+          <path fill="#D9C8A0" d="M-14 -4h5v1h-5z M-24 -4h5v1h-5z"></path>
+          <path fill="#FFFFFF" opacity="0.35" d="M25 -11h3v25h-3z"></path>
+          <path fill="#5A3A22" d="M26 -10h2v10h-2z M26 3h2v10h-2z"></path>
+          <path fill="#F2B632" d="M26 -10h2v2h-2z M26 11h2v2h-2z"></path>
+        </g>
+      </g>
+
+      <g class="gqv-f gqv-f2" style="animation-duration: {{dur}}">
+        <path fill="#F2A03A" d="M62 50h4v2h-4z M64 47h1v3h-1z M107 50h4v2h-4z M109 47h1v3h-1z"></path>
+        <path fill="#F7C548" d="M63 50h2v1h-2z M64 49h1v1h-1z M108 50h2v1h-2z M109 49h1v1h-1z"></path>
+        <path fill="#FFFFFF" opacity="0.6" d="M0 40h14v1H0z M4 48h10v1H4z"></path>
+        <path fill="#E0CFA0" d="M40 65h4v3h-4z M33 64h5v4h-5z M26 65h4v3h-4z"></path>
+        <path fill="#F4E6C4" d="M40 65h2v1h-2z M33 64h2v1h-2z M26 65h2v1h-2z"></path>
+        <g transform="translate(50 52)">
+          <use href="#gqv-body"></use>
+          <use href="#gqv-head"></use>
+          <use href="#gqv-face-fierce"></use>
+          <path fill="#1A1414" d="M-12 -16h4v2h-4z M-15 -17h3v2h-3z M-18 -16h3v1h-3z M-22 -17h4v1h-4z M-12 -13h4v2h-4z M-16 -14h4v2h-4z M-20 -13h4v1h-4z M-11 -10h3v2h-3z M-14 -11h3v2h-3z M-18 -10h4v1h-4z M-10 -7h2v2h-2z M-13 -8h3v1h-3z M-15 -7h2v1h-2z"></path>
+          <path fill="#4A4058" d="M-11 -16h2v1h-2z M-15 -14h2v1h-2z M-13 -11h1v1h-1z"></path>
+          <path fill="#FFF6DE" d="M-14 -5h5v2h-5z M-19 -4h5v2h-5z M-24 -5h5v2h-5z M-29 -4h5v1h-5z"></path>
+          <path fill="#D9C8A0" d="M-19 -3h5v1h-5z M-24 -4h5v1h-5z"></path>
+          <path fill="#FFFFFF" opacity="0.35" d="M25 -11h3v25h-3z"></path>
+          <path fill="#5A3A22" d="M26 -4h2v4h-2z M26 3h2v4h-2z"></path>
+          <path fill="#F2B632" d="M26 -4h2v1h-2z M26 6h2v1h-2z"></path>
+        </g>
+      </g>
+
+      <g class="gqv-f gqv-f3" style="animation-duration: {{dur}}">
+        <path fill="#F2A03A" d="M62 49h4v3h-4z M63 48h2v1h-2z M107 49h4v3h-4z M108 48h2v1h-2z"></path>
+        <path fill="#F7C548" d="M63 50h2v2h-2z M108 50h2v2h-2z"></path>
+        <g transform="translate(62 52)">
+          <use href="#gqv-body"></use>
+          <use href="#gqv-standing"></use>
+          <g transform="translate(0 -5)">
+            <use href="#gqv-head"></use>
+            <use href="#gqv-face-happy"></use>
+            <path fill="#1A1414" d="M-12 -16h3v2h-3z M-14 -15h2v2h-2z M-11 -12h2v2h-2z M-13 -11h2v1h-2z"></path>
+          </g>
+          <path fill="#FFF6DE" d="M-14 -10h5v2h-5z M-19 -11h5v2h-5z M-23 -10h4v1h-4z"></path>
+          <path fill="#D9C8A0" d="M-14 -9h5v1h-5z"></path>
+          <path fill="#5A3A22" d="M26 -10h2v10h-2z M26 3h2v10h-2z"></path>
+          <path fill="#F2B632" d="M26 -10h2v2h-2z M26 11h2v2h-2z"></path>
+          <path fill="#FFFFFF" d="M21 -33h1v1h-1z"></path>
+        </g>
+      </g>
+
+      <g class="gqv-f gqv-f4" style="animation-duration: {{dur}}">
+        <path fill="#F2A03A" d="M62 50h4v2h-4z M64 47h1v3h-1z M107 50h4v2h-4z M109 47h1v3h-1z"></path>
+        <path fill="#F7C548" d="M63 50h2v1h-2z M64 49h1v1h-1z M108 50h2v1h-2z M109 49h1v1h-1z"></path>
+        <path fill="#FFF3C4" opacity="0.75" d="M74 17h10v12H74z"></path>
+        <path fill="#FFE08A" opacity="0.8" d="M78 8h2v6h-2z M78 32h2v4h-2z M86 22h8v1h-8z M64 22h8v1h-8z M85 13h2v2h-2z M71 13h2v2h-2z M85 30h2v2h-2z M71 30h2v2h-2z"></path>
+        <g transform="translate(62 52)">
+          <use href="#gqv-body"></use>
+          <use href="#gqv-standing"></use>
+          <g transform="translate(0 -5)">
+            <use href="#gqv-head"></use>
+            <use href="#gqv-face-happy"></use>
+            <path fill="#1A1414" d="M-12 -17h3v2h-3z M-14 -16h2v2h-2z M-11 -12h2v2h-2z M-13 -12h2v1h-2z"></path>
+          </g>
+          <path fill="#FFF6DE" d="M-14 -10h5v2h-5z M-19 -9h5v2h-5z M-24 -10h5v1h-5z"></path>
+          <path fill="#D9C8A0" d="M-19 -8h5v1h-5z"></path>
+          <path fill="#5A3A22" d="M26 -10h2v10h-2z M26 3h2v10h-2z"></path>
+          <path fill="#F2B632" d="M26 -10h2v2h-2z M26 11h2v2h-2z"></path>
+        </g>
+        <path fill="#FFFFFF" d="M91 13h1v3h-1z M90 14h3v1h-3z M68 26h1v3h-1z M67 27h3v1h-3z M95 26h1v1h-1z M74 10h1v1h-1z"></path>
+      </g>
+    </svg>
+  </div>
+
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 12px">
+    <h1 style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 64px; font-weight: 400; line-height: 1; color: #F2B632; text-shadow: 5px 5px 0 #B8341F">GG</h1>
+    <div style="font-size: 22px; font-weight: 700; letter-spacing: 2px; color: #FFF6DE">ARTEFAKT ZDOBYTY!</div>
+    <p style="margin: 0; font-size: 17px; line-height: 1.35; color: #CFC6B0; text-align: center">Złoty kostur jest twój. Świat stoi przed tobą otworem.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+    <div style="padding: 12px 14px; border: 3px solid #F2B632; background: #17140F; display: flex; flex-direction: column; gap: 6px">
+      <span style="font: 400 17px 'Press Start 2P', monospace; color: #F2B632">8/10</span>
+      <span style="font-size: 15px; font-weight: 600; letter-spacing: 1px; color: #CFC6B0">POPRAWNYCH</span>
+    </div>
+    <div style="padding: 12px 14px; border: 3px solid #F2B632; background: #17140F; display: flex; flex-direction: column; gap: 6px">
+      <span style="display: flex; align-items: center; gap: 8px">
+        <svg width="18" height="18" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><path fill="#F2B632" d="M2 0h4v1H2z M1 1h6v1H1z M0 2h8v4H0z M1 6h6v1H1z M2 7h4v1H2z"></path><path fill="#B7791F" d="M4 2h1v4H4z"></path><path fill="#FFFFFF" d="M2 2h1v1H2z"></path></svg>
+        <span style="font: 400 17px 'Press Start 2P', monospace; color: #F2B632">2 450</span>
+      </span>
+      <span style="font-size: 15px; font-weight: 600; letter-spacing: 1px; color: #CFC6B0">PUNKTY</span>
+    </div>
+  </div>
+
+  <div style="flex-grow: 1"></div>
+
+  <div style="display: flex; flex-direction: column; gap: 14px; padding: 0 6px">
+    <button type="button" style="height: 64px; border: 3px solid #2B1D14; border-radius: 0; background: {{accent}}; color: #FFFFFF; font: 400 15px 'Press Start 2P', monospace; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 12px; text-shadow: 3px 3px 0 rgba(0,0,0,0.35); box-shadow: inset 0 4px 0 rgba(255,255,255,0.35), inset 0 -6px 0 rgba(0,0,0,0.3), 0 0 0 3px #F2B632, 0 0 0 6px #2B1D14; cursor: pointer">
+      <svg class="gqv-blink" width="10" height="18" viewBox="0 0 4 7" shape-rendering="crispEdges" aria-hidden="true"><path fill="#F2B632" d="M0 0h1v7H0z M1 1h1v5H1z M2 2h1v3H2z M3 3h1v1H3z"></path></svg>
+      ZAGRAJ PONOWNIE
+    </button>
+    <button type="button" style="height: 52px; border: 3px solid #FFF6DE; border-radius: 0; background: transparent; color: #FFF6DE; font: 600 19px 'Pixelify Sans', sans-serif; cursor: pointer">Zmień kategorię</button>
+  </div>
+
+  <div aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 390px; height: 844px; overflow: hidden; pointer-events: none">
+    <svg class="gqv-conf" width="390" height="1688" viewBox="0 0 195 844" shape-rendering="crispEdges" style="display: block">
+      <defs>
+        <g id="gqv-confetti">
+          <path fill="#F2B632" d="M10 12h2v2h-2z M178 10h1v3h-1z M52 88h3v1h-3z M140 70h2v2h-2z M188 128h1v3h-1z M100 160h3v1h-3z M56 220h2v2h-2z M12 270h2v2h-2z M104 300h2v2h-2z M92 332h1v3h-1z M154 346h2v2h-2z M140 400h1v3h-1z"></path>
+          <path fill="#D6452F" d="M34 30h3v1h-3z M80 64h2v2h-2z M8 130h1v3H8z M160 160h2v2h-2z M118 230h2v2h-2z M44 292h1v3h-1z M124 372h3v1h-3z M16 405h3v1h-3z"></path>
+          <path fill="#5B8FD1" d="M60 8h1v3h-1z M20 70h2v2h-2z M130 138h2v2h-2z M90 190h1v3h-1z M166 300h3v1h-3z M62 366h2v2h-2z"></path>
+          <path fill="#3FA39A" d="M88 40h2v2h-2z M170 96h3v1h-3z M40 150h2v2h-2z M146 205h2v2h-2z M74 262h3v1h-3z M184 380h2v2h-2z"></path>
+          <path fill="#FFF6DE" d="M120 20h3v1h-3z M70 122h2v2h-2z M176 228h3v1h-3z M30 340h2v2h-2z"></path>
+          <path fill="#E88AB0" d="M150 35h2v2h-2z M110 92h1v3h-1z M24 200h3v1h-3z M136 276h2v2h-2z M80 410h2v2h-2z"></path>
+        </g>
+      </defs>
+      <use href="#gqv-confetti"></use>
+      <use href="#gqv-confetti" y="422"></use>
+    </svg>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2A62A6","options":["#2A62A6","#2E7D5B","#6E4A9E"]},"animSpeed":{"editor":"enum","options":["wolno","średnio","szybko"],"default":"średnio"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+const speeds = { 'wolno': '5.6s', 'średnio': '4s', 'szybko': '2.8s' };
+return {
+accent: this.props.accent ?? '#2A62A6',
+dur: speeds[this.props.animSpeed ?? 'średnio'] ?? '4s'
+};
+}
+}
+</script>
+</body>
+</html>
