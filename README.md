@@ -15,7 +15,8 @@ Zagraj: otwórz `index.html` w przeglądarce albo włącz GitHub Pages dla tego 
 ## Pliki
 
 - `index.html` – gotowa gra (samodzielna strona, bez zależności poza fontami Google).
-- `geo-quiz/src/shell.html` – kod gry: style, ekrany, logika, baza pytań.
+- `geo-quiz/src/shell.html` – kod gry: style, ekrany, logika.
+- `geo-quiz/src/bank.js` – baza pytań i zasady losowania (poziomy, mniejsza powtarzalność).
 - `geo-quiz/design/` – projekt ekranów z canvasa (źródło pikselowych scen).
 - `geo-quiz/build.py` – skleja grę ze scenami z projektu: `python3 geo-quiz/build.py`.
 - `geo-quiz/dist/artifact.html` – ta sama gra w formie strony dla claude.ai.
