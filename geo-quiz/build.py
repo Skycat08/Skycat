@@ -5,6 +5,7 @@ Outputs:
   dist/artifact.html  - page body for a claude.ai artifact (no doctype/head)
   ../index.html       - standalone page for GitHub Pages
 """
+import base64
 import pathlib
 import re
 
@@ -39,7 +40,15 @@ def heart(outline, fill, shine):
 
 
 body = (ROOT / "src" / "shell.html").read_text(encoding="utf-8")
+digits = base64.b64encode((ROOT / "src" / "digits-silkscreen.woff2").read_bytes()).decode()
+NUMFONT = "".join(
+    f"@font-face{{font-family:'{name}';src:url(data:font/woff2;base64,{digits}) format('woff2');"
+    f"unicode-range:U+0030-0039;size-adjust:{adjust}%}}"
+    for name, adjust in (("GQNum", 110), ("GQNumD", 160))
+)
 parts = {
+    "/*NUMFONT*/": NUMFONT,
+    "/*BANK*/": (ROOT / "src" / "bank.js").read_text(encoding="utf-8"),
     "<!--MAIN_SVG-->": scene("Main.dc.html", '<svg width="336" height="180"'),
     "<!--DEFEAT_SVG-->": scene("Defeat.dc.html", '<svg width="336" height="252"'),
     "<!--VICTORY_SVG-->": scene("Victory.dc.html", '<svg width="336" height="252"'),

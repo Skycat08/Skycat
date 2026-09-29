@@ -3,13 +3,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
+/* Digits come from Silkscreen (clear 1/7 and 2/5); letters keep the pixel faces. */
+/*NUMFONT*/
 /* Layout: one phone-width column centred on a paper-map ground; each game screen is a section toggled with [hidden]. */
 :root {
   --paper: #F4E6C4; --card: #FFF6DE; --card-dim: #EFE0BD; --ink: #2B1D14; --muted: #6B5540;
   --blue: #2A62A6; --red: #B8341F; --gold: #F2B632; --gold-dk: #B7791F; --navy: #23408E;
   --ok-bg: #D3E3F6; --bad-bg: #F6D2C6; --night: #0A0A0A; --night-card: #17140F; --night-muted: #CFC6B0;
-  --display: 'Press Start 2P', 'Courier New', monospace;
-  --body: 'Pixelify Sans', 'Trebuchet MS', system-ui, sans-serif;
+  --display: 'GQNumD', 'Press Start 2P', 'Courier New', monospace;
+  --body: 'GQNum', 'Pixelify Sans', 'Trebuchet MS', system-ui, sans-serif;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
@@ -357,11 +359,49 @@ const BULB_BIG = '<svg class="pix" viewBox="0 0 8 9" aria-hidden="true"><path fi
 const SPK_ON = '<svg class="pix" width="22" height="22" viewBox="0 0 8 8" aria-hidden="true"><path fill="#2B1D14" d="M0 3h2v2H0z M2 2h1v4H2z M3 1h1v6H3z"></path><path fill="#2A62A6" d="M5 2h1v1H5z M6 3h1v2H6z M5 5h1v1H5z"></path></svg>';
 const SPK_OFF = '<svg class="pix" width="22" height="22" viewBox="0 0 8 8" aria-hidden="true"><path fill="#2B1D14" d="M0 3h2v2H0z M2 2h1v4H2z M3 1h1v6H3z"></path><path fill="#B8341F" d="M5 2h1v1H5z M7 2h1v1H7z M6 3h1v2H6z M5 5h1v1H5z M7 5h1v1H7z"></path></svg>';
 
-/* flags: 60x40 cloth drawn at x6 y4 inside a 70x48 box with a pole */
+/* flags: a W x 40 cloth (W = 60 unless the flag is square) drawn at x6 y4 next to a pole.
+   Shapes are rasterised row by row into 1-unit rects so every edge stays on the pixel grid. */
 const eq = (...c) => c.map((x) => [x, 1]);
+function rasterPoly(pts) {
+  const rows = [];
+  const ys = pts.map((p) => p[1]);
+  const y0 = Math.max(0, Math.floor(Math.min(...ys))), y1 = Math.min(40, Math.ceil(Math.max(...ys)));
+  for (let y = y0; y < y1; y++) {
+    const sy = y + 0.5, xs = [];
+    for (let i = 0; i < pts.length; i++) {
+      const [ax, ay] = pts[i], [bx, by] = pts[(i + 1) % pts.length];
+      if ((ay <= sy && by > sy) || (by <= sy && ay > sy)) xs.push(ax + (sy - ay) * (bx - ax) / (by - ay));
+    }
+    xs.sort((a, b) => a - b);
+    for (let i = 0; i + 1 < xs.length; i += 2) {
+      const a = Math.round(xs[i]), b = Math.round(xs[i + 1]);
+      if (b > a) rows.push([a, y, b - a]);
+    }
+  }
+  return rows;
+}
+function circlePts(cx, cy, r) { const p = []; for (let k = 0; k < 48; k++) { const t = k / 48 * Math.PI * 2; p.push([cx + r * Math.cos(t), cy + r * Math.sin(t)]); } return p; }
+function starPts(cx, cy, R, rot) {
+  const p = [], a0 = (rot === undefined ? -90 : rot) * Math.PI / 180;
+  for (let k = 0; k < 10; k++) { const r = k % 2 ? R * 0.4 : R, t = a0 + k * Math.PI / 5; p.push([cx + r * Math.cos(t), cy + r * Math.sin(t)]); }
+  return p;
+}
+function linePts(x1, y1, x2, y2, t) {
+  const dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy) || 1, nx = -dy / L * t / 2, ny = dx / L * t / 2;
+  return [[x1 + nx, y1 + ny], [x2 + nx, y2 + ny], [x2 - nx, y2 - ny], [x1 - nx, y1 - ny]];
+}
 function flagSVG(spec) {
-  const X = 6, Y = 4, W = 60, H = 40;
+  const X = 6, Y = 4, W = spec.w || 60, H = 40;
   let out = '';
+  /* one path per shape: separate 1-unit rects leave hairline seams when the flag is scaled */
+  const fillRows = (c, rows) => {
+    let d = '';
+    rows.forEach(([x, y, w]) => {
+      const x0 = Math.max(0, x), x1 = Math.min(W, x + w);
+      if (x1 > x0) d += `M${X + x0} ${Y + y}h${x1 - x0}v1h${x0 - x1}z`;
+    });
+    if (d) out += `<path fill="${c}" d="${d}"></path>`;
+  };
   const bands = (arr, vert) => {
     const tot = arr.reduce((a, b) => a + b[1], 0); const len = vert ? W : H; let p = 0;
     arr.forEach(([c, w], i) => {
@@ -377,105 +417,27 @@ function flagSVG(spec) {
   if (spec.cross) spec.cross.forEach(([c, w]) => {
     out += `<rect x="${X + 20 - w / 2}" y="${Y}" width="${w}" height="${H}" fill="${c}"></rect><rect x="${X}" y="${Y + 20 - w / 2}" width="${W}" height="${w}" fill="${c}"></rect>`;
   });
-  if (spec.circle) {
-    const [c, cx, cy, r] = spec.circle;
-    for (let y = cy - r; y < cy + r; y++) {
-      const dy = y + 0.5 - cy; const hw = Math.round(Math.sqrt(r * r - dy * dy));
-      if (hw > 0) out += `<rect x="${X + cx - hw}" y="${Y + y}" width="${hw * 2}" height="1" fill="${c}"></rect>`;
-    }
-  }
-  return `<svg class="pix" viewBox="0 0 70 48" role="img" aria-label="Flaga do rozpoznania"><path fill="#F2B632" d="M2 0h2v1H2z M1 1h4v1H1z M2 2h2v1H2z"></path><path fill="#8A5A33" d="M2 3h2v45H2z"></path><path fill="#2B1D14" d="M5 3h62v42H5z"></path>${out}</svg>`;
-}
-
-/* ---------- question bank ---------- */
-const FLAGS = [
-  ['Polska', 'easy', { h: eq('#FFFFFF', '#DC143C') }, ['Monako', 'Indonezja', 'Austria'], 'Warszawa', 'Biel i czerwień to barwy z herbu: biały orzeł na czerwonym polu.'],
-  ['Niemcy', 'easy', { h: eq('#000000', '#DD0000', '#FFCE00') }, ['Belgia', 'Austria', 'Litwa'], 'Berlin', ''],
-  ['Francja', 'easy', { v: eq('#0055A4', '#FFFFFF', '#EF4135') }, ['Holandia', 'Włochy', 'Rosja'], 'Paryż', 'Trikolor pochodzi z czasów rewolucji francuskiej.'],
-  ['Włochy', 'easy', { v: eq('#009246', '#FFFFFF', '#CE2B37') }, ['Irlandia', 'Meksyk', 'Węgry'], 'Rzym', ''],
-  ['Japonia', 'easy', { bg: '#FFFFFF', circle: ['#BC002D', 30, 20, 12] }, ['Bangladesz', 'Korea Południowa', 'Chiny'], 'Tokio', 'Flaga nazywa się Hinomaru, czyli „krąg słońca”.'],
-  ['Ukraina', 'easy', { h: eq('#0057B7', '#FFD700') }, ['Szwecja', 'Kazachstan', 'Rumunia'], 'Kijów', 'Niebo nad łanami zboża.'],
-  ['Szwecja', 'easy', { bg: '#006AA7', cross: [['#FECC00', 6]] }, ['Finlandia', 'Norwegia', 'Dania'], 'Sztokholm', ''],
-  ['Hiszpania', 'easy', { h: [['#AA151B', 1], ['#F1BF00', 2], ['#AA151B', 1]] }, ['Portugalia', 'Kolumbia', 'Andora'], 'Madryt', 'Flaga państwowa ma jeszcze herb, tu pokazana jest wersja bez niego.'],
-  ['Irlandia', 'normal', { v: eq('#169B62', '#FFFFFF', '#FF883E') }, ['Włochy', 'Wybrzeże Kości Słoniowej', 'Indie'], 'Dublin', 'Wybrzeże Kości Słoniowej ma te same kolory w odwrotnej kolejności.'],
-  ['Belgia', 'normal', { v: eq('#000000', '#FDDA24', '#EF3340') }, ['Niemcy', 'Rumunia', 'Czad'], 'Bruksela', 'Te same kolory co u Niemiec, tylko w pionie.'],
-  ['Holandia', 'normal', { h: eq('#AE1C28', '#FFFFFF', '#21468B') }, ['Francja', 'Rosja', 'Luksemburg'], 'Amsterdam', 'Luksemburg ma prawie taką samą flagę, z jaśniejszym błękitem.'],
-  ['Austria', 'normal', { h: eq('#C8102E', '#FFFFFF', '#C8102E') }, ['Łotwa', 'Polska', 'Peru'], 'Wiedeń', ''],
-  ['Rosja', 'normal', { h: eq('#FFFFFF', '#0039A6', '#D52B1E') }, ['Słowenia', 'Serbia', 'Holandia'], 'Moskwa', ''],
-  ['Finlandia', 'normal', { bg: '#FFFFFF', cross: [['#003580', 8]] }, ['Szwecja', 'Islandia', 'Grecja'], 'Helsinki', 'Śnieg i jeziora, stąd biel i błękit.'],
-  ['Norwegia', 'normal', { bg: '#BA0C2F', cross: [['#FFFFFF', 8], ['#00205B', 4]] }, ['Islandia', 'Dania', 'Wielka Brytania'], 'Oslo', ''],
-  ['Dania', 'normal', { bg: '#C8102E', cross: [['#FFFFFF', 6]] }, ['Szwajcaria', 'Norwegia', 'Anglia'], 'Kopenhaga', 'Dannebrog to jedna z najstarszych wciąż używanych flag państwowych.'],
-  ['Litwa', 'normal', { h: eq('#FDB913', '#006A44', '#C1272D') }, ['Boliwia', 'Ghana', 'Etiopia'], 'Wilno', ''],
-  ['Węgry', 'normal', { h: eq('#CE2939', '#FFFFFF', '#477050') }, ['Bułgaria', 'Włochy', 'Iran'], 'Budapeszt', ''],
-  ['Bangladesz', 'normal', { bg: '#006A4E', circle: ['#F42A41', 27, 20, 10] }, ['Japonia', 'Palau', 'Pakistan'], 'Dhaka', 'Czerwone koło jest lekko przesunięte w stronę masztu.'],
-  ['Estonia', 'normal', { h: eq('#0072CE', '#000000', '#FFFFFF') }, ['Łotwa', 'Finlandia', 'Botswana'], 'Tallinn', ''],
-  ['Mauritius', 'hard', { h: eq('#EA2839', '#1A206D', '#FFD500', '#00A551') }, ['Gabon', 'Madagaskar', 'Seszele'], 'Port Louis', 'Jedna z niewielu flag z czterema poziomymi pasami.'],
-  ['Gabon', 'hard', { h: eq('#009E60', '#FCD116', '#3A75C4') }, ['Sierra Leone', 'Rwanda', 'Mauritius'], 'Libreville', 'Zieleń lasu, żółć równika i błękit oceanu.'],
-  ['Sierra Leone', 'hard', { h: eq('#1EB53A', '#FFFFFF', '#0072C6') }, ['Gabon', 'Nigeria', 'Sudan'], 'Freetown', ''],
-  ['Kolumbia', 'hard', { h: [['#FCD116', 2], ['#003893', 1], ['#CE1126', 1]] }, ['Ekwador', 'Wenezuela', 'Hiszpania'], 'Bogota', 'Ekwador ma podobną flagę, ale z herbem pośrodku.'],
-  ['Łotwa', 'hard', { h: [['#9E3039', 2], ['#FFFFFF', 1], ['#9E3039', 2]] }, ['Austria', 'Polska', 'Liban'], 'Ryga', 'Ten ciemny karmin to tak zwana łotewska czerwień.'],
-  ['Nigeria', 'hard', { v: eq('#008751', '#FFFFFF', '#008751') }, ['Irlandia', 'Pakistan', 'Sierra Leone'], 'Abudża', ''],
-  ['Czad', 'hard', { v: eq('#002664', '#FECB00', '#C60C30') }, ['Rumunia', 'Andora', 'Mołdawia'], 'Ndżamena', 'Prawie identyczna z flagą Rumunii, różni się odcieniem niebieskiego.'],
-  ['Rumunia', 'hard', { v: eq('#002B7F', '#FCD116', '#CE1126') }, ['Czad', 'Belgia', 'Mołdawia'], 'Bukareszt', 'Prawie identyczna z flagą Czadu.'],
-  ['Bułgaria', 'hard', { h: eq('#FFFFFF', '#00966E', '#D62612') }, ['Węgry', 'Litwa', 'Tadżykistan'], 'Sofia', ''],
-  ['Armenia', 'hard', { h: eq('#D90012', '#0033A0', '#F2A800') }, ['Kolumbia', 'Litwa', 'Gruzja'], 'Erywań', ''],
-  ['Jemen', 'hard', { h: eq('#CE1126', '#FFFFFF', '#000000') }, ['Egipt', 'Syria', 'Irak'], 'Sana', 'Egipt, Syria i Irak mają te same pasy, ale z godłem lub gwiazdami.'],
-  ['Laos', 'hard', { h: [['#CE1126', 1], ['#002868', 2], ['#CE1126', 1]], circle: ['#FFFFFF', 30, 20, 8] }, ['Kambodża', 'Tajlandia', 'Kostaryka'], 'Wientian', 'Białe koło to księżyc nad Mekongiem.'],
-  ['Palau', 'hard', { bg: '#4AADD6', circle: ['#FFDE00', 26, 20, 10] }, ['Bangladesz', 'Japonia', 'Mikronezja'], 'Ngerulmud', 'Żółte koło to księżyc w pełni nad Pacyfikiem.'],
-  ['Gwinea', 'hard', { v: eq('#CE1126', '#FCD116', '#009460') }, ['Mali', 'Senegal', 'Kamerun'], 'Konakry', 'Flaga Mali ma te same kolory w odwrotnej kolejności.'],
-  ['Mali', 'hard', { v: eq('#14B53A', '#FCD116', '#CE1126') }, ['Gwinea', 'Senegal', 'Etiopia'], 'Bamako', ''],
-  ['Boliwia', 'hard', { h: eq('#D52B1E', '#F9E300', '#007934') }, ['Litwa', 'Ghana', 'Gwinea'], 'Sucre (siedziba rządu: La Paz)', '']
-].map(([name, level, spec, wrong, capital, note]) => ({
-  kind: 'flag', level, spec, text: 'Do jakiego kraju należy ta flaga?', a: name, wrong,
-  fact: `To flaga: ${name}. Stolica: ${capital}.${note ? ' ' + note : ''}`
-}));
-
-const FACTS = [
-  ['easy', 'Która rzeka jest najdłuższa w Europie?', 'Wołga', ['Dunaj', 'Ren', 'Dniepr'], 'Wołga ma ok. 3 530 km i uchodzi do Morza Kaspijskiego. Dunaj jest drugi, ok. 2 850 km.'],
-  ['easy', 'Który ocean jest największy?', 'Spokojny', ['Atlantycki', 'Indyjski', 'Arktyczny'], 'Ocean Spokojny zajmuje mniej więcej jedną trzecią powierzchni Ziemi.'],
-  ['easy', 'Który szczyt jest najwyższy na świecie?', 'Mount Everest', ['K2', 'Kangczendzonga', 'Mont Blanc'], 'Everest ma 8 849 m n.p.m. K2 jest drugi, ma 8 611 m.'],
-  ['easy', 'Jak nazywa się stolica Australii?', 'Canberra', ['Sydney', 'Melbourne', 'Perth'], 'Canberrę zbudowano od zera jako kompromis między rywalizującymi Sydney i Melbourne.'],
-  ['easy', 'Na którym kontynencie leży większość Egiptu?', 'Afryka', ['Azja', 'Europa', 'Australia'], 'Tylko Półwysep Synaj leży w Azji, reszta kraju jest w Afryce.'],
-  ['easy', 'Która pustynia jest największą gorącą pustynią świata?', 'Sahara', ['Gobi', 'Kalahari', 'Atakama'], 'Sahara ma ok. 9 mln km². Największą pustynią w ogóle jest lodowa Antarktyda.'],
-  ['easy', 'Jaki jest najwyższy szczyt Polski?', 'Rysy', ['Śnieżka', 'Babia Góra', 'Giewont'], 'Polski wierzchołek Rysów ma 2 499 m n.p.m. Najwyższy wierzchołek, 2 503 m, leży po stronie słowackiej.'],
-  ['normal', 'Które państwo jest najmniejsze na świecie?', 'Watykan', ['Monako', 'San Marino', 'Liechtenstein'], 'Watykan ma ok. 0,44 km², mniej niż wiele parków miejskich.'],
-  ['normal', 'Ile państw ma dostęp do Morza Kaspijskiego?', '5', ['3', '4', '6'], 'Rosja, Kazachstan, Turkmenistan, Iran i Azerbejdżan.'],
-  ['normal', 'Które jezioro jest najgłębsze na świecie?', 'Bajkał', ['Tanganika', 'Titicaca', 'Wiktorii'], 'Bajkał ma ok. 1 640 m głębokości i mieści ok. 20% niezamarzniętej słodkiej wody na Ziemi.'],
-  ['normal', 'Który kraj ma najwięcej mieszkańców?', 'Indie', ['Chiny', 'USA', 'Indonezja'], 'Według szacunków ONZ Indie wyprzedziły Chiny w 2023 roku.'],
-  ['normal', 'Przez które miasto przepływa Tamiza?', 'Londyn', ['Dublin', 'Edynburg', 'Manchester'], 'Tamiza ma ok. 346 km i uchodzi do Morza Północnego.'],
-  ['normal', 'W jakim kraju leży Machu Picchu?', 'Peru', ['Boliwia', 'Chile', 'Ekwador'], 'Miasto Inków leży w Andach na wysokości ok. 2 430 m.'],
-  ['normal', 'Który kraj ma najdłuższą linię brzegową?', 'Kanada', ['Rosja', 'Australia', 'Norwegia'], 'Wybrzeże Kanady ma ponad 200 tys. km, głównie dzięki tysiącom wysp.'],
-  ['normal', 'Jaka rzeka jest najdłuższa w Afryce?', 'Nil', ['Kongo', 'Niger', 'Zambezi'], 'Nil ma ok. 6 650 km i płynie przez 11 krajów.'],
-  ['normal', 'Która cieśnina oddziela Europę od Afryki?', 'Gibraltarska', ['Bosfor', 'Kaletańska', 'Mesyńska'], 'W najwęższym miejscu ma tylko ok. 14 km.'],
-  ['normal', 'W jakim kraju jest najwyższy wodospad świata, Salto Angel?', 'Wenezuela', ['Brazylia', 'Kanada', 'Zambia'], 'Salto Angel spada z wysokości 979 m.'],
-  ['hard', 'Jak nazywa się stolica Kazachstanu?', 'Astana', ['Ałmaty', 'Biszkek', 'Taszkent'], 'Stolicę przeniesiono z Ałmaty w 1997 roku. W latach 2019–2022 miasto nazywało się Nur-Sułtan.'],
-  ['hard', 'Która pustynia jest najsuchszą niepolarną pustynią świata?', 'Atakama', ['Sahara', 'Namib', 'Gobi'], 'W niektórych miejscach Atakamy nigdy nie zanotowano deszczu.'],
-  ['hard', 'Który kraj ma najwięcej stref czasowych, licząc terytoria zamorskie?', 'Francja', ['Rosja', 'USA', 'Wielka Brytania'], 'Francja ma 12 stref czasowych dzięki terytoriom rozsianym po całym świecie.'],
-  ['hard', 'Która stolica (siedziba rządu) leży najwyżej na świecie?', 'La Paz', ['Quito', 'Bogota', 'Katmandu'], 'La Paz leży na ok. 3 600 m n.p.m. Konstytucyjną stolicą Boliwii jest Sucre.'],
-  ['hard', 'Który z tych krajów nie ma dostępu do morza?', 'Paragwaj', ['Urugwaj', 'Ekwador', 'Gujana'], 'Mimo to Paragwaj ma marynarkę wojenną, która pływa po rzekach.'],
-  ['hard', 'Na granicy jakich krajów leży jezioro Titicaca?', 'Peru i Boliwia', ['Chile i Argentyna', 'Peru i Ekwador', 'Boliwia i Chile'], 'To najwyżej położone żeglowne jezioro świata, ok. 3 810 m n.p.m.'],
-  ['hard', 'Ile państw leży w Afryce (członków ONZ)?', '54', ['48', '50', '58'], 'Najmłodszy z nich to Sudan Południowy, niepodległy od 2011 roku.']
-].map(([level, text, a, wrong, fact]) => ({ kind: 'fact', level, text, a, wrong, fact }));
-
-const shuffle = (arr) => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const PREF = { chill: ['easy', 'normal'], normal: null, hard: ['hard', 'normal'] };
-function pick(pool, level, n) {
-  const order = PREF[level];
-  if (!order) return shuffle(pool).slice(0, n);
-  let out = [];
-  order.forEach((lv) => { if (out.length < n) out = out.concat(shuffle(pool.filter((q) => q.level === lv)).slice(0, n - out.length)); });
-  return out;
-}
-function buildRound(cat, level) {
-  let qs;
-  if (cat === 'flags') qs = pick(FLAGS, level, 10);
-  else if (cat === 'facts') qs = pick(FACTS, level, 10);
-  else qs = pick(FLAGS, level, 5).concat(pick(FACTS, level, 5));
-  return shuffle(qs).map((q) => {
-    const answers = shuffle([q.a].concat(q.wrong));
-    return Object.assign({}, q, { answers, correct: answers.indexOf(q.a) });
+  const shapes = (spec.shapes || []).slice();
+  if (spec.circle) shapes.unshift(['circle'].concat(spec.circle));
+  shapes.forEach(([kind, c, ...a]) => {
+    if (kind === 'rect') out += `<rect x="${X + a[0]}" y="${Y + a[1]}" width="${a[2]}" height="${a[3]}" fill="${c}"></rect>`;
+    else if (kind === 'poly') fillRows(c, rasterPoly(a[0]));
+    else if (kind === 'circle') fillRows(c, rasterPoly(circlePts(a[0], a[1], a[2])));
+    else if (kind === 'star') fillRows(c, rasterPoly(starPts(a[0], a[1], a[2], a[3])));
+    else if (kind === 'line') fillRows(c, rasterPoly(linePts(a[0], a[1], a[2], a[3], a[4])));
   });
+  return `<svg class="pix" viewBox="0 0 ${W + 10} 48" role="img" aria-label="Flaga do rozpoznania"><path fill="#F2B632" d="M2 0h2v1H2z M1 1h4v1H1z M2 2h2v1H2z"></path><path fill="#8A5A33" d="M2 3h2v45H2z"></path><path fill="#2B1D14" d="M5 3h${W + 2}v42H5z"></path>${out}</svg>`;
 }
+const usStars = () => {
+  const s = [];
+  for (let r = 0; r < 9; r++) {
+    const n = r % 2 ? 5 : 6, off = r % 2 ? 4 : 2;
+    for (let k = 0; k < n; k++) s.push(['rect', '#FFFFFF', off + k * 4, 1 + r * 2.4 | 0, 1, 1]);
+  }
+  return s;
+};
+
+/*BANK*/
 
 /* ---------- sound (8-bit, generated) ---------- */
 let muted = store.get('gq-mute', '0') === '1';

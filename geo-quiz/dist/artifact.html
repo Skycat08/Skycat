@@ -3,13 +3,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
+/* Digits come from Silkscreen (clear 1/7 and 2/5); letters keep the pixel faces. */
+@font-face{font-family:'GQNum';src:url(data:font/woff2;base64,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) format('woff2');unicode-range:U+0030-0039;size-adjust:110%}@font-face{font-family:'GQNumD';src:url(data:font/woff2;base64,d09GMgABAAAAAAxMABAAAAAAGaQAAAvyAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGx4cHgZgADwIUgmcDBEICopwiWoLGgABNgIkAzAEIAWERgcgDIEyG+kXERWtHyLTSFk4fz//KWfZL1l2IyYKfKVG3l6r5AHyzHioyrIzGdKwKlhquzsLFMRlLZ6OTw7h4bh7udF1T2h4/t/uv/a5dVV6aInVEF9/1m9+qAc15MoVhEYmrZzRRFKNfL611M5M2CVVzKrC9EW4Onf5c5tmILQXBFIlVggKaC+lICmqqlGkAK0rBMQ2OVDfLqZ8iC8S5caaaiSIaJYe6L1C9PpXbtM0+dQxJ5NNexQv971vxZ+pTuSVXk4YXRb3Fk/TEfo3zQPeRT1rxXDfcefa5Wv0LTGd8huTBo7a30yZSBb/8r4cRDPVOtTDTqz3lMDHpx3aiBHkhebxqMt0aDKZ/HPy10nb5+Kt7uZ/0zl630K8Qk95zxF5z20gmpzCaNtL8Z6jt8RqkOJFuZOnlvnyp7R44zIatx7PcSzAjnX7XN7J4UXFZ9PEogyHcjcIQ5AFGdkbkyDjdAKhwG4/gadk6HzUBDXFow9q6xukDdYMO6crb93oKqoZeOb2q4x5Cc+YYgQ/e3XseZ5xGuHeA2HAwsaLG0I/wPCM1OM1sWaclqAs37PjTWFklcBXqMXYMHlU6dg0RvoRAh4xvs3gNx8f74gFkw5TNNI8RC2yN5/IQxkGZc7IsjzEBRswOoe8jrVcGZYvRtjJ8tAXwzikkoeMyLcD8j6XZcGYzXIXMDhYzh7YCXJiIs5aG8CLMG+GoJs56LJmVoh5E8AeKvnQ5eLTZRoqh/m0TrvWjgoLEVsbe2JXEJtGapugrjhl+FExYkyZLMeU1JiWOghDC+ESNLLaArWYR9XUrmYJkqqDZ8emOjyXDlFvhd78DZdcQsTVoXoEv3kjd1lQ3LS5tKFlXLiVd2SQJ8Zz9JdgSmHGxGPyiphML2hGaskgqQt4u/sQQwiHqVaCGcUxrbFohp/6tMuhU3DBWbnD9dy3zarxzCKZVLfCSnOUOVWJ9LyFgUQsQQZ+5DgtZVGgPKNNCgqjEBzgQmaVQS2SRe/+fVm4NQUHsrzX64UbHIsqMcv2wcI81dIsDwMZ2laYYElVnpdiVPQSLCsIx4wl89jNNRhLUlss++hNtVxWZMWB5QwZG3/q07CUBVaM49IxVqSWTH1VXb6dV/6oZw9gYU++mmBNXb6RX751JTQIBy5ru6+rilbNHYvVVQNRaKzEr1sJeJGultZ02QpiUzJqUZZXWVcSfqTLkh9ZcbkVSojipAMV9B1edPESiyUzwLIZOKeFgmpL8Q1aEa3JHoQBnRsLIUbLtqGoIi+9nWNVak6xKDUWJDyn2X2yvS1ohdZIa516sr4QiKJan47xuzh4xCbYVBVtxAm2VCV2ZJt55D5WI/cznwSsTh5gDfIgmyIPsWnyMJtJiJXMe0s03OXbueQ2xFPvlNMTKInHputzhyYeTdfnHxkrwlKcxjSI4qMBaJY2GlKmj2AnJEAcAIgIIJoA8R2A2AGI7wJEC5DaVtytrOSghcO2YyMhXH0QhWuiXV9/mkMKB2McbCU4rJgHXJIpsujID/W2K2WQ8qAjxZtSLTbS2uYMh1tVXWyk+SGbwq5Hs6ZN6tRjio/HOv64InpJozs3RBwPBMXS5odfWzV652SnOiY20vlITiju8iDuvxLIFJ0EJ1V7q5ugozcBCDPsJDilKo82I27z4ONgIHjRpbIcyIEsON8NGtxxSD3uCLGx3kpwWoE2sdXP9SP4kc67q3nSmDPxXtmWzN2y4/hyxsFtUcBoSG0Yw3DNyYAXbuQf+Fzn4AO/Wb/f6kY2d9ZwKY0fUPYdGuZVla6hs38hTcw3biRRN8Uoy+GbIkDduEauRfOBC8kMvyn7RSeQmDX9LyvHrIngmI47UpIj0TCuIG5cjwrULcbAbz4Bi9JrkRs1ok2iybAJuvlwADOj3qwku50EZ687MKsK6IMHogSDz2UfEmLP5dqg23mbuzL8qjWuSI6TUQz3QyNCPbr0s8VegK3WdKOkpKzuXc/HIsgUlXTfblpMrn/x5lxQkts5+I/72DJ5Fty0OXdtuzok1uMEFxWH3wyy3nW4NhvfslE4HT+sZk/hTFwyd+vXcZYdvWJomDYOeSpNLuqmbuZ6XoF5qZONyllecpfbsmO7Yl9Vs36k9TuyOv8XgxqM9KAJu7YrO0FYV8JDG0cySKDTcY7Ue1RVdCYOpTBSciT59JLeeOXNMb27n8paGydaCR4LmtBlVZFYX8PJVoIrCqdaCa7mYMNUcpv7pSxyyrymKvNLcTVOcF2Nifqxk5OpMYk9uaHEhbgJR95S0wG7DVfeAci7gKh76gNCyXS9c/UBPxCrxaV4HDvyCRMm2JPclU/BkU/Dkc9ER1PmMJQFQO4C5FBNH2UjIPcAch+gno0T7bl8DyP1fYD6AUD9EKB+BFA/BqifAAp/qirqFp76mS8UF/quz9GL8vkM5zOq019QlVDrF6fA5SU3QV6OpLMW1Ss+jn51CvRrQJe8Hiik+g0X6DcB5K1IOmdLve3j6HemQL8LoO8ZUv2+C/TPAeQXkXTelvqlj6N/NQX61wD6G0Oqf+sCXQJSf6fGcz9qZ45GMPa9WprLMAit1TGm91A7kL36SV07IUFiMqGlr1k1v6HbYrNHPw38y29P4jupzZNH3CmE4M+r/+nDKtA60ZHX1ntdSXRNV4ZpXdOxSfXxOIhiiYJYYmIV4feOg6h/FZNLIikxF2QVnE5ijkpkXIILkpKGVQhCgxZJgpQEhb9lFV3AOhMb3IqMgjDhK7sS5J+OJVJGQVGwVkFDFt2D3X/dXAwWc8qiGCyKTdm/bi+vlsuLixq/FsXMXwaKwbNaxcDNRVkM/KUT/GCA181/+fXM4pf75B4ZLMvBKYRZzhaXDf5aDCqDsgfZR/xhqb3l1vIsdrD4NYzuuI55k8Mn/HVT2VteLXvLAzca8UWg3Fp00dlMhI2xBDlKRJ1AKWloESUHnBRnjS7QFa0bO3JutiQQ0YIRcpxTDZQavg9rTcOLMSPMfqhW0syX9Xn90I2dm01DRO+VgYBuGNF6hO6mEBLqpFo3Zu6f4gVkC7HGOduDCiXQKsjRkRirTZuKKY3GdsB9OOcvxOL9CL9/bLbI+IoY627rLuOpbEKSeA9JPanXqpXUxz6OQhyuXq8nbvTc7CAqksDY+RaDtkbn2Fict86etfdhI5EwHBHur9X6NWtDa0OH1H3Vp7/JhKUhMzQ1jWAVHYHcWsKJtSPsaFVKWqNe927c3Gz9v0DldUCO9klAWdiZnbWuEYpzI9z+JIGkmlQraU6ziGyasUZOoAm9DnOMFZwhJwjKKs9714gs2Dho6JB6jSpVG/GxG18Mu09HK1E6VzDIM5DAKwhshNtG3OPGZjNMTkBu6579VFZN5wL2GgmsKAlUTkSaRGnuRLwQVi7vONZeWtuICxuVXB4Jxo4ZPWrkiOHDGMrQ+jym6iYmG/ex8S6PWC+5kQBLYJ2IMByeAMDb1AYSNn/MYzc0qut+89XgO2ftq6PKqpMv333S/L/tf6vbgpRttYOxpnXvsfW3/2/791Hd1jankrY1/X37Gt+1dRUmv9orRcI0DMUV8zjNw5h3V5pZKGI87ZN6OgSekwWnHcIwGbNDUZFkR8AavtihmcZTOwxHOb3DMo0VotJ7P3TQRx9d9LKGhSzsVW+hh4t00TfxWUCvuMJgnfSQs5ADbGcvRwICLxtWb6ONa8znsFs8p58rNCGOe6on7Ks7ucYkFrOARSzyYtcyKcLsdprop3gnHVzkmsidxCwGjLJXsYBl46+/kvksp5XlNDM7St8mNYvi2R9jP3vYz9rYtuBr1bj0Fjrp4obcUXm+xU9iSURPZxJH6aCNSTF0dpAeOrlEGy1h1KZ0q45cVb3jFsshNuei0lk/zSyghU6uBkR30unmXqGN9nxFKbktbCFCNbvF2W9w0/8fZwnz/ve8wnuHTz4r8sipZ+RXk1XXs7jNzzNBMedQ9sWpuh6pSKybqcbaV4WbXw/Rt6GIBYnXkfGOfDU6q63PTpP7Dp18Jrvv5IS0sllxr3i6Jdh6auyzM8UbXvO3ITq7r+XoVcwX8OJ0NdyqypxX5P+7n9EPP6vY+rxptWzdCgAAAA==) format('woff2');unicode-range:U+0030-0039;size-adjust:160%}
 /* Layout: one phone-width column centred on a paper-map ground; each game screen is a section toggled with [hidden]. */
 :root {
   --paper: #F4E6C4; --card: #FFF6DE; --card-dim: #EFE0BD; --ink: #2B1D14; --muted: #6B5540;
   --blue: #2A62A6; --red: #B8341F; --gold: #F2B632; --gold-dk: #B7791F; --navy: #23408E;
   --ok-bg: #D3E3F6; --bad-bg: #F6D2C6; --night: #0A0A0A; --night-card: #17140F; --night-muted: #CFC6B0;
-  --display: 'Press Start 2P', 'Courier New', monospace;
-  --body: 'Pixelify Sans', 'Trebuchet MS', system-ui, sans-serif;
+  --display: 'GQNumD', 'Press Start 2P', 'Courier New', monospace;
+  --body: 'GQNum', 'Pixelify Sans', 'Trebuchet MS', system-ui, sans-serif;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
@@ -1008,11 +1010,49 @@ const BULB_BIG = '<svg class="pix" viewBox="0 0 8 9" aria-hidden="true"><path fi
 const SPK_ON = '<svg class="pix" width="22" height="22" viewBox="0 0 8 8" aria-hidden="true"><path fill="#2B1D14" d="M0 3h2v2H0z M2 2h1v4H2z M3 1h1v6H3z"></path><path fill="#2A62A6" d="M5 2h1v1H5z M6 3h1v2H6z M5 5h1v1H5z"></path></svg>';
 const SPK_OFF = '<svg class="pix" width="22" height="22" viewBox="0 0 8 8" aria-hidden="true"><path fill="#2B1D14" d="M0 3h2v2H0z M2 2h1v4H2z M3 1h1v6H3z"></path><path fill="#B8341F" d="M5 2h1v1H5z M7 2h1v1H7z M6 3h1v2H6z M5 5h1v1H5z M7 5h1v1H7z"></path></svg>';
 
-/* flags: 60x40 cloth drawn at x6 y4 inside a 70x48 box with a pole */
+/* flags: a W x 40 cloth (W = 60 unless the flag is square) drawn at x6 y4 next to a pole.
+   Shapes are rasterised row by row into 1-unit rects so every edge stays on the pixel grid. */
 const eq = (...c) => c.map((x) => [x, 1]);
+function rasterPoly(pts) {
+  const rows = [];
+  const ys = pts.map((p) => p[1]);
+  const y0 = Math.max(0, Math.floor(Math.min(...ys))), y1 = Math.min(40, Math.ceil(Math.max(...ys)));
+  for (let y = y0; y < y1; y++) {
+    const sy = y + 0.5, xs = [];
+    for (let i = 0; i < pts.length; i++) {
+      const [ax, ay] = pts[i], [bx, by] = pts[(i + 1) % pts.length];
+      if ((ay <= sy && by > sy) || (by <= sy && ay > sy)) xs.push(ax + (sy - ay) * (bx - ax) / (by - ay));
+    }
+    xs.sort((a, b) => a - b);
+    for (let i = 0; i + 1 < xs.length; i += 2) {
+      const a = Math.round(xs[i]), b = Math.round(xs[i + 1]);
+      if (b > a) rows.push([a, y, b - a]);
+    }
+  }
+  return rows;
+}
+function circlePts(cx, cy, r) { const p = []; for (let k = 0; k < 48; k++) { const t = k / 48 * Math.PI * 2; p.push([cx + r * Math.cos(t), cy + r * Math.sin(t)]); } return p; }
+function starPts(cx, cy, R, rot) {
+  const p = [], a0 = (rot === undefined ? -90 : rot) * Math.PI / 180;
+  for (let k = 0; k < 10; k++) { const r = k % 2 ? R * 0.4 : R, t = a0 + k * Math.PI / 5; p.push([cx + r * Math.cos(t), cy + r * Math.sin(t)]); }
+  return p;
+}
+function linePts(x1, y1, x2, y2, t) {
+  const dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy) || 1, nx = -dy / L * t / 2, ny = dx / L * t / 2;
+  return [[x1 + nx, y1 + ny], [x2 + nx, y2 + ny], [x2 - nx, y2 - ny], [x1 - nx, y1 - ny]];
+}
 function flagSVG(spec) {
-  const X = 6, Y = 4, W = 60, H = 40;
+  const X = 6, Y = 4, W = spec.w || 60, H = 40;
   let out = '';
+  /* one path per shape: separate 1-unit rects leave hairline seams when the flag is scaled */
+  const fillRows = (c, rows) => {
+    let d = '';
+    rows.forEach(([x, y, w]) => {
+      const x0 = Math.max(0, x), x1 = Math.min(W, x + w);
+      if (x1 > x0) d += `M${X + x0} ${Y + y}h${x1 - x0}v1h${x0 - x1}z`;
+    });
+    if (d) out += `<path fill="${c}" d="${d}"></path>`;
+  };
   const bands = (arr, vert) => {
     const tot = arr.reduce((a, b) => a + b[1], 0); const len = vert ? W : H; let p = 0;
     arr.forEach(([c, w], i) => {
@@ -1028,18 +1068,32 @@ function flagSVG(spec) {
   if (spec.cross) spec.cross.forEach(([c, w]) => {
     out += `<rect x="${X + 20 - w / 2}" y="${Y}" width="${w}" height="${H}" fill="${c}"></rect><rect x="${X}" y="${Y + 20 - w / 2}" width="${W}" height="${w}" fill="${c}"></rect>`;
   });
-  if (spec.circle) {
-    const [c, cx, cy, r] = spec.circle;
-    for (let y = cy - r; y < cy + r; y++) {
-      const dy = y + 0.5 - cy; const hw = Math.round(Math.sqrt(r * r - dy * dy));
-      if (hw > 0) out += `<rect x="${X + cx - hw}" y="${Y + y}" width="${hw * 2}" height="1" fill="${c}"></rect>`;
-    }
-  }
-  return `<svg class="pix" viewBox="0 0 70 48" role="img" aria-label="Flaga do rozpoznania"><path fill="#F2B632" d="M2 0h2v1H2z M1 1h4v1H1z M2 2h2v1H2z"></path><path fill="#8A5A33" d="M2 3h2v45H2z"></path><path fill="#2B1D14" d="M5 3h62v42H5z"></path>${out}</svg>`;
+  const shapes = (spec.shapes || []).slice();
+  if (spec.circle) shapes.unshift(['circle'].concat(spec.circle));
+  shapes.forEach(([kind, c, ...a]) => {
+    if (kind === 'rect') out += `<rect x="${X + a[0]}" y="${Y + a[1]}" width="${a[2]}" height="${a[3]}" fill="${c}"></rect>`;
+    else if (kind === 'poly') fillRows(c, rasterPoly(a[0]));
+    else if (kind === 'circle') fillRows(c, rasterPoly(circlePts(a[0], a[1], a[2])));
+    else if (kind === 'star') fillRows(c, rasterPoly(starPts(a[0], a[1], a[2], a[3])));
+    else if (kind === 'line') fillRows(c, rasterPoly(linePts(a[0], a[1], a[2], a[3], a[4])));
+  });
+  return `<svg class="pix" viewBox="0 0 ${W + 10} 48" role="img" aria-label="Flaga do rozpoznania"><path fill="#F2B632" d="M2 0h2v1H2z M1 1h4v1H1z M2 2h2v1H2z"></path><path fill="#8A5A33" d="M2 3h2v45H2z"></path><path fill="#2B1D14" d="M5 3h${W + 2}v42H5z"></path>${out}</svg>`;
 }
+const usStars = () => {
+  const s = [];
+  for (let r = 0; r < 9; r++) {
+    const n = r % 2 ? 5 : 6, off = r % 2 ? 4 : 2;
+    for (let k = 0; k < n; k++) s.push(['rect', '#FFFFFF', off + k * 4, 1 + r * 2.4 | 0, 1, 1]);
+  }
+  return s;
+};
 
-/* ---------- question bank ---------- */
+/* ---------- question bank ----------
+   Levels: 'easy' (Chill), 'normal', 'hard' (Hardkor).
+   A question may appear one level above its own, never below it
+   and never two levels up (see ALLOWED). */
 const FLAGS = [
+  /* easy */
   ['Polska', 'easy', { h: eq('#FFFFFF', '#DC143C') }, ['Monako', 'Indonezja', 'Austria'], 'Warszawa', 'Biel i czerwień to barwy z herbu: biały orzeł na czerwonym polu.'],
   ['Niemcy', 'easy', { h: eq('#000000', '#DD0000', '#FFCE00') }, ['Belgia', 'Austria', 'Litwa'], 'Berlin', ''],
   ['Francja', 'easy', { v: eq('#0055A4', '#FFFFFF', '#EF4135') }, ['Holandia', 'Włochy', 'Rosja'], 'Paryż', 'Trikolor pochodzi z czasów rewolucji francuskiej.'],
@@ -1048,40 +1102,78 @@ const FLAGS = [
   ['Ukraina', 'easy', { h: eq('#0057B7', '#FFD700') }, ['Szwecja', 'Kazachstan', 'Rumunia'], 'Kijów', 'Niebo nad łanami zboża.'],
   ['Szwecja', 'easy', { bg: '#006AA7', cross: [['#FECC00', 6]] }, ['Finlandia', 'Norwegia', 'Dania'], 'Sztokholm', ''],
   ['Hiszpania', 'easy', { h: [['#AA151B', 1], ['#F1BF00', 2], ['#AA151B', 1]] }, ['Portugalia', 'Kolumbia', 'Andora'], 'Madryt', 'Flaga państwowa ma jeszcze herb, tu pokazana jest wersja bez niego.'],
+  ['Wielka Brytania', 'easy', { bg: '#012169', shapes: [
+    ['poly', '#FFFFFF', [[0, 0], [6, 0], [60, 36], [60, 40], [54, 40], [0, 4]]],
+    ['poly', '#FFFFFF', [[60, 0], [60, 4], [6, 40], [0, 40], [0, 36], [54, 0]]],
+    ['line', '#C8102E', 0, 0, 60, 40, 2], ['line', '#C8102E', 60, 0, 0, 40, 2],
+    ['rect', '#FFFFFF', 0, 15, 60, 10], ['rect', '#FFFFFF', 25, 0, 10, 40],
+    ['rect', '#C8102E', 0, 17, 60, 6], ['rect', '#C8102E', 27, 0, 6, 40]] }, ['Australia', 'Nowa Zelandia', 'Norwegia'], 'Londyn', 'Union Jack łączy krzyże Anglii, Szkocji i Irlandii.'],
+  ['Szwajcaria', 'easy', { w: 40, bg: '#DA291C', shapes: [['rect', '#FFFFFF', 16, 8, 8, 24], ['rect', '#FFFFFF', 8, 16, 24, 8]] }, ['Dania', 'Gruzja', 'Austria'], 'Berno', 'To jedna z dwóch kwadratowych flag państwowych, obok flagi Watykanu.'],
+  ['Grecja', 'easy', { h: eq('#0D5EAF', '#FFFFFF', '#0D5EAF', '#FFFFFF', '#0D5EAF', '#FFFFFF', '#0D5EAF', '#FFFFFF', '#0D5EAF'), shapes: [
+    ['rect', '#0D5EAF', 0, 0, 22, 22], ['rect', '#FFFFFF', 9, 0, 4, 22], ['rect', '#FFFFFF', 0, 9, 22, 4]] }, ['Urugwaj', 'Finlandia', 'Izrael'], 'Ateny', 'Dziewięć pasów to podobno dziewięć sylab greckiego hasła „Wolność albo śmierć”.'],
+  ['Czechy', 'easy', { h: eq('#FFFFFF', '#D7141A'), shapes: [['poly', '#11457E', [[0, 0], [30, 20], [0, 40]]]] }, ['Słowacja', 'Filipiny', 'Polska'], 'Praga', 'Słowacja ma te same kolory, ale w poziomych pasach i z herbem.'],
+  ['Turcja', 'easy', { bg: '#E30A17', shapes: [['circle', '#FFFFFF', 21, 20, 10], ['circle', '#E30A17', 23.5, 20, 8], ['star', '#FFFFFF', 35, 20, 5.5, 180]] }, ['Tunezja', 'Pakistan', 'Azerbejdżan'], 'Ankara', 'Półksiężyc i gwiazda były symbolem już w czasach Imperium Osmańskiego.'],
+  ['Stany Zjednoczone', 'easy', { h: eq('#B22234', '#FFFFFF', '#B22234', '#FFFFFF', '#B22234', '#FFFFFF', '#B22234', '#FFFFFF', '#B22234', '#FFFFFF', '#B22234', '#FFFFFF', '#B22234'),
+    shapes: [['rect', '#3C3B6E', 0, 0, 24, 22]].concat(usStars()) }, ['Liberia', 'Kuba', 'Wielka Brytania'], 'Waszyngton', '50 gwiazd to 50 stanów, a 13 pasów to 13 pierwszych kolonii.'],
+  ['Chiny', 'easy', { bg: '#EE1C25', shapes: [['star', '#FFFF00', 10, 10, 6.5], ['star', '#FFFF00', 20, 4, 2.2], ['star', '#FFFF00', 24, 8, 2.2], ['star', '#FFFF00', 24, 14, 2.2], ['star', '#FFFF00', 20, 18, 2.2]] }, ['Wietnam', 'Kirgistan', 'Maroko'], 'Pekin', 'Duża gwiazda oznacza partię, a cztery małe klasy społeczne.'],
+  /* normal */
   ['Irlandia', 'normal', { v: eq('#169B62', '#FFFFFF', '#FF883E') }, ['Włochy', 'Wybrzeże Kości Słoniowej', 'Indie'], 'Dublin', 'Wybrzeże Kości Słoniowej ma te same kolory w odwrotnej kolejności.'],
-  ['Belgia', 'normal', { v: eq('#000000', '#FDDA24', '#EF3340') }, ['Niemcy', 'Rumunia', 'Czad'], 'Bruksela', 'Te same kolory co u Niemiec, tylko w pionie.'],
-  ['Holandia', 'normal', { h: eq('#AE1C28', '#FFFFFF', '#21468B') }, ['Francja', 'Rosja', 'Luksemburg'], 'Amsterdam', 'Luksemburg ma prawie taką samą flagę, z jaśniejszym błękitem.'],
+  ['Belgia', 'normal', { v: eq('#000000', '#FDDA24', '#EF3340') }, ['Niemcy', 'Rumunia', 'Czad'], 'Bruksela', 'Kolory są podobne do niemieckich, tylko ułożone w pionie.'],
+  ['Holandia', 'normal', { h: eq('#AE1C28', '#FFFFFF', '#21468B') }, ['Francja', 'Rosja', 'Jemen'], 'Amsterdam', 'Luksemburg ma prawie taką samą flagę, z jaśniejszym błękitem.'],
   ['Austria', 'normal', { h: eq('#C8102E', '#FFFFFF', '#C8102E') }, ['Łotwa', 'Polska', 'Peru'], 'Wiedeń', ''],
   ['Rosja', 'normal', { h: eq('#FFFFFF', '#0039A6', '#D52B1E') }, ['Słowenia', 'Serbia', 'Holandia'], 'Moskwa', ''],
   ['Finlandia', 'normal', { bg: '#FFFFFF', cross: [['#003580', 8]] }, ['Szwecja', 'Islandia', 'Grecja'], 'Helsinki', 'Śnieg i jeziora, stąd biel i błękit.'],
   ['Norwegia', 'normal', { bg: '#BA0C2F', cross: [['#FFFFFF', 8], ['#00205B', 4]] }, ['Islandia', 'Dania', 'Wielka Brytania'], 'Oslo', ''],
-  ['Dania', 'normal', { bg: '#C8102E', cross: [['#FFFFFF', 6]] }, ['Szwajcaria', 'Norwegia', 'Anglia'], 'Kopenhaga', 'Dannebrog to jedna z najstarszych wciąż używanych flag państwowych.'],
+  ['Dania', 'normal', { bg: '#C8102E', cross: [['#FFFFFF', 6]] }, ['Szwajcaria', 'Norwegia', 'Anglia'], 'Kopenhaga', 'Dannebrog uchodzi za najstarszą wciąż używaną flagę państwową.'],
   ['Litwa', 'normal', { h: eq('#FDB913', '#006A44', '#C1272D') }, ['Boliwia', 'Ghana', 'Etiopia'], 'Wilno', ''],
   ['Węgry', 'normal', { h: eq('#CE2939', '#FFFFFF', '#477050') }, ['Bułgaria', 'Włochy', 'Iran'], 'Budapeszt', ''],
-  ['Bangladesz', 'normal', { bg: '#006A4E', circle: ['#F42A41', 27, 20, 10] }, ['Japonia', 'Palau', 'Pakistan'], 'Dhaka', 'Czerwone koło jest lekko przesunięte w stronę masztu.'],
+  ['Bangladesz', 'normal', { bg: '#006A4E', circle: ['#F42A41', 27, 20, 12] }, ['Japonia', 'Palau', 'Pakistan'], 'Dhaka', 'Czerwone koło jest lekko przesunięte w stronę masztu.'],
   ['Estonia', 'normal', { h: eq('#0072CE', '#000000', '#FFFFFF') }, ['Łotwa', 'Finlandia', 'Botswana'], 'Tallinn', ''],
+  ['Islandia', 'normal', { bg: '#02529C', cross: [['#FFFFFF', 8], ['#DC1E35', 4]] }, ['Norwegia', 'Finlandia', 'Szwecja'], 'Reykjavik', 'To flaga Norwegii z zamienionymi kolorami.'],
+  ['Izrael', 'normal', { bg: '#FFFFFF', shapes: [['rect', '#0038B8', 0, 4, 60, 6], ['rect', '#0038B8', 0, 30, 60, 6],
+    ['line', '#0038B8', 30, 11, 38, 25, 1.6], ['line', '#0038B8', 38, 25, 22, 25, 1.6], ['line', '#0038B8', 22, 25, 30, 11, 1.6],
+    ['line', '#0038B8', 30, 29, 38, 15, 1.6], ['line', '#0038B8', 38, 15, 22, 15, 1.6], ['line', '#0038B8', 22, 15, 30, 29, 1.6]] }, ['Grecja', 'Finlandia', 'Argentyna'], null, 'Pośrodku jest Gwiazda Dawida, a niebieskie pasy nawiązują do żydowskiego szala modlitewnego.'],
+  ['Wietnam', 'normal', { bg: '#DA251D', shapes: [['star', '#FFFF00', 30, 20.5, 11]] }, ['Chiny', 'Maroko', 'Kirgistan'], 'Hanoi', 'Pięć ramion gwiazdy to pięć grup społecznych: robotnicy, chłopi, żołnierze, inteligencja i młodzież.'],
+  ['Kuba', 'normal', { h: eq('#002A8F', '#FFFFFF', '#002A8F', '#FFFFFF', '#002A8F'), shapes: [['poly', '#CF142B', [[0, 0], [34, 20], [0, 40]]], ['star', '#FFFFFF', 11.5, 20.5, 6.5]] }, ['Chile', 'Filipiny', 'Czechy'], 'Hawana', 'Portoryko ma bardzo podobną flagę, z zamienionymi kolorami pasów i trójkąta.'],
+  ['Chile', 'normal', { h: eq('#FFFFFF', '#D52B1E'), shapes: [['rect', '#0039A6', 0, 0, 20, 20], ['star', '#FFFFFF', 10, 10.5, 6]] }, ['Kuba', 'Czechy', 'Liberia'], 'Santiago', 'Flaga Teksasu jest bardzo podobna, ale ma pionowy niebieski pas.'],
+  ['Argentyna', 'normal', { h: eq('#74ACDF', '#FFFFFF', '#74ACDF'), shapes: [
+    ['line', '#F6B40E', 30, 12.5, 30, 27.5, 1.4], ['line', '#F6B40E', 22.5, 20, 37.5, 20, 1.4], ['line', '#F6B40E', 24.7, 14.7, 35.3, 25.3, 1.4], ['line', '#F6B40E', 35.3, 14.7, 24.7, 25.3, 1.4],
+    ['circle', '#F6B40E', 30, 20, 4.2], ['circle', '#85340A', 30, 20, 1]] }, ['Urugwaj', 'Nikaragua', 'Salwador'], 'Buenos Aires', 'Słońce Majowe upamiętnia rewolucję z maja 1810 roku.'],
+  ['Jamajka', 'normal', { bg: '#000000', shapes: [['poly', '#009B3A', [[0, 0], [60, 0], [30, 20]]], ['poly', '#009B3A', [[0, 40], [60, 40], [30, 20]]],
+    ['line', '#FED100', 0, 0, 60, 40, 5.5], ['line', '#FED100', 60, 0, 0, 40, 5.5]] }, ['Tanzania', 'Gujana', 'Burundi'], 'Kingston', 'To jedyna flaga państwowa bez czerwieni, bieli i błękitu.'],
+  /* hard */
   ['Mauritius', 'hard', { h: eq('#EA2839', '#1A206D', '#FFD500', '#00A551') }, ['Gabon', 'Madagaskar', 'Seszele'], 'Port Louis', 'Jedna z niewielu flag z czterema poziomymi pasami.'],
   ['Gabon', 'hard', { h: eq('#009E60', '#FCD116', '#3A75C4') }, ['Sierra Leone', 'Rwanda', 'Mauritius'], 'Libreville', 'Zieleń lasu, żółć równika i błękit oceanu.'],
   ['Sierra Leone', 'hard', { h: eq('#1EB53A', '#FFFFFF', '#0072C6') }, ['Gabon', 'Nigeria', 'Sudan'], 'Freetown', ''],
   ['Kolumbia', 'hard', { h: [['#FCD116', 2], ['#003893', 1], ['#CE1126', 1]] }, ['Ekwador', 'Wenezuela', 'Hiszpania'], 'Bogota', 'Ekwador ma podobną flagę, ale z herbem pośrodku.'],
   ['Łotwa', 'hard', { h: [['#9E3039', 2], ['#FFFFFF', 1], ['#9E3039', 2]] }, ['Austria', 'Polska', 'Liban'], 'Ryga', 'Ten ciemny karmin to tak zwana łotewska czerwień.'],
   ['Nigeria', 'hard', { v: eq('#008751', '#FFFFFF', '#008751') }, ['Irlandia', 'Pakistan', 'Sierra Leone'], 'Abudża', ''],
-  ['Czad', 'hard', { v: eq('#002664', '#FECB00', '#C60C30') }, ['Rumunia', 'Andora', 'Mołdawia'], 'Ndżamena', 'Prawie identyczna z flagą Rumunii, różni się odcieniem niebieskiego.'],
-  ['Rumunia', 'hard', { v: eq('#002B7F', '#FCD116', '#CE1126') }, ['Czad', 'Belgia', 'Mołdawia'], 'Bukareszt', 'Prawie identyczna z flagą Czadu.'],
+  ['Czad', 'hard', { v: eq('#002664', '#FECB00', '#C60C30') }, ['Andora', 'Belgia', 'Mołdawia'], 'Ndżamena', 'Prawie identyczna z flagą Rumunii, różni się tylko odcieniem niebieskiego.'],
+  ['Rumunia', 'hard', { v: eq('#002B7F', '#FCD116', '#CE1126') }, ['Andora', 'Belgia', 'Mołdawia'], 'Bukareszt', 'Prawie identyczna z flagą Czadu.'],
   ['Bułgaria', 'hard', { h: eq('#FFFFFF', '#00966E', '#D62612') }, ['Węgry', 'Litwa', 'Tadżykistan'], 'Sofia', ''],
   ['Armenia', 'hard', { h: eq('#D90012', '#0033A0', '#F2A800') }, ['Kolumbia', 'Litwa', 'Gruzja'], 'Erywań', ''],
-  ['Jemen', 'hard', { h: eq('#CE1126', '#FFFFFF', '#000000') }, ['Egipt', 'Syria', 'Irak'], 'Sana', 'Egipt, Syria i Irak mają te same pasy, ale z godłem lub gwiazdami.'],
-  ['Laos', 'hard', { h: [['#CE1126', 1], ['#002868', 2], ['#CE1126', 1]], circle: ['#FFFFFF', 30, 20, 8] }, ['Kambodża', 'Tajlandia', 'Kostaryka'], 'Wientian', 'Białe koło to księżyc nad Mekongiem.'],
+  ['Jemen', 'hard', { h: eq('#CE1126', '#FFFFFF', '#000000') }, ['Egipt', 'Syria', 'Irak'], 'Sana', 'Egipt i Irak mają te same pasy, ale z godłem albo napisem pośrodku.'],
+  ['Laos', 'hard', { h: [['#CE1126', 1], ['#002868', 2], ['#CE1126', 1]], circle: ['#FFFFFF', 30, 20, 8] }, ['Kambodża', 'Tajlandia', 'Kostaryka'], 'Wientian', 'Białe koło to księżyc w pełni nad Mekongiem.'],
   ['Palau', 'hard', { bg: '#4AADD6', circle: ['#FFDE00', 26, 20, 10] }, ['Bangladesz', 'Japonia', 'Mikronezja'], 'Ngerulmud', 'Żółte koło to księżyc w pełni nad Pacyfikiem.'],
   ['Gwinea', 'hard', { v: eq('#CE1126', '#FCD116', '#009460') }, ['Mali', 'Senegal', 'Kamerun'], 'Konakry', 'Flaga Mali ma te same kolory w odwrotnej kolejności.'],
   ['Mali', 'hard', { v: eq('#14B53A', '#FCD116', '#CE1126') }, ['Gwinea', 'Senegal', 'Etiopia'], 'Bamako', ''],
-  ['Boliwia', 'hard', { h: eq('#D52B1E', '#F9E300', '#007934') }, ['Litwa', 'Ghana', 'Gwinea'], 'Sucre (siedziba rządu: La Paz)', '']
+  ['Boliwia', 'hard', { h: eq('#D52B1E', '#F9E300', '#007934') }, ['Litwa', 'Ghana', 'Gwinea'], 'Sucre (siedziba rządu: La Paz)', ''],
+  ['Tajlandia', 'hard', { h: [['#A51931', 1], ['#FFFFFF', 1], ['#2D2A4A', 2], ['#FFFFFF', 1], ['#A51931', 1]] }, ['Kostaryka', 'Laos', 'Holandia'], 'Bangkok', 'Kostaryka ma odwrócony układ: czerwony pas w środku i niebieskie brzegi.'],
+  ['Tanzania', 'hard', { bg: '#1EB53A', shapes: [['poly', '#00A3DD', [[60, 0], [60, 40], [0, 40]]], ['line', '#FCD116', 0, 40, 60, 0, 13], ['line', '#000000', 0, 40, 60, 0, 8.5]] }, ['Kongo', 'Namibia', 'Trynidad i Tobago'], 'Dodoma', 'Największym miastem i portem jest Dar es Salaam.'],
+  ['Seszele', 'hard', { shapes: [
+    ['poly', '#003F87', [[0, 40], [0, 0], [20, 0]]], ['poly', '#FCD856', [[0, 40], [20, 0], [40, 0]]], ['poly', '#D62828', [[0, 40], [40, 0], [60, 0], [60, 13.3]]],
+    ['poly', '#FFFFFF', [[0, 40], [60, 13.3], [60, 26.7]]], ['poly', '#007A3D', [[0, 40], [60, 26.7], [60, 40]]]] }, ['Mauritius', 'Gabon', 'Komory'], 'Wiktoria', 'Promienie rozchodzą się z dolnego rogu, symbolizując kraj idący w przyszłość.'],
+  ['Benin', 'hard', { shapes: [['rect', '#008751', 0, 0, 24, 40], ['rect', '#FCD116', 24, 0, 36, 20], ['rect', '#E8112D', 24, 20, 36, 20]] }, ['Madagaskar', 'Gwinea', 'Mali'], 'Porto-Novo', 'Siedziba rządu mieści się w Kotonu.'],
+  ['Madagaskar', 'hard', { shapes: [['rect', '#FFFFFF', 0, 0, 20, 40], ['rect', '#FC3D32', 20, 0, 40, 20], ['rect', '#007E3A', 20, 20, 40, 20]] }, ['Benin', 'Mauritius', 'Gwinea Bissau'], 'Antananarywa', ''],
+  ['Botswana', 'hard', { bg: '#75AADB', shapes: [['rect', '#FFFFFF', 0, 15, 60, 10], ['rect', '#000000', 0, 17, 60, 6]] }, ['Estonia', 'Sierra Leone', 'Gambia'], 'Gaborone', 'Błękit to deszcz, w tym suchym kraju najcenniejsza rzecz.'],
+  ['Surinam', 'hard', { h: [['#377E3F', 2], ['#FFFFFF', 1], ['#B40A2D', 4], ['#FFFFFF', 1], ['#377E3F', 2]], shapes: [['star', '#ECC81D', 30, 20.5, 6.5]] }, ['Gujana', 'Boliwia', 'Gambia'], 'Paramaribo', 'Żółta gwiazda symbolizuje jedność wszystkich mieszkańców.']
 ].map(([name, level, spec, wrong, capital, note]) => ({
-  kind: 'flag', level, spec, text: 'Do jakiego kraju należy ta flaga?', a: name, wrong,
-  fact: `To flaga: ${name}. Stolica: ${capital}.${note ? ' ' + note : ''}`
+  id: 'flag:' + name, kind: 'flag', level, spec, text: 'Do jakiego kraju należy ta flaga?', a: name, wrong,
+  fact: `To flaga: ${name}.${capital ? ` Stolica: ${capital}.` : ''}${note ? ' ' + note : ''}`
 }));
 
 const FACTS = [
+  /* easy */
   ['easy', 'Która rzeka jest najdłuższa w Europie?', 'Wołga', ['Dunaj', 'Ren', 'Dniepr'], 'Wołga ma ok. 3 530 km i uchodzi do Morza Kaspijskiego. Dunaj jest drugi, ok. 2 850 km.'],
   ['easy', 'Który ocean jest największy?', 'Spokojny', ['Atlantycki', 'Indyjski', 'Arktyczny'], 'Ocean Spokojny zajmuje mniej więcej jedną trzecią powierzchni Ziemi.'],
   ['easy', 'Który szczyt jest najwyższy na świecie?', 'Mount Everest', ['K2', 'Kangczendzonga', 'Mont Blanc'], 'Everest ma 8 849 m n.p.m. K2 jest drugi, ma 8 611 m.'],
@@ -1089,44 +1181,95 @@ const FACTS = [
   ['easy', 'Na którym kontynencie leży większość Egiptu?', 'Afryka', ['Azja', 'Europa', 'Australia'], 'Tylko Półwysep Synaj leży w Azji, reszta kraju jest w Afryce.'],
   ['easy', 'Która pustynia jest największą gorącą pustynią świata?', 'Sahara', ['Gobi', 'Kalahari', 'Atakama'], 'Sahara ma ok. 9 mln km². Największą pustynią w ogóle jest lodowa Antarktyda.'],
   ['easy', 'Jaki jest najwyższy szczyt Polski?', 'Rysy', ['Śnieżka', 'Babia Góra', 'Giewont'], 'Polski wierzchołek Rysów ma 2 499 m n.p.m. Najwyższy wierzchołek, 2 503 m, leży po stronie słowackiej.'],
+  ['easy', 'Jak nazywa się stolica Kanady?', 'Ottawa', ['Toronto', 'Vancouver', 'Montreal'], 'Ottawę wybrała na stolicę królowa Wiktoria w 1857 roku.'],
+  ['easy', 'Która rzeka przepływa przez Kraków i Warszawę?', 'Wisła', ['Odra', 'Warta', 'Bug'], 'Wisła to najdłuższa rzeka Polski, ma ponad 1 000 km.'],
+  ['easy', 'Który kontynent jest największy?', 'Azja', ['Afryka', 'Ameryka Północna', 'Europa'], 'Azja zajmuje prawie jedną trzecią lądów Ziemi.'],
+  ['easy', 'Stolicą którego kraju jest Reykjavik?', 'Islandia', ['Norwegia', 'Finlandia', 'Irlandia'], 'To najdalej na północ położona stolica niepodległego państwa.'],
+  ['easy', 'W którym kraju znajduje się Wielki Kanion?', 'USA', ['Meksyk', 'Kanada', 'Australia'], 'Kanion wyrzeźbiła rzeka Kolorado w stanie Arizona.'],
+  ['easy', 'Nad jakim morzem leży Polska?', 'Bałtyckim', ['Północnym', 'Czarnym', 'Śródziemnym'], 'Bałtyk ma niskie zasolenie, bo zasilają go liczne rzeki.'],
+  ['easy', 'Który kraj ma kształt buta?', 'Włochy', ['Grecja', 'Hiszpania', 'Chorwacja'], 'Półwysep Apeniński wygląda jak but z obcasem i czubkiem.'],
+  ['easy', 'Nad jaką rzeką leży Kair?', 'Nil', ['Eufrat', 'Kongo', 'Niger'], 'Kair to jedno z największych miast Afryki.'],
+  ['easy', 'Który ocean leży między Europą a Ameryką Północną?', 'Atlantycki', ['Spokojny', 'Indyjski', 'Arktyczny'], 'Atlantyk jest drugim co do wielkości oceanem świata.'],
+  ['easy', 'Jak nazywa się najwyższy szczyt Alp?', 'Mont Blanc', ['Matterhorn', 'Grossglockner', 'Zugspitze'], 'Mont Blanc ma ok. 4 806 m n.p.m. i leży na granicy Francji i Włoch.'],
+  /* normal */
   ['normal', 'Które państwo jest najmniejsze na świecie?', 'Watykan', ['Monako', 'San Marino', 'Liechtenstein'], 'Watykan ma ok. 0,44 km², mniej niż wiele parków miejskich.'],
   ['normal', 'Ile państw ma dostęp do Morza Kaspijskiego?', '5', ['3', '4', '6'], 'Rosja, Kazachstan, Turkmenistan, Iran i Azerbejdżan.'],
-  ['normal', 'Które jezioro jest najgłębsze na świecie?', 'Bajkał', ['Tanganika', 'Titicaca', 'Wiktorii'], 'Bajkał ma ok. 1 640 m głębokości i mieści ok. 20% niezamarzniętej słodkiej wody na Ziemi.'],
+  ['normal', 'Które jezioro jest najgłębsze na świecie?', 'Bajkał', ['Tanganika', 'Titicaca', 'Wiktorii'], 'Bajkał ma ok. 1 640 m głębokości i mieści ok. 20% niezamarzniętej słodkiej wody powierzchniowej na Ziemi.'],
   ['normal', 'Który kraj ma najwięcej mieszkańców?', 'Indie', ['Chiny', 'USA', 'Indonezja'], 'Według szacunków ONZ Indie wyprzedziły Chiny w 2023 roku.'],
   ['normal', 'Przez które miasto przepływa Tamiza?', 'Londyn', ['Dublin', 'Edynburg', 'Manchester'], 'Tamiza ma ok. 346 km i uchodzi do Morza Północnego.'],
   ['normal', 'W jakim kraju leży Machu Picchu?', 'Peru', ['Boliwia', 'Chile', 'Ekwador'], 'Miasto Inków leży w Andach na wysokości ok. 2 430 m.'],
   ['normal', 'Który kraj ma najdłuższą linię brzegową?', 'Kanada', ['Rosja', 'Australia', 'Norwegia'], 'Wybrzeże Kanady ma ponad 200 tys. km, głównie dzięki tysiącom wysp.'],
-  ['normal', 'Jaka rzeka jest najdłuższa w Afryce?', 'Nil', ['Kongo', 'Niger', 'Zambezi'], 'Nil ma ok. 6 650 km i płynie przez 11 krajów.'],
+  ['normal', 'Jaka rzeka jest najdłuższa w Afryce?', 'Nil', ['Kongo', 'Niger', 'Zambezi'], 'Nil ma ok. 6 650 km, a jego dorzecze obejmuje 11 krajów.'],
   ['normal', 'Która cieśnina oddziela Europę od Afryki?', 'Gibraltarska', ['Bosfor', 'Kaletańska', 'Mesyńska'], 'W najwęższym miejscu ma tylko ok. 14 km.'],
   ['normal', 'W jakim kraju jest najwyższy wodospad świata, Salto Angel?', 'Wenezuela', ['Brazylia', 'Kanada', 'Zambia'], 'Salto Angel spada z wysokości 979 m.'],
+  ['normal', 'Jak nazywa się stolica Turcji?', 'Ankara', ['Stambuł', 'Izmir', 'Antalya'], 'Ankara jest stolicą od 1923 roku, choć największym miastem pozostaje Stambuł.'],
+  ['normal', 'Jak nazywa się stolica Brazylii?', 'Brasília', ['Rio de Janeiro', 'São Paulo', 'Salvador'], 'Brasílię zbudowano od podstaw i otwarto w 1960 roku.'],
+  ['normal', 'Która rzeka niesie najwięcej wody na świecie?', 'Amazonka', ['Nil', 'Jangcy', 'Missisipi'], 'Amazonka odprowadza do oceanu więcej wody niż kilka kolejnych największych rzek razem wziętych.'],
+  ['normal', 'Który kraj ma najwięcej wysp?', 'Szwecja', ['Grecja', 'Filipiny', 'Chorwacja'], 'Szwecja ma ponad 260 tysięcy wysp, większość bezludnych.'],
+  ['normal', 'Jak nazywa się najwyższy szczyt Afryki?', 'Kilimandżaro', ['Kenia', 'Ruwenzori', 'Atlas'], 'Kilimandżaro w Tanzanii ma 5 895 m n.p.m.'],
+  ['normal', 'Jak nazywa się najwyższy szczyt Ameryki Południowej?', 'Aconcagua', ['Chimborazo', 'Huascarán', 'Ojos del Salado'], 'Aconcagua w Argentynie ma ok. 6 961 m, to najwyższy szczyt poza Azją.'],
+  ['normal', 'W jakim kraju leży świątynia Angkor Wat?', 'Kambodża', ['Tajlandia', 'Laos', 'Wietnam'], 'Angkor Wat jest nawet na fladze Kambodży.'],
+  ['normal', 'Jak nazywa się stolica Nowej Zelandii?', 'Wellington', ['Auckland', 'Christchurch', 'Queenstown'], 'To najdalej na południe położona stolica niepodległego państwa.'],
+  ['normal', 'Które państwo jest największe w Afryce?', 'Algieria', ['Sudan', 'Kongo (DRK)', 'Libia'], 'Algieria jest największa od 2011 roku, gdy podzielił się Sudan.'],
+  ['normal', 'Nad jakim zbiornikiem leży najniżej położony ląd na Ziemi?', 'Morze Martwe', ['Morze Kaspijskie', 'Morze Czerwone', 'Jezioro Asal'], 'Brzeg Morza Martwego leży ok. 430 m poniżej poziomu morza.'],
+  /* hard */
   ['hard', 'Jak nazywa się stolica Kazachstanu?', 'Astana', ['Ałmaty', 'Biszkek', 'Taszkent'], 'Stolicę przeniesiono z Ałmaty w 1997 roku. W latach 2019–2022 miasto nazywało się Nur-Sułtan.'],
   ['hard', 'Która pustynia jest najsuchszą niepolarną pustynią świata?', 'Atakama', ['Sahara', 'Namib', 'Gobi'], 'W niektórych miejscach Atakamy nigdy nie zanotowano deszczu.'],
   ['hard', 'Który kraj ma najwięcej stref czasowych, licząc terytoria zamorskie?', 'Francja', ['Rosja', 'USA', 'Wielka Brytania'], 'Francja ma 12 stref czasowych dzięki terytoriom rozsianym po całym świecie.'],
   ['hard', 'Która stolica (siedziba rządu) leży najwyżej na świecie?', 'La Paz', ['Quito', 'Bogota', 'Katmandu'], 'La Paz leży na ok. 3 600 m n.p.m. Konstytucyjną stolicą Boliwii jest Sucre.'],
   ['hard', 'Który z tych krajów nie ma dostępu do morza?', 'Paragwaj', ['Urugwaj', 'Ekwador', 'Gujana'], 'Mimo to Paragwaj ma marynarkę wojenną, która pływa po rzekach.'],
   ['hard', 'Na granicy jakich krajów leży jezioro Titicaca?', 'Peru i Boliwia', ['Chile i Argentyna', 'Peru i Ekwador', 'Boliwia i Chile'], 'To najwyżej położone żeglowne jezioro świata, ok. 3 810 m n.p.m.'],
-  ['hard', 'Ile państw leży w Afryce (członków ONZ)?', '54', ['48', '50', '58'], 'Najmłodszy z nich to Sudan Południowy, niepodległy od 2011 roku.']
-].map(([level, text, a, wrong, fact]) => ({ kind: 'fact', level, text, a, wrong, fact }));
+  ['hard', 'Ile państw leży w Afryce (członków ONZ)?', '54', ['48', '50', '58'], 'Najmłodszy z nich to Sudan Południowy, niepodległy od 2011 roku.'],
+  ['hard', 'Jak nazywa się stolica Tuvalu?', 'Funafuti', ['Majuro', 'Tarawa', 'Nukuʻalofa'], 'Tuvalu ma tylko ok. 26 km² i jest jednym z najmniejszych państw świata.'],
+  ['hard', 'Jak nazywa się stolica Mongolii?', 'Ułan Bator', ['Ałmaty', 'Irkuck', 'Biszkek'], 'To najzimniejsza stolica świata, średnia roczna temperatura jest bliska zera.'],
+  ['hard', 'Które państwo leży w całości wewnątrz RPA?', 'Lesotho', ['Eswatini', 'Botswana', 'Namibia'], 'Cały kraj leży powyżej 1 000 m n.p.m., jego najniższy punkt ma ok. 1 400 m.'],
+  ['hard', 'Jak nazywa się stolica Bhutanu?', 'Thimphu', ['Katmandu', 'Dhaka', 'Lhasa'], 'To jedna z nielicznych stolic bez sygnalizacji świetlnej, ruchem kierują policjanci.'],
+  ['hard', 'Które państwo jest „podwójnie śródlądowe” (graniczy tylko z krajami bez morza)?', 'Uzbekistan', ['Kazachstan', 'Mongolia', 'Afganistan'], 'Poza nim takim państwem jest tylko Liechtenstein.'],
+  ['hard', 'Jak nazywa się stolica Madagaskaru?', 'Antananarywa', ['Port Louis', 'Moroni', 'Maputo'], 'Miasto leży na wyżynie, ok. 1 280 m n.p.m.'],
+  ['hard', 'Jak nazywa się stolica Burkina Faso?', 'Wagadugu', ['Bamako', 'Niamey', 'Akra'], 'Co dwa lata odbywa się tu FESPACO, największy festiwal filmowy Afryki.'],
+  ['hard', 'Jak nazywa się pustynia w Namibii słynąca z czerwonych wydm?', 'Namib', ['Kalahari', 'Karoo', 'Ogaden'], 'Namib uchodzi za najstarszą pustynię świata, ma kilkadziesiąt milionów lat.'],
+  ['hard', 'Jak nazywa się stolica Kirgistanu?', 'Biszkek', ['Duszanbe', 'Aszchabad', 'Ałmaty'], 'Ponad 90% Kirgistanu zajmują góry.'],
+  ['hard', 'W którym kraju Ameryki Południowej językiem urzędowym jest niderlandzki?', 'Surinam', ['Gujana', 'Urugwaj', 'Paragwaj'], 'Surinam był holenderską kolonią do 1975 roku.']
+].map(([level, text, a, wrong, fact]) => ({ id: 'fact:' + text, kind: 'fact', level, text, a, wrong, fact }));
 
+/* ---------- drawing a round ---------- */
+/* Which question levels each game level may use, and how strongly.
+   A question migrates at most one level up: easy -> normal, normal -> hard. */
+const ALLOWED = {
+  chill: { easy: 1 },
+  normal: { normal: 1, easy: 0.5 },
+  hard: { hard: 1, normal: 0.5 }
+};
+/* Questions already shown this browser session are far less likely to come back. */
+const SEEN_KEY = 'gq-seen';
+const REPEAT_FACTOR = 0.08;
+function loadSeen() { try { return JSON.parse(sessionStorage.getItem(SEEN_KEY) || '{}') || {}; } catch (e) { return {}; } }
+function saveSeen(seen) { try { sessionStorage.setItem(SEEN_KEY, JSON.stringify(seen)); } catch (e) {} }
 const shuffle = (arr) => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const PREF = { chill: ['easy', 'normal'], normal: null, hard: ['hard', 'normal'] };
-function pick(pool, level, n) {
-  const order = PREF[level];
-  if (!order) return shuffle(pool).slice(0, n);
-  let out = [];
-  order.forEach((lv) => { if (out.length < n) out = out.concat(shuffle(pool.filter((q) => q.level === lv)).slice(0, n - out.length)); });
-  return out;
+function pick(pool, level, n, seen) {
+  const allowed = ALLOWED[level];
+  return pool
+    .filter((q) => allowed[q.level])
+    .map((q) => ({ q, key: Math.pow(Math.random(), 1 / (allowed[q.level] * Math.pow(REPEAT_FACTOR, seen[q.id] || 0))) }))
+    .sort((x, y) => y.key - x.key)
+    .slice(0, n)
+    .map((x) => x.q);
 }
 function buildRound(cat, level) {
+  const seen = loadSeen();
   let qs;
-  if (cat === 'flags') qs = pick(FLAGS, level, 10);
-  else if (cat === 'facts') qs = pick(FACTS, level, 10);
-  else qs = pick(FLAGS, level, 5).concat(pick(FACTS, level, 5));
+  if (cat === 'flags') qs = pick(FLAGS, level, 10, seen);
+  else if (cat === 'facts') qs = pick(FACTS, level, 10, seen);
+  else qs = pick(FLAGS, level, 5, seen).concat(pick(FACTS, level, 5, seen));
+  qs.forEach((q) => { seen[q.id] = (seen[q.id] || 0) + 1; });
+  saveSeen(seen);
   return shuffle(qs).map((q) => {
     const answers = shuffle([q.a].concat(q.wrong));
     return Object.assign({}, q, { answers, correct: answers.indexOf(q.a) });
   });
 }
+window.__geoQuiz = { questions: FLAGS.concat(FACTS), flagSVG, buildRound, ALLOWED };
+
 
 /* ---------- sound (8-bit, generated) ---------- */
 let muted = store.get('gq-mute', '0') === '1';

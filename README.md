@@ -6,8 +6,8 @@ Zagraj: otwórz `index.html` w przeglądarce albo włącz GitHub Pages dla tego 
 
 ## Jak to działa
 
-- 10 pytań na rundę, losowanych z bazy 60 pytań (36 flag + 24 ciekawostki).
-- Poziom zmienia trudność pytań: Chill bierze łatwe, Hardkor egzotyczne flagi i podchwytliwe fakty.
+- 10 pytań na rundę, losowanych z bazy 111 pytań (57 flag + 54 ciekawostki). Pytania, które już padły w tej sesji przeglądarki, mają dużo mniejszą szansę na ponowne wylosowanie.
+- Poziom zmienia trudność pytań: Chill bierze tylko łatwe, Normal normalne i czasem łatwe, Hardkor trudne i czasem normalne. Pytanie może przejść najwyżej o jeden poziom w górę, nigdy w dół.
 - Punkty: 100 / 150 / 200 za odpowiedź (zależnie od poziomu) plus 50 za każdy krok combo, maksymalnie +200.
 - 3 błędy kończą grę ekranem porażki. Przejście 10 pytań daje ekran zwycięstwa.
 - Rekord zapisuje się w przeglądarce gracza. Wspólny ranking działa tylko w wersji gry opublikowanej na claude.ai.
@@ -19,3 +19,4 @@ Zagraj: otwórz `index.html` w przeglądarce albo włącz GitHub Pages dla tego 
 - `geo-quiz/design/` – projekt ekranów z canvasa (źródło pikselowych scen).
 - `geo-quiz/build.py` – skleja grę ze scenami z projektu: `python3 geo-quiz/build.py`.
 - `geo-quiz/dist/artifact.html` – ta sama gra w formie strony dla claude.ai.
+- Cyfry: font Silkscreen (SIL Open Font License), osadzony tylko dla znaków 0–9.
